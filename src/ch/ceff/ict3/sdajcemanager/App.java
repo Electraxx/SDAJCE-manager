@@ -5,17 +5,24 @@
  */
 package ch.ceff.ict3.sdajcemanager;
 
+import ch.ceff.ict3.sdajcemanager.composants.MainFrame;
+import javax.swing.SwingUtilities;
+
 /**
  *
  * @author cp-14luf
  */
 public class App {
 
-    /**
-     * @param args the command line arguments
-     */
+    public static final String APP_NAME = "SDAJCE-manager";
+    
     public static void main(String[] args) {
-        // TODO code application logic here
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new MainFrame(APP_NAME);
+            }
+        });
     }
     
 }
