@@ -8,18 +8,22 @@ package ch.ceff.ict3.sdajcemanager.composants;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import javafx.scene.control.ToolBar;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
 
 /**
  *
  * @author cp-14luf
  */
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame implements WindowListener {
 
     private TablePanelCarte tablePanel;
     private ToolBar toolBar;
@@ -70,13 +74,67 @@ public class MainFrame extends JFrame {
         menuPage.add(menuCarte);
         menuPage.add(menuDeck);
         menuPage.add(menuPartie);
+        //ajout d'un sous-menu au sous-menu MenuCarte
         JMenuItem itemAjouterCarte = new JMenuItem("ajout carte");
         menuCarte.add(itemAjouterCarte);
+        //ajout d'un sous-menu au sous-menu MenuItem
         JMenuItem itemNouveauDeck = new JMenuItem("Nouveau Deck");
         menuDeck.add(itemNouveauDeck);
+        //ajout d'un sous-menu au sous-menu MenuPartie
         JMenuItem itemNouvellePartie = new JMenuItem("nouvelle partie");
         menuPartie.add(itemNouvellePartie);
+        
+        //Mnémonique
+        itemQuitter.setMnemonic(KeyEvent.VK_Q);
+        itemAjouterCarte.setMnemonic(KeyEvent.VK_C);
+        itemNouveauDeck.setMnemonic(KeyEvent.VK_D);
 
         return menuBar;
     }
+    
+    private void quitter(){
+        int option = JOptionPane.showConfirmDialog(this,"désirez-vous quitter ?"
+                ,"demande de confirmation",
+                JOptionPane.OK_CANCEL_OPTION);
+        if(option == JOptionPane.OK_OPTION){
+            System.exit(0);
+        }
+    }
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+       
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+        quitter();
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+
+    }
+    
+    
 }
