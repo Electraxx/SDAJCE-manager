@@ -5,7 +5,7 @@
  */
 package ch.ceff.ict3.sdajcemanager.modele;
 
-import java.util.LinkedList;
+import java.util.List;
 
 /**
  *
@@ -15,9 +15,9 @@ public class Deck {
     
     private int id;
     private String name;
-    private LinkedList<Carte> cartes;
+    private List<Carte> cartes;
     
-    public Deck(int id, String name, LinkedList<Carte> cartes) {
+    public Deck(int id, String name, List<Carte> cartes) {
         this.id = id;
         this.name = name;
         this.cartes = cartes;
@@ -39,11 +39,11 @@ public class Deck {
         this.name = name;
     }
 
-    public LinkedList<Carte> getCartes() {
+    public List<Carte> getCartes() {
         return cartes;
     }
 
-    public void setCartes(LinkedList<Carte> cartes) {
+    public void setCartes(List<Carte> cartes) {
         this.cartes = cartes;
     }
     

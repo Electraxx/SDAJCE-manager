@@ -17,13 +17,11 @@ public class Conteneur {
     private int id;
     private String nom;
     private String abbreviation;
-    private List<Carte> cartes;
     
-    public Conteneur(int id, String nom, String abbreviation, List<Carte> cartes) {
+    public Conteneur(int id, String nom, String abbreviation) {
         this.id = id;
         this.nom = nom;
         this.abbreviation = abbreviation;
-        this.cartes = cartes;
     }
 
     public int getId() {
@@ -49,14 +47,4 @@ public class Conteneur {
     public void setAbbreviation(String abbreviation) {
         this.abbreviation = abbreviation;
     }
-
-    public List<Carte> getCartes() {
-        return cartes;
-    }
-
-    public void setCartes(LinkedList<Carte> cartes) {
-        this.cartes = cartes;
-    }
-    
-    
 }
