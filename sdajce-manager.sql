@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mer 10 Mai 2017 à 09:18
+-- Généré le :  Mer 10 Mai 2017 à 12:54
 -- Version du serveur :  10.1.16-MariaDB
 -- Version de PHP :  5.6.24
 
@@ -215,8 +215,7 @@ INSERT INTO `conteneur` (`id_contn`, `nom_contn`, `abbr_contn`) VALUES
 
 CREATE TABLE `decks` (
   `id_deck` int(10) NOT NULL,
-  `nom_deck` varchar(45) NOT NULL,
-  `id_carte_deck` int(10) NOT NULL
+  `nom_deck` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
