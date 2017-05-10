@@ -5,6 +5,7 @@
  */
 package ch.ceff.ict3.sdajcemanager.event;
 
+import ch.ceff.ict3.sdajcemanager.modele.Conteneur;
 import java.util.EventObject;
 
 /**
@@ -17,9 +18,9 @@ public class AddCarteEvent extends EventObject {
     private String type;
     private String sphere;
     private int nombre;
-    private int conteneur;
+    private Conteneur conteneur;
 
-    public AddCarteEvent(Object source, String nom, String type, String sphere, int nombre, int conteneur) {
+    public AddCarteEvent(Object source, String nom, String type, String sphere, int nombre, Conteneur conteneur) {
         super(source);
         this.nom = nom;
         this.type = type;
@@ -60,11 +61,11 @@ public class AddCarteEvent extends EventObject {
         this.nombre = nombre;
     }
 
-    public int getConteneur() {
+    public Conteneur getConteneur() {
         return conteneur;
     }
 
-    public void setConteneur(int conteneur) {
+    public void setConteneur(Conteneur conteneur) {
         this.conteneur = conteneur;
     }
     
