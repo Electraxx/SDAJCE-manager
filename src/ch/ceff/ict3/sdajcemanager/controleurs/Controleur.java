@@ -11,6 +11,7 @@ import ch.ceff.ict3.sdajcemanager.modele.Conteneur;
 import ch.ceff.ict3.sdajcemanager.modele.Database;
 import ch.ceff.ict3.sdajcemanager.modele.Deck;
 import ch.ceff.ict3.sdajcemanager.modele.Partie;
+import java.util.List;
 
 /**
  *
@@ -33,6 +34,14 @@ public class Controleur {
         db.delCarte(index);
     }
 
+    public Carte getCarte(int index) {
+        return db.getCarte(index);
+    }
+
+    public List<Carte> getAllCartes() {
+        return db.getAllCartes();
+    }
+
     public void editCarte(EditCarteEvent event) {
         Carte carte = new Carte(event.getId(), event.getNom(), event.getType(), event.getSphere(), event.getNombre(), event.getConteneur());
         db.editCarte(carte);
@@ -47,6 +56,14 @@ public class Controleur {
         db.delDeck(index);
     }
 
+    public Deck getDeck(int index) {
+        return db.getDeck(index);
+    }
+
+    public List<Deck> getAllDecks() {
+        return db.getAllDecks();
+    }
+
     public void AddPartie(AddPartieEvent event) {
         Partie partie = new Partie(-1, event.getDate(), event.isResultat(), event.getDecks());
         db.addPartie(partie);
@@ -56,6 +73,14 @@ public class Controleur {
         db.delPartie(index);
     }
 
+    public Partie getPartie(int index) {
+        return db.getPartie(index);
+    }
+
+    public List<Partie> getAllParties() {
+        return db.getAllParties();
+    }
+
     public void AddConteneur(AddConteneurEvent event) {
         Conteneur conteneur = new Conteneur(-1, event.getNom(), event.getAbbr());
         db.addConteneur(conteneur);
@@ -63,6 +88,14 @@ public class Controleur {
 
     public void DelConteneur(int index) {
         db.delConteneur(index);
+    }
+
+    public Conteneur getConteneur(int index) {
+        return db.getConteneur(index);
+    }
+
+    public List<Conteneur> getAllConteneur() {
+        return db.getAllConteneur();
     }
 
 }
