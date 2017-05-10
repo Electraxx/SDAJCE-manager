@@ -5,12 +5,18 @@
  */
 package ch.ceff.ict3.sdajcemanager.composants;
 
+import ch.ceff.ict3.sdajcemanager.modele.Carte;
+import ch.ceff.ict3.sdajcemanager.modele.Conteneur;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.scene.control.ToolBar;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -18,6 +24,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
+import javax.swing.KeyStroke;
 
 /**
  *
@@ -28,6 +35,7 @@ public class MainFrame extends JFrame implements WindowListener {
     private TablePanelCarte tablePanel;
     private ToolBar toolBar;
     private FormPanelCarte panelCarte;
+    private PageCarte pageCarte;
     
     private JSplitPane splitPane;
 
@@ -37,21 +45,14 @@ public class MainFrame extends JFrame implements WindowListener {
 
     public void initComponents(String titre) {
         Container contentPane = getContentPane();
-
-        //toolBar = new ToolBar();
-        tablePanel = new TablePanelCarte();
-        panelCarte = new FormPanelCarte();
+        pageCarte = new PageCarte();
         
-        
-        
-        //splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,tablePanel,panelCarte);
-
-        contentPane.add(panelCarte, BorderLayout.NORTH);
-        contentPane.add(tablePanel, BorderLayout.SOUTH);
+        contentPane.add(pageCarte,BorderLayout.CENTER);
 
         setJMenuBar(createJMenuBar());
         setMinimumSize(new Dimension(700, 450));
         setLocationRelativeTo(null);
+
     }
 
     private JMenuBar createJMenuBar() {
@@ -83,32 +84,50 @@ public class MainFrame extends JFrame implements WindowListener {
         //ajout d'un sous-menu au sous-menu MenuPartie
         JMenuItem itemNouvellePartie = new JMenuItem("nouvelle partie");
         menuPartie.add(itemNouvellePartie);
-        
+
         //Mnémonique
         itemQuitter.setMnemonic(KeyEvent.VK_Q);
-        itemAjouterCarte.setMnemonic(KeyEvent.VK_C);
+        itemAjouterCarte.setMnemonic(KeyEvent.VK_F);
         itemNouveauDeck.setMnemonic(KeyEvent.VK_D);
+        itemNouvellePartie.setMnemonic(KeyEvent.VK_P);
 
+        //accelerateur
+        itemQuitter.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, ActionEvent.CTRL_MASK));
+        itemAjouterCarte.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, ActionEvent.CTRL_MASK));
+        itemNouveauDeck.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, ActionEvent.CTRL_MASK));
+        itemNouvellePartie.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.CTRL_MASK));
+
+        //listerner menu 
+        itemQuitter.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                quitter();
+            }
+        });
+
+        addWindowListener((WindowListener) this);
         return menuBar;
     }
-    
-    private void quitter(){
-        int option = JOptionPane.showConfirmDialog(this,"désirez-vous quitter ?"
-                ,"demande de confirmation",
+
+    private void quitter() {
+        int option = JOptionPane.showConfirmDialog(this,
+                "Voulez-vous réellement quitter l'application",
+                "Demande de confirmation",
                 JOptionPane.OK_CANCEL_OPTION);
-        if(option == JOptionPane.OK_OPTION){
+
+        if (option == JOptionPane.OK_OPTION) {
             System.exit(0);
         }
     }
 
     @Override
-    public void windowOpened(WindowEvent e) {
-       
+    public void windowClosing(WindowEvent e) {
+        quitter();
     }
 
     @Override
-    public void windowClosing(WindowEvent e) {
-        quitter();
+    public void windowOpened(WindowEvent e) {
+
     }
 
     @Override
@@ -135,6 +154,4 @@ public class MainFrame extends JFrame implements WindowListener {
     public void windowDeactivated(WindowEvent e) {
 
     }
-    
-    
 }

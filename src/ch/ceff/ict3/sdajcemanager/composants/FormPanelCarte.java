@@ -75,8 +75,9 @@ public class FormPanelCarte extends JPanel {
         comboProperty.setSelectedIndex(0);
         comboProperty.setEditable(true);
 
-        Dimension dimensions = new Dimension(250, 150);
-        setPreferredSize(dimensions);
+       
+       setPreferredSize(new Dimension(700,150));
+        
         Border bordure = BorderFactory.createTitledBorder("Option");
         Border marge = BorderFactory.createEmptyBorder(5, 5, 5, 5);
         setBorder(BorderFactory.createCompoundBorder(marge, bordure));

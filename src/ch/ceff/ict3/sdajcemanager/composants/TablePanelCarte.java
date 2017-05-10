@@ -8,6 +8,7 @@ package ch.ceff.ict3.sdajcemanager.composants;
 import ch.ceff.ict3.sdajcemanager.modele.Carte;
 import ch.ceff.ict3.sdajcemanager.modele.CarteTableModele;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -30,7 +31,7 @@ public class TablePanelCarte extends JPanel {
         table = new JTable();
         carteModel = new CarteTableModele();
         table = new JTable(carteModel);
-        
+        setPreferredSize(new Dimension(685,200));
         add(new JScrollPane(table), BorderLayout.CENTER);
     }
     
