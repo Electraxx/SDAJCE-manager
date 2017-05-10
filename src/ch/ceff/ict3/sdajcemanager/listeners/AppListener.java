@@ -5,10 +5,30 @@
  */
 package ch.ceff.ict3.sdajcemanager.listeners;
 
+import ch.ceff.ict3.sdajcemanager.event.*;
+import java.util.EventListener;
+
 /**
  *
  * @author cp-14luf
  */
-public interface AppListener {
+public interface AppListener extends EventListener{
+    
+    public void addCarte(AddCarteEvent event);
+    public void delCarte(DelCarteEvent event);
+    public void editCarte(EditCarteEvent event);
+    
+    public void addConteneur(AddConteneurEvent event);
+    public void editConteneur(DelConteneurEvent event);
+    
+    public void addDeck(AddDeckEvent event);
+    public void delDeck(DelDeckEvent event);
+    
+    public void AddPartie(AddPartieEvent event);
+    public void delPartie(DelPartieEvent event);
+    
+    
+    
+    
     
 }
