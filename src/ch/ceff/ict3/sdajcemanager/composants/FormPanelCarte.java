@@ -64,7 +64,7 @@ public class FormPanelCarte extends JPanel {
         comboAttribut.setModel(modelSphere);
         comboAttribut.setSelectedIndex(0);
         comboAttribut.setEditable(true);
-        
+
         //Liste des Conteneur
         comboProperty = new JComboBox();
         DefaultComboBoxModel modelConteneur = new DefaultComboBoxModel();
@@ -75,7 +75,7 @@ public class FormPanelCarte extends JPanel {
         comboProperty.setSelectedIndex(0);
         comboProperty.setEditable(true);
 
-        Dimension dimensions = new Dimension(250,150);
+        Dimension dimensions = new Dimension(250, 150);
         setPreferredSize(dimensions);
         Border bordure = BorderFactory.createTitledBorder("Option");
         Border marge = BorderFactory.createEmptyBorder(5, 5, 5, 5);
@@ -107,7 +107,7 @@ public class FormPanelCarte extends JPanel {
     private void layoutComponents() {
         setLayout(new GridBagLayout());
         GridBagConstraints gc = new GridBagConstraints();
-        
+
         gc.fill = GridBagConstraints.HORIZONTAL;
         gc.weightx = 1;
         gc.weighty = 0.1;
@@ -120,37 +120,37 @@ public class FormPanelCarte extends JPanel {
         gc.anchor = GridBagConstraints.FIRST_LINE_END;
         add(new JLabel("Recherche :"), gc);
 
-        
         gc.gridx = 1;
         gc.anchor = GridBagConstraints.FIRST_LINE_START;
-        gc.insets =  new Insets(0,0,0,3);
+        gc.insets = new Insets(0, 0, 0, 3);
         add(searchField, gc);
-        
+
         gc.gridx = 2;
         gc.anchor = GridBagConstraints.FIRST_LINE_END;
         add(buttonSearch, gc);
-        
-        gc.gridx=3;
+
+        gc.gridx = 3;
         gc.anchor = GridBagConstraints.FIRST_LINE_END;
-        add(buttonAddCart,gc);
-        
+        add(buttonAddCart, gc);
+
         //ligne 2
-        gc.gridx=0;
-        gc.gridy=1;
-        
+        gc.gridx = 0;
+        gc.gridy = 1;
+
         gc.fill = GridBagConstraints.HORIZONTAL;
         gc.anchor = GridBagConstraints.FIRST_LINE_START;
-        add(comboType,gc);
-        
+        add(comboType, gc);
+
         gc.gridx = 1;
         gc.anchor = GridBagConstraints.PAGE_START;
-        gc.insets =  new Insets(0,0,0,3);
+        gc.insets = new Insets(0, 0, 0, 3);
         add(comboAttribut, gc);
-        
+
         gc.gridx = 2;
         gc.anchor = GridBagConstraints.FIRST_LINE_START;
-        gc.insets =  new Insets(0,0,0,3);
+        gc.insets = new Insets(0, 0, 0, 3);
         add(comboProperty, gc);
-   }
+    }
+
 
 }

@@ -6,6 +6,7 @@
 package ch.ceff.ict3.sdajcemanager;
 
 import ch.ceff.ict3.sdajcemanager.composants.MainFrame;
+import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
 /**
@@ -15,14 +16,16 @@ import javax.swing.SwingUtilities;
 public class App {
 
     public static final String APP_NAME = "SDAJCE-manager";
-    
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 new MainFrame(APP_NAME);
+                JFrame fenetre = new MainFrame("Tutoriel 13");
+                fenetre.setVisible(true);
             }
         });
     }
-    
+
 }

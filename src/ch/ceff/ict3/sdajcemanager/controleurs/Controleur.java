@@ -10,5 +10,5 @@ package ch.ceff.ict3.sdajcemanager.controleurs;
  * @author cp-14luf
  */
 public class Controleur {
-    
+   
 }
