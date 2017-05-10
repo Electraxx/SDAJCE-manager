@@ -6,6 +6,9 @@
 package ch.ceff.ict3.sdajcemanager.modele;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 /**
@@ -17,7 +20,7 @@ public class Database {
     
     private Connection connection;
     
-    public static Database creerDatabase() {
+    public static Database newDatabase() {
         if(INSTANCE == null) {
             INSTANCE = new Database();
         }
@@ -25,29 +28,55 @@ public class Database {
     }
     
     private Database() {
-        
+        this.connection = DBConnect.connect("localhost", "root", "");
     }
     
     // Gestion de la DB
     
-    public void addCarte(){}
-    public Carte getCarte(){return null;}
-    public List<Carte> getAllCartes(){return null;}
-    public void delCarte(int index){}
+    public void addCarte(Carte carte) {
+        String query = "INSERT INTO cartes ("
+                + "nom_carte,"
+                + "type_carte,"
+                + "sphere_carte,"
+                + "nombre_carte,"
+                + "id_conteneur_carte"
+                + ") VALUES ("
+                + carte.getNom() + ","
+                + carte.getType() + ","
+                + carte.getSphere() + ","
+                + carte.getNombre() + ","
+                + carte.getConteneur().getId() + ","
+                +");";
+        ResultSet result = DBConnect.query(connection, query);
+    }
+    public Carte getCarte(int index) {
+        String query = "SELECT * FROM cartes WHERE id_carte=" + index;
+        ResultSet result = DBConnect.query(connection, query);
+        return null;
+    }
+    public List<Carte> getAllCartes() {
+        String query = "SELECT * FROM cartes";
+        ResultSet result = DBConnect.query(connection, query);
+        return null;
+    }
+    public void delCarte(int index) {
+        String query = "DELETE FROM cartes WHERE id_carte=" + index;
+        ResultSet result = DBConnect.query(connection, query);
+    }
     
     
-    public void addDeck(){}
-    public Deck getDeck(){return null;}
-    public List<Deck> getAllDecks(){return null;}
-    public void delDeck(int index){}
+    public void addDeck(Deck deck) {}
+    public Deck getDeck(int index) {return null;}
+    public List<Deck> getAllDecks() {return null;}
+    public void delDeck(int index) {}
     
-    public void addConteneur(){}
-    public Conteneur getConteneur(){return null;}
-    public List<Conteneur> getAllConteneur(){return null;}
-    public void delConteneur(int index){}
+    public void addConteneur(Conteneur conteneur) {}
+    public Conteneur getConteneur(int index) {return null;}
+    public List<Conteneur> getAllConteneur() {return null;}
+    public void delConteneur(int index) {}
     
-    public void addPartie(){}
-    public Partie getPartie(){return null;}
-    public List<Partie> getAllParties(){return null;}
-    public void delPartie(int index){}
+    public void addPartie(Partie partie) {}
+    public Partie getPartie(int index) {return null;}
+    public List<Partie> getAllParties() {return null;}
+    public void delPartie(int index) {}
 }
