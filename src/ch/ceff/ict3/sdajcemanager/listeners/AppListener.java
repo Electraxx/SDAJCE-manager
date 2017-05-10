@@ -24,7 +24,7 @@ public interface AppListener extends EventListener{
     public void addDeck(AddDeckEvent event);
     public void delDeck(DelDeckEvent event);
     
-    public void AddPartie(AddPartieEvent event);
+    public void addPartie(AddPartieEvent event);
     public void delPartie(DelPartieEvent event);
     
     
