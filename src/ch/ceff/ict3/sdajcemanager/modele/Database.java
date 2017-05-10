@@ -188,7 +188,12 @@ public class Database {
         return decks;
         
     }
-    public void delDeck(int index) {}
+    public void delDeck(int index) {
+        String queryDeck = "DELETE FROM decks WHERE id_deck=" + index;
+        String queryCartesDeck = "DELETE FROM carte_decks WHERE id_deck=" + index;
+        DBConnect.query(this.connection, queryDeck);
+        DBConnect.query(this.connection, queryCartesDeck);
+    }
     
     public void addConteneur(Conteneur conteneur) {}
     public Conteneur getConteneur(int index) {return null;}
