@@ -49,6 +49,24 @@ public class Database {
                 +");";
         ResultSet result = DBConnect.query(connection, query);
     }
+    public void editCarte(Carte carte) {
+        String query = "INSERT INTO cartes ("
+                + "id_carte,"
+                + "nom_carte,"
+                + "type_carte,"
+                + "sphere_carte,"
+                + "nombre_carte,"
+                + "id_conteneur_carte"
+                + ") VALUES ("
+                + carte.getId()+ ","
+                + carte.getNom() + ","
+                + carte.getType() + ","
+                + carte.getSphere() + ","
+                + carte.getNombre() + ","
+                + carte.getConteneur().getId() + ","
+                +");";
+        ResultSet result = DBConnect.query(connection, query);
+    }
     public Carte getCarte(int index) {
         String query = "SELECT * FROM cartes WHERE id_carte=" + index;
         ResultSet result = DBConnect.query(connection, query);
@@ -65,7 +83,27 @@ public class Database {
     }
     
     
-    public void addDeck(Deck deck) {}
+    public void addDeck(Deck deck) {
+        
+
+        
+        
+        String query1 = "INSERT INTO cartes ("
+                + "nom_deck"
+                + ") VALUES ("
+                + deck.getName()
+                +");";
+        
+        String query2 = "INSERT INTO cartes_deck ("
+                + "id_carte"
+                + "nombre_carte_deck"
+                + ") VALUES ";
+        
+        for(Carte carte: deck.getCartes()) {
+            query2 += "(" + carte.getId()+ "," + carte.getNombre() + "),";
+        }
+        ResultSet result = DBConnect.query(connection, query1);
+    }
     public Deck getDeck(int index) {return null;}
     public List<Deck> getAllDecks() {return null;}
     public void delDeck(int index) {}
