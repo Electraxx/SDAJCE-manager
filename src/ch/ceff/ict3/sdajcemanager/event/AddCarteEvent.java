@@ -17,9 +17,9 @@ public class AddCarteEvent extends EventObject {
     private String type;
     private String sphere;
     private int nombre;
-    private String conteneur;
+    private int conteneur;
 
-    public AddCarteEvent(Object source, String nom, String type, String sphere, int nombre, String conteneur) {
+    public AddCarteEvent(Object source, String nom, String type, String sphere, int nombre, int conteneur) {
         super(source);
         this.nom = nom;
         this.type = type;
@@ -60,11 +60,11 @@ public class AddCarteEvent extends EventObject {
         this.nombre = nombre;
     }
 
-    public String getConteneur() {
+    public int getConteneur() {
         return conteneur;
     }
 
-    public void setConteneur(String conteneur) {
+    public void setConteneur(int conteneur) {
         this.conteneur = conteneur;
     }
     

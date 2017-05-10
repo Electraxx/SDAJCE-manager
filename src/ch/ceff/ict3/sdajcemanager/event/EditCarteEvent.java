@@ -11,21 +11,31 @@ import java.util.EventObject;
  *
  * @author cp-14syf
  */
-public class EditCarteEvent extends EventObject{
+public class EditCarteEvent extends EventObject {
 
+    private int id;
     private String nom;
     private String type;
     private String sphere;
     private int nombre;
-    private String conteneur;
+    private int conteneur;
 
-    public EditCarteEvent(Object source, String nom, String type, String sphere, int nombre, String conteneur) {
+    public EditCarteEvent(Object source, int id, String nom, String type, String sphere, int nombre, int conteneur) {
         super(source);
+        this.id = id;
         this.nom = nom;
         this.type = type;
         this.sphere = sphere;
         this.nombre = nombre;
         this.conteneur = conteneur;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNom() {
@@ -60,11 +70,12 @@ public class EditCarteEvent extends EventObject{
         this.nombre = nombre;
     }
 
-    public String getConteneur() {
+    public int getConteneur() {
         return conteneur;
     }
 
-    public void setConteneur(String conteneur) {
+    public void setConteneur(int conteneur) {
         this.conteneur = conteneur;
     }
+
 }

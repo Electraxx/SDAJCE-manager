@@ -13,59 +13,24 @@ import java.util.EventObject;
  */
 public class DelCarteEvent extends EventObject{
 
-    private String nom;
-    private String type;
-    private String sphere;
-    private int nombre;
-    private String conteneur;
+    private int id;
 
-    public DelCarteEvent(Object source, String nom, String type, String sphere, int nombre, String conteneur) {
+    public DelCarteEvent(Object source){
         super(source);
-        this.nom = nom;
-        this.type = type;
-        this.sphere = sphere;
-        this.nombre = nombre;
-        this.conteneur = conteneur;
+    }
+    
+    public DelCarteEvent(Object source, int id) {
+        super(source);
+        this.id = id;
     }
 
-    public String getNom() {
-        return nom;
+    public int getId() {
+        return id;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setId(int id) {
+        this.id = id;
     }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getSphere() {
-        return sphere;
-    }
-
-    public void setSphere(String sphere) {
-        this.sphere = sphere;
-    }
-
-    public int getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(int nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getConteneur() {
-        return conteneur;
-    }
-
-    public void setConteneur(String conteneur) {
-        this.conteneur = conteneur;
-    }
-
+    
+    
 }
