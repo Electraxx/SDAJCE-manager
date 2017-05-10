@@ -5,6 +5,7 @@
  */
 package ch.ceff.ict3.sdajcemanager.modele;
 
+import java.sql.Connection;
 import java.util.List;
 
 /**
@@ -13,6 +14,8 @@ import java.util.List;
  */
 public class Database {
     private static Database INSTANCE;
+    
+    private Connection connection;
     
     public static Database creerDatabase() {
         if(INSTANCE == null) {
