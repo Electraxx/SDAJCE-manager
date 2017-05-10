@@ -5,6 +5,7 @@
  */
 package ch.ceff.ict3.sdajcemanager.event;
 
+import ch.ceff.ict3.sdajcemanager.modele.Deck;
 import java.util.EventObject;
 
 /**
@@ -15,13 +16,13 @@ public class AddPartieEvent extends EventObject {
 
     private String date;
     private boolean resultat;
-    private int decks;
+    private Deck decks;
 
     public AddPartieEvent(Object source) {
         super(source);
     }
 
-    public AddPartieEvent(String date, boolean resultat, int decks, Object source) {
+    public AddPartieEvent(String date, boolean resultat, Deck decks, Object source) {
         super(source);
         this.date = date;
         this.resultat = resultat;
@@ -44,11 +45,11 @@ public class AddPartieEvent extends EventObject {
         this.resultat = resultat;
     }
 
-    public int getDecks() {
+    public Deck getDecks() {
         return decks;
     }
 
-    public void setDecks(int decks) {
+    public void setDecks(Deck decks) {
         this.decks = decks;
     }
 
