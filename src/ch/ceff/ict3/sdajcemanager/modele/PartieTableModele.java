@@ -6,7 +6,6 @@
 package ch.ceff.ict3.sdajcemanager.modele;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
