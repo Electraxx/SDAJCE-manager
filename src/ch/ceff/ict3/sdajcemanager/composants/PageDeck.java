@@ -18,7 +18,7 @@ import javax.swing.JPanel;
  * @author cp-14syf
  */
 public class PageDeck  extends JPanel{
-    private FormPanelDeck panelCarte;
+    private FormPanelDeck panelDeck;
     private TablePanelDeck tablePanel;
 
     public PageDeck() {
@@ -29,7 +29,7 @@ public class PageDeck  extends JPanel{
         
         //toolBar = new ToolBar();
         tablePanel = new TablePanelDeck();
-        panelCarte = new FormPanelDeck();
+        panelDeck = new FormPanelDeck();
 
         List<Deck> temp_data = new ArrayList<Deck>();
         
@@ -46,8 +46,10 @@ public class PageDeck  extends JPanel{
         temp_data.add(new Deck(0, "deck 4 test", temp_data_carte));
         
         tablePanel.setData(temp_data);
+        tablePanel.setAutoCreateRowSorter();
+        tablePanel.setSorter();
 
-        this.add(panelCarte, BorderLayout.NORTH);
+        this.add(panelDeck, BorderLayout.NORTH);
         this.add(tablePanel, BorderLayout.SOUTH);
 
 
