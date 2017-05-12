@@ -11,6 +11,7 @@ import ch.ceff.ict3.sdajcemanager.modele.Conteneur;
 import ch.ceff.ict3.sdajcemanager.modele.Database;
 import ch.ceff.ict3.sdajcemanager.modele.Deck;
 import ch.ceff.ict3.sdajcemanager.modele.Partie;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -35,11 +36,21 @@ public class Controleur {
     }
 
     public Carte getCarte(int index) {
-        return db.getCarte(index);
+        try {
+            return db.getCarte(index);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
 
     public List<Carte> getAllCartes() {
-        return db.getAllCartes();
+        try {
+            return db.getAllCartes();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
 
     public void editCarte(EditCarteEvent event) {
@@ -57,11 +68,21 @@ public class Controleur {
     }
 
     public Deck getDeck(int index) {
-        return db.getDeck(index);
+        try {
+            return db.getDeck(index);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
 
     public List<Deck> getAllDecks() {
-        return db.getAllDecks();
+        try {
+            return db.getAllDecks();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
 
     public void AddPartie(AddPartieEvent event) {
@@ -74,11 +95,21 @@ public class Controleur {
     }
 
     public Partie getPartie(int index) {
-        return db.getPartie(index);
+        try {
+            return db.getPartie(index);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
 
     public List<Partie> getAllParties() {
-        return db.getAllParties();
+        try {
+            return db.getAllParties();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
 
     public void AddConteneur(AddConteneurEvent event) {
@@ -91,11 +122,21 @@ public class Controleur {
     }
 
     public Conteneur getConteneur(int index) {
-        return db.getConteneur(index);
+        try {
+            return db.getConteneur(index);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
 
     public List<Conteneur> getAllConteneur() {
-        return db.getAllConteneur();
+        try {
+            return db.getAllConteneur();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
 
 }
