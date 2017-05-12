@@ -24,8 +24,8 @@ import javax.swing.border.Border;
  *
  * @author cp-14syf
  */
-public class FormPanelDeck  extends JPanel{
-    
+public class FormPanelDeck extends JPanel {
+
     private JButton buttonSearch;
     private JButton buttonAddCart;
     private JComboBox comboAttribut;
@@ -38,7 +38,6 @@ public class FormPanelDeck  extends JPanel{
     private void initComponents() {
 
         //liste des sphère
-
         comboAttribut = new JComboBox();
         DefaultComboBoxModel modelSphere = new DefaultComboBoxModel();
         modelSphere.addElement("Sphere");
@@ -50,9 +49,9 @@ public class FormPanelDeck  extends JPanel{
         comboAttribut.setModel(modelSphere);
         comboAttribut.setSelectedIndex(0);
         comboAttribut.setEditable(true);
-       
-      // setPreferredSize(new Dimension(700,150));
-        
+
+        setPreferredSize(new Dimension(700, 150));
+
         Border bordure = BorderFactory.createTitledBorder("Option");
         Border marge = BorderFactory.createEmptyBorder(5, 5, 5, 5);
         setBorder(BorderFactory.createCompoundBorder(marge, bordure));
@@ -68,16 +67,27 @@ public class FormPanelDeck  extends JPanel{
         buttonSearch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                String search = searchField.getText();
+                System.out.println(search);
             }
         });
-        //action sur le bouton ajouter carte
+
+        //action sur le bouton nouveau deck
         buttonAddCart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
         });
+        
+        comboAttribut.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String sphereSearch = comboAttribut.getSelectedItem().toString();
+                System.out.println(sphereSearch);
+            }
+        });
+
     }
 
     private void layoutComponents() {
