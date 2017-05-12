@@ -21,6 +21,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 /**
  *
@@ -28,7 +30,6 @@ import javax.swing.border.Border;
  */
 public class FormPanelDeck extends JPanel {
 
-    private JButton buttonSearch;
     private JButton buttonAddCart;
     private JComboBox comboAttribut;
     private JTextField searchField;
@@ -60,23 +61,25 @@ public class FormPanelDeck extends JPanel {
         setBorder(BorderFactory.createCompoundBorder(marge, bordure));
 
         searchField = new JTextField(9);
-        buttonSearch = new JButton("Rechercher");
         buttonAddCart = new JButton("Nouveau Deck");
 
         //placement des composants
         layoutComponents();
 
-        //action sur le bouton rechercher
-        buttonSearch.addActionListener(new ActionListener() {
+        searchField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
-            public void actionPerformed(ActionEvent event) {
-                String search = searchField.getText();
-                System.out.println(search);
-                 SearchDeckEvent searchDeckEvent = new SearchDeckEvent(this, search);
-                
-                if(appListener != null) {
-                    appListener.searchDeck(searchDeckEvent);
-                }
+            public void insertUpdate(DocumentEvent e) {
+                search();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                search();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                search();
             }
         });
 
@@ -87,7 +90,7 @@ public class FormPanelDeck extends JPanel {
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
         });
-        
+
         comboAttribut.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -97,7 +100,18 @@ public class FormPanelDeck extends JPanel {
         });
 
     }
-     public void setSearchDeckListener(AppListener appListener) {
+
+    public void search() {
+        String search = searchField.getText();
+        System.out.println(search);
+        SearchDeckEvent searchDeckEvent = new SearchDeckEvent(this, search);
+
+        if (appListener != null) {
+            appListener.searchDeck(searchDeckEvent);
+        }
+    }
+
+    public void setSearchDeckListener(AppListener appListener) {
         this.appListener = appListener;
     }
 
@@ -122,11 +136,8 @@ public class FormPanelDeck extends JPanel {
         gc.insets = new Insets(0, 0, 0, 3);
         add(searchField, gc);
 
-        gc.gridx = 2;
-        gc.anchor = GridBagConstraints.FIRST_LINE_END;
-        add(buttonSearch, gc);
 
-        gc.gridx = 3;
+        gc.gridx = 2;
         gc.anchor = GridBagConstraints.FIRST_LINE_END;
         add(buttonAddCart, gc);
 
