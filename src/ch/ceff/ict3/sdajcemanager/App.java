@@ -6,6 +6,10 @@
 package ch.ceff.ict3.sdajcemanager;
 
 import ch.ceff.ict3.sdajcemanager.composants.MainFrame;
+import ch.ceff.ict3.sdajcemanager.modele.Carte;
+import ch.ceff.ict3.sdajcemanager.modele.Database;
+import java.sql.SQLException;
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
@@ -18,6 +22,21 @@ public class App {
     public static final String APP_NAME = "SDAJCE-manager";
 
     public static void main(String[] args) {
+        try {
+            
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+            ex.printStackTrace();
+        }
+        Database db = Database.newDatabase();
+        try {
+            List<Carte> lc = db.getAllCartes();
+
+            System.out.println(lc.size());
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
