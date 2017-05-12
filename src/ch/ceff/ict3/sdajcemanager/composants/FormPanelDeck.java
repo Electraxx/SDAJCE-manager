@@ -103,7 +103,6 @@ public class FormPanelDeck extends JPanel {
 
     public void search() {
         String search = searchField.getText();
-        System.out.println(search);
         SearchDeckEvent searchDeckEvent = new SearchDeckEvent(this, search);
 
         if (appListener != null) {
