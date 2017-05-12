@@ -5,6 +5,7 @@
  */
 package ch.ceff.ict3.sdajcemanager.composants;
 
+import ch.ceff.ict3.sdajcemanager.listeners.AppListener;
 import ch.ceff.ict3.sdajcemanager.modele.Carte;
 import ch.ceff.ict3.sdajcemanager.modele.Conteneur;
 import ch.ceff.ict3.sdajcemanager.modele.Deck;
@@ -36,14 +37,10 @@ public class PageDeck  extends JPanel{
         List<Carte> temp_data_carte = new ArrayList<Carte>();
         
         temp_data_carte.add(new Carte(0, "test", "tests", "test", 2, new Conteneur(0, "test", "test")));
-        temp_data_carte.add(new Carte(0, "test", "tests", "test", 2, new Conteneur(0, "test", "test")));
-        temp_data_carte.add(new Carte(0, "test", "tests", "test", 2, new Conteneur(0, "test", "test")));
-        temp_data_carte.add(new Carte(0, "test", "tests", "test", 2, new Conteneur(0, "test", "test")));
         
-        temp_data.add(new Deck(0, "deck 1 test", temp_data_carte));
-        temp_data.add(new Deck(0, "deck 2 test", temp_data_carte));
-        temp_data.add(new Deck(0, "deck 3 test", temp_data_carte));
-        temp_data.add(new Deck(0, "deck 4 test", temp_data_carte));
+        for(int i = 0; i < 200; i++){
+        temp_data.add(new Deck(0, "deck" + i + " test", temp_data_carte));
+        }
         
         tablePanel.setData(temp_data);
         tablePanel.setAutoCreateRowSorter();
@@ -53,5 +50,12 @@ public class PageDeck  extends JPanel{
         this.add(tablePanel, BorderLayout.SOUTH);
 
 
+    }
+    public void search(String text){
+        tablePanel.search(text);
+    }
+    
+    public void setListener(AppListener appListener){
+        panelDeck.setSearchDeckListener(appListener);
     }
 }

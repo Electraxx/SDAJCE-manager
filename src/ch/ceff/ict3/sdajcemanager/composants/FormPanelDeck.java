@@ -98,7 +98,6 @@ public class FormPanelDeck extends JPanel {
                 System.out.println(sphereSearch);
             }
         });
-
     }
 
     public void search() {
