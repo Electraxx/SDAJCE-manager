@@ -5,6 +5,16 @@
  */
 package ch.ceff.ict3.sdajcemanager.composants;
 
+import ch.ceff.ict3.sdajcemanager.event.AddCarteEvent;
+import ch.ceff.ict3.sdajcemanager.event.AddConteneurEvent;
+import ch.ceff.ict3.sdajcemanager.event.AddDeckEvent;
+import ch.ceff.ict3.sdajcemanager.event.AddPartieEvent;
+import ch.ceff.ict3.sdajcemanager.event.DelCarteEvent;
+import ch.ceff.ict3.sdajcemanager.event.DelConteneurEvent;
+import ch.ceff.ict3.sdajcemanager.event.DelDeckEvent;
+import ch.ceff.ict3.sdajcemanager.event.DelPartieEvent;
+import ch.ceff.ict3.sdajcemanager.event.EditCarteEvent;
+import ch.ceff.ict3.sdajcemanager.listeners.AppListener;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -13,7 +23,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import javafx.scene.control.ToolBar;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -26,13 +35,14 @@ import javax.swing.KeyStroke;
  *
  * @author cp-14luf
  */
-public class MainFrame extends JFrame implements WindowListener {
+public class MainFrame extends JFrame implements WindowListener, AppListener {
 
     private TablePanelCarte tablePanel;
     private ToolBar toolBar;
     private FormPanelCarte panelCarte;
     private PageCarte pageCarte;
     private JSplitPane splitPane;
+    private AppListener listener;
 
     public MainFrame(String titre) {
         initComponents(titre);
@@ -42,16 +52,16 @@ public class MainFrame extends JFrame implements WindowListener {
         Container contentPane = getContentPane();
         pageCarte = new PageCarte();
         toolBar = new ToolBar();
-        
-        contentPane.add(pageCarte,BorderLayout.CENTER);
-       
+
+        toolBar.setListener(this);
+
+        contentPane.add(pageCarte, BorderLayout.CENTER);
+        contentPane.add(toolBar, BorderLayout.PAGE_START);
+
         setJMenuBar(createJMenuBar());
         setMinimumSize(new Dimension(700, 450));
         setLocationRelativeTo(null);
-
     }
-    
-
 
     private JMenuBar createJMenuBar() {
         JMenuBar menuBar = new JMenuBar();
@@ -116,6 +126,55 @@ public class MainFrame extends JFrame implements WindowListener {
         if (option == JOptionPane.OK_OPTION) {
             System.exit(0);
         }
+    }
+
+    public void setListener(AppListener listener) {
+        this.listener = listener;
+    }
+
+    @Override
+    public void addCarte(AddCarteEvent event) {
+
+    }
+
+    @Override
+    public void delCarte(DelCarteEvent event) {
+
+    }
+
+    @Override
+    public void editCarte(EditCarteEvent event) {
+
+    }
+
+    @Override
+    public void addConteneur(AddConteneurEvent event) {
+
+    }
+
+    @Override
+    public void editConteneur(DelConteneurEvent event) {
+
+    }
+
+    @Override
+    public void addDeck(AddDeckEvent event) {
+
+    }
+
+    @Override
+    public void delDeck(DelDeckEvent event) {
+
+    }
+
+    @Override
+    public void addPartie(AddPartieEvent event) {
+
+    }
+
+    @Override
+    public void delPartie(DelPartieEvent event) {
+
     }
 
     @Override
