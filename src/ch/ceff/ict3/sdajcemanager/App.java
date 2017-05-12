@@ -22,7 +22,7 @@ public class App {
             @Override
             public void run() {
                 new MainFrame(APP_NAME);
-                JFrame fenetre = new MainFrame("Tutoriel 13");
+                JFrame fenetre = new MainFrame("SDAJCE Manager");
                 fenetre.setVisible(true);
             }
         });
