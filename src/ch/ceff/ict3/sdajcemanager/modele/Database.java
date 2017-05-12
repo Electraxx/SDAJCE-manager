@@ -34,7 +34,7 @@ public class Database {
     // Gestion de la DB
     
     public void addCarte(Carte carte) {
-        String query = "INSERT INTO cartes ("
+        String queryCarte = "INSERT INTO cartes ("
                 + "nom_carte,"
                 + "type_carte,"
                 + "sphere_carte,"
@@ -45,12 +45,12 @@ public class Database {
                 + carte.getType() + ","
                 + carte.getSphere() + ","
                 + carte.getNombre() + ","
-                + carte.getConteneur().getId() + ","
+                + carte.getConteneur().getId()
                 +");";
-        DBConnect.query(connection, query);
+        DBConnect.query(connection, queryCarte);
     }
     public void editCarte(Carte carte) {
-        String query = "INSERT INTO cartes ("
+        String queryCarte = "INSERT INTO cartes ("
                 + "id_carte,"
                 + "nom_carte,"
                 + "type_carte,"
@@ -65,21 +65,14 @@ public class Database {
                 + carte.getNombre() + ","
                 + carte.getConteneur().getId() + ","
                 +");";
-        DBConnect.query(connection, query);
+        DBConnect.query(connection, queryCarte);
     }
     public Carte getCarte(int index) throws SQLException {
         
-        String query1 = "SELECT * FROM cartes WHERE id_carte=" + index;
-        ResultSet resultCarte = DBConnect.query(connection, query1);
+        String queryCarte = "SELECT * FROM cartes WHERE id_carte=" + index;
+        ResultSet resultCarte = DBConnect.query(connection, queryCarte);
         
-        String query2 = "SELECT * FROM conteneur WHERE id_cont=" + resultCarte.getInt("id_conteneur_carte");
-        ResultSet resultConteneur = DBConnect.query(connection, query2);
-        
-        Conteneur conteneur = new Conteneur(
-                resultConteneur.getInt("id_contn"),
-                resultConteneur.getString("nom_contn"),
-                resultConteneur.getString("abbr_contn")
-        );
+        Conteneur conteneur = getConteneur(resultCarte.getInt("id_conteneur_carte"));
         
         Carte carte = new Carte(
                 index,
@@ -89,39 +82,26 @@ public class Database {
                 resultCarte.getInt("nombre_carte"),
                 conteneur
         );
+        resultCarte.close();
         return carte;
     }
     public List<Carte> getAllCartes() throws SQLException {
-        String query = "SELECT * FROM cartes";
-        ResultSet resultCartes = DBConnect.query(connection, query);
+        String queryCartes = "SELECT id_carte FROM cartes";
+        ResultSet resultCartes = DBConnect.query(connection, queryCartes);
         
         List<Carte> cartes = new ArrayList<>();
         
         while (resultCartes.next()) {
-            String query2 = "SELECT * FROM conteneur WHERE id_cont=" + resultCartes.getInt("id_conteneur_carte");
-            ResultSet resultConteneur = DBConnect.query(connection, query2);
-
-            Conteneur conteneur = new Conteneur(
-                resultConteneur.getInt("id_contn"),
-                resultConteneur.getString("nom_contn"),
-                resultConteneur.getString("abbr_contn")
-            );
-
-            Carte carte = new Carte(
-                resultCartes.getInt("id_carte"),
-                resultCartes.getString("nom_carte"),
-                resultCartes.getString("type_carte"),
-                resultCartes.getString("sphere_nombre"),
-                resultCartes.getInt("nombre_carte"),
-                conteneur
-            );
+            Carte carte = getCarte(resultCartes.getInt("id_carte"));
             cartes.add(carte);
         }
+        
+        resultCartes.close();
         return cartes;
     }
     public void delCarte(int index) {
-        String query = "DELETE FROM cartes WHERE id_carte=" + index;
-        DBConnect.query(connection, query);
+        String queryCarte = "DELETE FROM cartes WHERE id_carte=" + index;
+        DBConnect.query(connection, queryCarte);
     }
     
     public void addDeck(Deck deck) {
@@ -161,30 +141,22 @@ public class Database {
         }
         
         Deck deck = new Deck(resultDeck.getInt("id_deck"), resultDeck.getString("nom_deck"), cartes);
-        
+        resultDeck.close();
+        resultCartesDeck.close();
         return deck;
     }
     public List<Deck> getAllDecks() throws SQLException {
-        String queryDecks = "SELECT * FROM decks";
+        String queryDecks = "SELECT id_deck FROM decks";
         ResultSet resultDecks = DBConnect.query(connection, queryDecks);
         
         List<Deck> decks = new ArrayList<>();
         
         while(resultDecks.next()) {
-            String queryCartesDeck = "SELECT * FROM cartes_deck WHERE id_deck=" + resultDecks.getInt("id_deck");
-            ResultSet resultCartesDeck = DBConnect.query(this.connection, queryCartesDeck);
-            
-            List<Carte> cartes = new ArrayList<>();
-        
-            while(resultCartesDeck.next()) {
-                Carte carte = getCarte(resultCartesDeck.getInt("id_carte"));
-                carte.setNombre(resultCartesDeck.getInt("nombre_carte_deck"));
-                cartes.add(carte);
-            }
-
-            Deck deck = new Deck(resultDecks.getInt("id_deck"), resultDecks.getString("nom_deck"), cartes);
+            Deck deck = getDeck(resultDecks.getInt("id_deck"));
             decks.add(deck);
         }
+        
+        resultDecks.close();
         return decks;
         
     }
@@ -195,13 +167,112 @@ public class Database {
         DBConnect.query(this.connection, queryCartesDeck);
     }
     
-    public void addConteneur(Conteneur conteneur) {}
-    public Conteneur getConteneur(int index) {return null;}
-    public List<Conteneur> getAllConteneur() {return null;}
-    public void delConteneur(int index) {}
+    public void addConteneur(Conteneur conteneur) {
+        String queryConteneur = "INSERT INTO conteneur ("
+                + "nom_contn,"
+                + "abbd_contn"
+                + ") VALUES ("
+                + conteneur.getNom() + ","
+                + conteneur.getAbbreviation()
+                + ");";
+        DBConnect.query(connection, queryConteneur);
+    }
+    public Conteneur getConteneur(int index) throws SQLException {
+        String queryConteneur = "SELECT * FROM conteneur WHERE id_contn=" + index;
+        ResultSet resultConteneur = DBConnect.query(connection, queryConteneur);
+        
+        Conteneur conteneneur = new Conteneur(
+                resultConteneur.getInt("id_contn"),
+                resultConteneur.getString("nom_contn"),
+                resultConteneur.getString("abbr_contn")
+        );
+        
+        resultConteneur.close();
+        return conteneneur;
+    }
+    public List<Conteneur> getAllConteneur() throws SQLException {
+        String queryConteneurs = "SELECT id_contn FORM conteneur";
+        ResultSet resultConteneurs = DBConnect.query(connection, queryConteneurs);
+        
+        List<Conteneur> conteneurs = new ArrayList<>();
+        
+        while(resultConteneurs.next()){
+            Conteneur conteneur = getConteneur(resultConteneurs.getInt("id_contn"));
+            conteneurs.add(conteneur);
+        }
+        
+        resultConteneurs.close();
+        return conteneurs;
+        
+    }
+    public void delConteneur(int index) {
+        String queryConteneur = "DELETE FROM conteneur WHERE id_contn=" + index;
+        DBConnect.query(this.connection, queryConteneur);
+    }
     
-    public void addPartie(Partie partie) {}
-    public Partie getPartie(int index) {return null;}
-    public List<Partie> getAllParties() {return null;}
-    public void delPartie(int index) {}
+    public void addPartie(Partie partie) {
+        String queryPartie = "INSERT INTO partie ("
+                + "date_partie"
+                + "resultat"
+                + ") VALUES ("
+                + partie.getDate() + ","
+                + partie.isResultat()
+                +");";
+        DBConnect.query(this.connection, queryPartie);
+        
+        for (Deck deck: partie.getDecks()) {
+            String queryDecksPartie = "SELECT INTO decks_partie ("
+                    + "id_deck"
+                    + "id_partie"
+                    + ") VALUES ("
+                    + deck.getId() + ","
+                    + partie.getId()
+                    +");";
+            DBConnect.query(this.connection, queryDecksPartie);
+        }
+        
+    }
+    public Partie getPartie(int index) throws SQLException {
+        String queryPartie = "SELECT * FROM partie";
+        ResultSet resultPartie = DBConnect.query(this.connection, queryPartie);
+        
+        String queryDecksPartie = "SELECT id_deck FROM decks_partie WHERE id_partie=" + index; 
+        ResultSet resultDecksPartie = DBConnect.query(this.connection, queryDecksPartie);
+        
+        List<Deck> decks = new ArrayList<>();
+        
+        while(resultDecksPartie.next()) {
+            decks.add(getDeck(resultDecksPartie.getInt("id_deck")));
+        }
+        
+        Partie partie = new Partie(
+                resultPartie.getInt("id_partie"),
+                resultPartie.getDate("date_partie"),
+                resultPartie.getBoolean("resultat"),
+                decks
+                
+        );
+        resultDecksPartie.close();
+        resultPartie.close();
+        return partie;
+    }
+    public List<Partie> getAllParties() throws SQLException {
+        String queryParties = "SELECT id_partie FROM partie";
+        ResultSet resultParties = DBConnect.query(this.connection, queryParties);
+        
+        List<Partie> parties = new ArrayList<>();
+        
+        while(resultParties.next()) {
+            parties.add(getPartie(resultParties.getInt("id_partie")));
+        }
+        
+        resultParties.close();
+        return parties;
+    }
+    public void delPartie(int index) {
+        String queryPartie = "DELETE FROM partie WHERE id_deck=" + index;
+        String queryDeckPartie = "DELETE FROM decks_partie WHERE id_deck=" + index;
+        DBConnect.query(this.connection, queryPartie);
+        DBConnect.query(this.connection, queryDeckPartie);
+    }
 }
