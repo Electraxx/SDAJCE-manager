@@ -18,11 +18,12 @@ import javax.swing.JTable;
  *
  * @author cp-13jru
  */
-public class TablePanelCarte extends JPanel {
-    private JTable table;
+public class TablePanelPartie extends JPanel {
+    
+      private JTable table;
     private CarteTableModele carteModel;
     
-    public TablePanelCarte(){
+    public TablePanelPartie(){
         initComponents();
     }
     private void initComponents(){
@@ -42,8 +43,6 @@ public class TablePanelCarte extends JPanel {
       public void refresh() {
         carteModel.fireTableDataChanged();
     }
-    
-    
     
     
 }

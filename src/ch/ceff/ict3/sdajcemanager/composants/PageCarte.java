@@ -8,11 +8,8 @@ package ch.ceff.ict3.sdajcemanager.composants;
 import ch.ceff.ict3.sdajcemanager.modele.Carte;
 import ch.ceff.ict3.sdajcemanager.modele.Conteneur;
 import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
@@ -36,14 +33,15 @@ public class PageCarte extends JPanel {
 
         List<Carte> temp_data = new ArrayList<Carte>();
 
-        temp_data.add(new Carte(0, "Bla", "kljnkljbn", "kljbnk", 2, new Conteneur(0, "Test", "tst")));
-        temp_data.add(new Carte(1, "Bla", "kljnkljbn", "kljbnk", 2, new Conteneur(0, "Test", "tst")));
-        temp_data.add(new Carte(0, "Bla", "kljnkljbn", "kljbnk", 2, new Conteneur(0, "Test", "tst")));
+        temp_data.add(new Carte(0, "Gimli", "Heros", "energie", 2, new Conteneur(0, "Test", "bb")));
+        temp_data.add(new Carte(1, "Legolas", "Heros", "Tactique", 2, new Conteneur(0, "Test", "c1")));
+        temp_data.add(new Carte(2, "Gandalf", "Allié", "Neutre", 2, new Conteneur(0, "Test", "bb")));
+        temp_data.add(new Carte(3, "Thorin", "Heros", "neutre", 2, new Conteneur(0, "Test", "c1")));
         
         
 
         tablePanel.setData(temp_data);
-
+        tablePanel.refresh();
         this.add(panelCarte, BorderLayout.NORTH);
         this.add(tablePanel, BorderLayout.SOUTH);
 

@@ -14,6 +14,7 @@ import ch.ceff.ict3.sdajcemanager.event.DelConteneurEvent;
 import ch.ceff.ict3.sdajcemanager.event.DelDeckEvent;
 import ch.ceff.ict3.sdajcemanager.event.DelPartieEvent;
 import ch.ceff.ict3.sdajcemanager.event.EditCarteEvent;
+
 import ch.ceff.ict3.sdajcemanager.listeners.AppListener;
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -41,6 +42,7 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
     private ToolBar toolBar;
     private FormPanelCarte panelCarte;
     private PageCarte pageCarte;
+    private PageDeck pageDeck;
     private JSplitPane splitPane;
     private AppListener listener;
 
@@ -51,6 +53,7 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
     public void initComponents(String titre) {
         Container contentPane = getContentPane();
         pageCarte = new PageCarte();
+        pageDeck = new PageDeck();
         toolBar = new ToolBar();
 
         toolBar.setListener(this);
@@ -127,6 +130,7 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
             System.exit(0);
         }
     }
+
 
     public void setListener(AppListener listener) {
         this.listener = listener;
@@ -210,5 +214,23 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
     @Override
     public void windowDeactivated(WindowEvent e) {
 
+    }
+
+    @Override
+    public void changePage(String page) {
+        Container contentPane = getContentPane();
+
+        contentPane.removeAll();
+        contentPane.add(toolBar, BorderLayout.PAGE_START);
+        if (page == "pageCarte") {
+            contentPane.add(pageCarte, BorderLayout.CENTER);
+        } else if (page == "pageDeck") {
+            contentPane.add(pageDeck, BorderLayout.CENTER);
+        } else if (page == "pagePartie") {
+            //contentPane.add(pagePartie, BorderLayout.CENTER);
+        }
+
+        contentPane.revalidate();
+        contentPane.repaint();
     }
 }

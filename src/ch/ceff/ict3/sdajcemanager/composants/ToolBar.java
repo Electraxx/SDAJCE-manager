@@ -24,6 +24,8 @@ public class ToolBar extends JToolBar implements ActionListener {
     private JButton buttonDeck;
     private JButton buttonParty;
     private AppListener listener;
+    private PageCarte pageCarte;
+    private PageDeck pageDeck;
 
     public ToolBar() {
         initComponents();
@@ -33,15 +35,22 @@ public class ToolBar extends JToolBar implements ActionListener {
 //    setBackground(Color.red);
         setBorder(BorderFactory.createEtchedBorder());
 
+        
         buttonCarte = new JButton();
+        //ajoute une image dans le bouton
         buttonCarte.setIcon(Utils.createIcon("images/IconeCarte.png"));
-        buttonCarte.setSize(1,1);
+        //ajoute une infoBulle
+        buttonCarte.setToolTipText("Onglet Carte");
         buttonDeck = new JButton();
         buttonDeck.setIcon(Utils.createIcon("images/IconeDeck.png"));
-        buttonCarte.setSize(1,1);
+        buttonDeck.setToolTipText("Onglet Deck");
         buttonParty = new JButton();
         buttonParty.setIcon(Utils.createIcon("images/IconeDuel.png"));
-        buttonCarte.setSize(1,1);
+        buttonParty.setToolTipText("Onglet Partie");
+  
+        buttonCarte.addActionListener(this);
+        buttonDeck.addActionListener(this);
+        buttonParty.addActionListener(this);
 
         //setLayout(new FlowLayout(FlowLayout.LEFT));
         add(buttonCarte);
@@ -57,7 +66,18 @@ public class ToolBar extends JToolBar implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JButton activeButton = (JButton)e.getSource();
+        
+        if (listener != null) {
+            if(activeButton == buttonCarte){
+                listener.changePage("pageCarte");
+            }else if(activeButton == buttonDeck){
+                 listener.changePage("pageDeck");
+            }else if(activeButton == buttonParty){
+                 listener.changePage("pagePartie");
+            }
+            
+        }
     }
 
 }
