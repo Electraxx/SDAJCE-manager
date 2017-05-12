@@ -21,8 +21,7 @@ public class App {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new MainFrame(APP_NAME);
-                JFrame fenetre = new MainFrame("SDAJCE Manager");
+                JFrame fenetre = new MainFrame(APP_NAME);
                 fenetre.setVisible(true);
             }
         });
