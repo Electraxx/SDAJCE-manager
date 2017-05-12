@@ -5,6 +5,8 @@
  */
 package ch.ceff.ict3.sdajcemanager.composants;
 
+import ch.ceff.ict3.sdajcemanager.event.SearchDeckEvent;
+import ch.ceff.ict3.sdajcemanager.listeners.AppListener;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -30,6 +32,7 @@ public class FormPanelDeck extends JPanel {
     private JButton buttonAddCart;
     private JComboBox comboAttribut;
     private JTextField searchField;
+    private AppListener appListener;
 
     public FormPanelDeck() {
         initComponents();
@@ -69,6 +72,11 @@ public class FormPanelDeck extends JPanel {
             public void actionPerformed(ActionEvent event) {
                 String search = searchField.getText();
                 System.out.println(search);
+                 SearchDeckEvent searchDeckEvent = new SearchDeckEvent(this, search);
+                
+                if(appListener != null) {
+                    appListener.searchDeck(searchDeckEvent);
+                }
             }
         });
 
@@ -88,6 +96,9 @@ public class FormPanelDeck extends JPanel {
             }
         });
 
+    }
+     public void setSearchDeckListener(AppListener appListener) {
+        this.appListener = appListener;
     }
 
     private void layoutComponents() {
