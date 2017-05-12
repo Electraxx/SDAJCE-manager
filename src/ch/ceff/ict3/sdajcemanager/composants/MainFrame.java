@@ -5,8 +5,6 @@
  */
 package ch.ceff.ict3.sdajcemanager.composants;
 
-import ch.ceff.ict3.sdajcemanager.modele.Carte;
-import ch.ceff.ict3.sdajcemanager.modele.Conteneur;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -15,8 +13,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.util.ArrayList;
-import java.util.List;
 import javafx.scene.control.ToolBar;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -36,7 +32,6 @@ public class MainFrame extends JFrame implements WindowListener {
     private ToolBar toolBar;
     private FormPanelCarte panelCarte;
     private PageCarte pageCarte;
-    
     private JSplitPane splitPane;
 
     public MainFrame(String titre) {
@@ -46,14 +41,17 @@ public class MainFrame extends JFrame implements WindowListener {
     public void initComponents(String titre) {
         Container contentPane = getContentPane();
         pageCarte = new PageCarte();
+        toolBar = new ToolBar();
         
         contentPane.add(pageCarte,BorderLayout.CENTER);
-
+       
         setJMenuBar(createJMenuBar());
         setMinimumSize(new Dimension(700, 450));
         setLocationRelativeTo(null);
 
     }
+    
+
 
     private JMenuBar createJMenuBar() {
         JMenuBar menuBar = new JMenuBar();
