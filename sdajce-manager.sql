@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Mer 10 Mai 2017 à 12:54
+-- Généré le :  Ven 12 Mai 2017 à 08:16
 -- Version du serveur :  10.1.16-MariaDB
 -- Version de PHP :  5.6.24
 
@@ -221,12 +221,23 @@ CREATE TABLE `decks` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `decks_partie`
+--
+
+CREATE TABLE `decks_partie` (
+  `id_deck_partie` int(10) NOT NULL,
+  `id_deck` int(10) DEFAULT NULL,
+  `id_partie` int(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `partie`
 --
 
 CREATE TABLE `partie` (
   `id_partie` int(10) NOT NULL,
-  `deck_partie` int(10) DEFAULT NULL,
   `date_partie` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `resultat` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -287,6 +298,12 @@ ALTER TABLE `decks`
   ADD PRIMARY KEY (`id_deck`);
 
 --
+-- Index pour la table `decks_partie`
+--
+ALTER TABLE `decks_partie`
+  ADD PRIMARY KEY (`id_deck_partie`);
+
+--
 -- Index pour la table `partie`
 --
 ALTER TABLE `partie`
@@ -322,6 +339,11 @@ ALTER TABLE `conteneur`
 --
 ALTER TABLE `decks`
   MODIFY `id_deck` int(10) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `decks_partie`
+--
+ALTER TABLE `decks_partie`
+  MODIFY `id_deck_partie` int(10) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `partie`
 --
