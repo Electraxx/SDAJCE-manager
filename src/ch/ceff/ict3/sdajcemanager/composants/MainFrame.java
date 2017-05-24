@@ -193,12 +193,28 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
 
     @Override
     public void searchCarte(SearchCarteEvent event) {
-        pageCarte.search(event.getSearch());
+        pageCarte.searchByText(event.getSearch());
     }
-    
-    
-    
-    
+
+    @Override
+    public void searchCarteByType(SearchCarteByTypeEvent event) {
+        pageCarte.searchByType(event.getSearch());
+    }
+
+    @Override
+    public void searchCarteBySphere(SearchCarteBySphereEvent event) {
+        pageCarte.searchBySphere(event.getSearch());
+    }
+
+    @Override
+    public void searchCarteByConteneur(SearchCarteByConteneurEvent event) {
+        pageCarte.searchByConteneur(event.getSearch());
+    }    
+
+    @Override
+    public void delFilters() {
+        pageCarte.delFilters();
+    }
 
     @Override
     public void windowClosing(WindowEvent e) {

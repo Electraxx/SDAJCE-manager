@@ -11,11 +11,11 @@ import java.util.EventObject;
  *
  * @author cp-14syf
  */
-public class SearchCarteEvent extends EventObject {
+public class SearchCarteByConteneurEvent extends EventObject {
     
     private String search;
 
-    public SearchCarteEvent(Object source,String search) {
+    public SearchCarteByConteneurEvent(Object source,String search) {
         super(source);
         this.search = search;
     }

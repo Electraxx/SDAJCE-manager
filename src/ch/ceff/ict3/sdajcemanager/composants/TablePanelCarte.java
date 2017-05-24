@@ -31,6 +31,7 @@ public class TablePanelCarte extends JPanel {
     private CarteTableModele carteModel;
     private AppListener appListener;
     private TableRowSorter<TableModel> rowSorter;
+    List<RowFilter<Object, Object>> filters = new ArrayList<RowFilter<Object, Object>>(3);
 
     public TablePanelCarte() {
         initComponents();
@@ -58,12 +59,33 @@ public class TablePanelCarte extends JPanel {
         carteModel.fireTableDataChanged();
     }
 
-    public void search(String text) {
-        if (text.trim().length() == 0) {
-            rowSorter.setRowFilter(null);
-        } else {
-            rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text, 1));
-        }
+    public void searchByText(String text) {
+        filters.add(RowFilter.regexFilter("(?i)" + text, 1));
+    }
+
+    public void search() {
+        
+        RowFilter<Object, Object> rf = RowFilter.andFilter(filters);
+        rowSorter.setRowFilter(rf);
+    }
+
+    public void searchByType(String text) {
+        filters.add(RowFilter.regexFilter("(?i)" + text, 2));
+        search();
+    }
+
+    public void searchBySphere(String text) {
+        filters.add(RowFilter.regexFilter("(?i)" + text, 3));
+        search();
+    }
+
+    public void searchByConteneur(String text) {
+        filters.add(RowFilter.regexFilter("(?i)" + text, 4));
+        search();
+    }
+    
+    public void delFilters(){
+        filters.clear();
     }
 
     public void setSorter() {
