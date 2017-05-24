@@ -35,9 +35,11 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
     private ToolBar toolBar;
     private FormPanelCarte panelCarte;
     private FormPanelDeck panelDeck;
+    private FormPanelPartie panelPartie;
     private TablePanelDeck tablePanelDeck;
     private PageCarte pageCarte;
     private PageDeck pageDeck;
+    private PagePartie pagePartie;
     private JSplitPane splitPane;
     private AppListener listener;
     private Controleur controler;
@@ -50,10 +52,12 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         Container contentPane = getContentPane();
         pageCarte = new PageCarte();
         pageDeck = new PageDeck();
+        pagePartie = new PagePartie();
         toolBar = new ToolBar();
         pageDeck.setListener(this);
-
+        pageCarte.setListener(this);
         toolBar.setListener(this);
+        //tablePanel.setCarteTableListener(this);
 
         contentPane.add(pageDeck, BorderLayout.CENTER);
         contentPane.add(toolBar, BorderLayout.PAGE_START);
@@ -186,6 +190,13 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
     public void searchDeck(SearchDeckEvent event) {
         pageDeck.search(event.getSearch());
     }
+
+    @Override
+    public void searchCarte(SearchCarteEvent event) {
+        pageCarte.search(event.getSearch());
+    }
+    
+    
     
     
 
@@ -235,10 +246,12 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         } else if (page == "pageDeck") {
             contentPane.add(pageDeck, BorderLayout.CENTER);
         } else if (page == "pagePartie") {
-            //contentPane.add(pagePartie, BorderLayout.CENTER);
+            contentPane.add(pagePartie, BorderLayout.CENTER);
         }
 
         contentPane.revalidate();
         contentPane.repaint();
     }
+
+    
 }

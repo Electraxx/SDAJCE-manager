@@ -5,6 +5,7 @@
  */
 package ch.ceff.ict3.sdajcemanager.composants;
 
+import ch.ceff.ict3.sdajcemanager.listeners.AppListener;
 import ch.ceff.ict3.sdajcemanager.modele.Carte;
 import ch.ceff.ict3.sdajcemanager.modele.Conteneur;
 import java.awt.BorderLayout;
@@ -42,9 +43,19 @@ public class PageCarte extends JPanel {
 
         tablePanel.setData(temp_data);
         tablePanel.refresh();
+        tablePanel.setAutoCreateRowSorter();
+        tablePanel.setSorter();
         this.add(panelCarte, BorderLayout.NORTH);
         this.add(tablePanel, BorderLayout.SOUTH);
 
 
+    }
+    
+    public void search(String text){
+        tablePanel.search(text);
+    }
+    
+    public void setListener(AppListener appListener){
+        panelCarte.setSearchCarteListener(appListener);
     }
 }
