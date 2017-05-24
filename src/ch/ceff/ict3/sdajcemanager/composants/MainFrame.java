@@ -5,8 +5,10 @@
  */
 package ch.ceff.ict3.sdajcemanager.composants;
 
+import ch.ceff.ict3.sdajcemanager.controleurs.Controleur;
 import ch.ceff.ict3.sdajcemanager.event.*;
 import ch.ceff.ict3.sdajcemanager.listeners.AppListener;
+import ch.ceff.ict3.sdajcemanager.modele.Carte;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -38,6 +40,7 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
     private PageDeck pageDeck;
     private JSplitPane splitPane;
     private AppListener listener;
+    private Controleur controler;
 
     public MainFrame(String titre) {
         initComponents(titre);
@@ -58,6 +61,11 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         setJMenuBar(createJMenuBar());
         setMinimumSize(new Dimension(700, 450));
         setLocationRelativeTo(null);
+        
+        controler = new Controleur();
+        
+        addWindowListener(this);
+        
     }
 
     private JMenuBar createJMenuBar() {
@@ -132,47 +140,46 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
 
     @Override
     public void addCarte(AddCarteEvent event) {
-
+        this.controler.addCarte(event);
     }
 
     @Override
     public void delCarte(DelCarteEvent event) {
-
+        this.controler.delCarte(event.getId());
     }
 
     @Override
     public void editCarte(EditCarteEvent event) {
-
+        this.controler.editCarte(event);
     }
 
     @Override
     public void addConteneur(AddConteneurEvent event) {
-
+        this.controler.addConteneur(event);
     }
 
     @Override
     public void editConteneur(DelConteneurEvent event) {
-
     }
 
     @Override
     public void addDeck(AddDeckEvent event) {
-
+        this.controler.addDeck(event);
     }
 
     @Override
     public void delDeck(DelDeckEvent event) {
-
+        this.controler.delDeck(event.getId());
     }
 
     @Override
     public void addPartie(AddPartieEvent event) {
-
+        this.controler.addPartie(event);
     }
 
     @Override
     public void delPartie(DelPartieEvent event) {
-
+        this.controler.delPartie(event.getId());
     }
 
     @Override
