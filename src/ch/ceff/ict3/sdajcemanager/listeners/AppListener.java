@@ -30,6 +30,8 @@ public interface AppListener extends EventListener{
     public void addPartie(AddPartieEvent event);
     public void delPartie(DelPartieEvent event);
     
+    public void orderTable();
+    
     
     
     

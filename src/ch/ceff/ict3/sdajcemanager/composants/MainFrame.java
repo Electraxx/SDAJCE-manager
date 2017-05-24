@@ -57,6 +57,7 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         toolBar = new ToolBar();
 
         toolBar.setListener(this);
+        //tablePanel.setCarteTableListener(this);
 
         contentPane.add(pageCarte, BorderLayout.CENTER);
         contentPane.add(toolBar, BorderLayout.PAGE_START);
@@ -233,4 +234,10 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         contentPane.revalidate();
         contentPane.repaint();
     }
+
+    @Override
+    public void orderTable() {
+        //controler.ordonnerListe();
+    }
+    
 }
