@@ -11,6 +11,7 @@ import ch.ceff.ict3.sdajcemanager.modele.Conteneur;
 import ch.ceff.ict3.sdajcemanager.modele.Database;
 import ch.ceff.ict3.sdajcemanager.modele.Deck;
 import ch.ceff.ict3.sdajcemanager.modele.Partie;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -22,80 +23,143 @@ public class Controleur {
     private Database db;
 
     public Controleur() {
-        db = db.newDatabase();
+        db = Database.newDatabase();
     }
 
     public void addCarte(AddCarteEvent event) {
         Carte carte = new Carte(-1, event.getNom(), event.getType(), event.getSphere(), event.getNombre(), event.getConteneur());
-        db.addCarte(carte);
+        try {
+            db.addCarte(carte);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
-
     public void delCarte(int index) {
-        db.delCarte(index);
+        try {
+            db.delCarte(index);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
-
     public Carte getCarte(int index) {
-        return db.getCarte(index);
+        try {
+            return db.getCarte(index);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
-
     public List<Carte> getAllCartes() {
-        return db.getAllCartes();
+        try {
+            return db.getAllCartes();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
-
     public void editCarte(EditCarteEvent event) {
         Carte carte = new Carte(event.getId(), event.getNom(), event.getType(), event.getSphere(), event.getNombre(), event.getConteneur());
-        db.editCarte(carte);
+        try {
+            db.editCarte(carte);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void addDeck(AddDeckEvent event) {
         Deck deck = new Deck(-1, event.getNom(), event.getCartes());
-        db.addDeck(deck);
+        try {
+            db.addDeck(deck);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
-
     public void delDeck(int index) {
-        db.delDeck(index);
+        try {
+            db.delDeck(index);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
-
     public Deck getDeck(int index) {
-        return db.getDeck(index);
+        try {
+            return db.getDeck(index);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
-
     public List<Deck> getAllDecks() {
-        return db.getAllDecks();
+        try {
+            return db.getAllDecks();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
 
-    public void AddPartie(AddPartieEvent event) {
+    public void addPartie(AddPartieEvent event) {
         Partie partie = new Partie(-1, event.getDate(), event.isResultat(), event.getDecks());
-        db.addPartie(partie);
+        try {
+            db.addPartie(partie);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
-
-    public void DelPartie(int index) {
-        db.delPartie(index);
+    public void delPartie(int index) {
+        try {
+            db.delPartie(index);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
-
     public Partie getPartie(int index) {
-        return db.getPartie(index);
+        try {
+            return db.getPartie(index);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
-
     public List<Partie> getAllParties() {
-        return db.getAllParties();
+        try {
+            return db.getAllParties();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
 
-    public void AddConteneur(AddConteneurEvent event) {
+    public void addConteneur(AddConteneurEvent event) {
         Conteneur conteneur = new Conteneur(-1, event.getNom(), event.getAbbr());
-        db.addConteneur(conteneur);
+        try {
+            db.addConteneur(conteneur);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
-
-    public void DelConteneur(int index) {
-        db.delConteneur(index);
+    public void delConteneur(int index) {
+        try {
+            db.delConteneur(index);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
-
     public Conteneur getConteneur(int index) {
-        return db.getConteneur(index);
+        try {
+            return db.getConteneur(index);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
-
     public List<Conteneur> getAllConteneur() {
-        return db.getAllConteneur();
+        try {
+            return db.getAllConteneur();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
 
 }
