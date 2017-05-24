@@ -23,16 +23,24 @@ public class Controleur {
     private Database db;
 
     public Controleur() {
-        db = db.newDatabase();
+        db = Database.newDatabase();
     }
 
     public void addCarte(AddCarteEvent event) {
         Carte carte = new Carte(-1, event.getNom(), event.getType(), event.getSphere(), event.getNombre(), event.getConteneur());
-        db.addCarte(carte);
+        try {
+            db.addCarte(carte);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void delCarte(int index) {
-        db.delCarte(index);
+        try {
+            db.delCarte(index);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public Carte getCarte(int index) {
@@ -55,16 +63,28 @@ public class Controleur {
 
     public void editCarte(EditCarteEvent event) {
         Carte carte = new Carte(event.getId(), event.getNom(), event.getType(), event.getSphere(), event.getNombre(), event.getConteneur());
-        db.editCarte(carte);
+        try {
+            db.editCarte(carte);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void addDeck(AddDeckEvent event) {
         Deck deck = new Deck(-1, event.getNom(), event.getCartes());
-        db.addDeck(deck);
+        try {
+            db.addDeck(deck);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void delDeck(int index) {
-        db.delDeck(index);
+        try {
+            db.delDeck(index);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public Deck getDeck(int index) {
@@ -87,11 +107,19 @@ public class Controleur {
 
     public void AddPartie(AddPartieEvent event) {
         Partie partie = new Partie(-1, event.getDate(), event.isResultat(), event.getDecks());
-        db.addPartie(partie);
+        try {
+            db.addPartie(partie);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void DelPartie(int index) {
-        db.delPartie(index);
+        try {
+            db.delPartie(index);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public Partie getPartie(int index) {
@@ -114,11 +142,19 @@ public class Controleur {
 
     public void AddConteneur(AddConteneurEvent event) {
         Conteneur conteneur = new Conteneur(-1, event.getNom(), event.getAbbr());
-        db.addConteneur(conteneur);
+        try {
+            db.addConteneur(conteneur);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void DelConteneur(int index) {
-        db.delConteneur(index);
+        try {
+            db.delConteneur(index);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public Conteneur getConteneur(int index) {
