@@ -40,6 +40,7 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
     private PageCarte pageCarte;
     private PageDeck pageDeck;
     private PagePartie pagePartie;
+    private FormPanelAjoutPartie pageAjoutPartie;
     private JSplitPane splitPane;
     private AppListener listener;
     private Controleur controler;
@@ -53,6 +54,7 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         pageCarte = new PageCarte();
         pageDeck = new PageDeck();
         pagePartie = new PagePartie();
+        
         toolBar = new ToolBar();
         pageDeck.setListener(this);
         pageCarte.setListener(this);
@@ -247,6 +249,8 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
             contentPane.add(pageDeck, BorderLayout.CENTER);
         } else if (page == "pagePartie") {
             contentPane.add(pagePartie, BorderLayout.CENTER);
+        }else if (page == "pageAjoutPartie"){
+            contentPane.add(pageAjoutPartie,BorderLayout.CENTER);
         }
 
         contentPane.revalidate();
