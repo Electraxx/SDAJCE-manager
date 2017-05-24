@@ -5,9 +5,12 @@
  */
 package ch.ceff.ict3.sdajcemanager.composants;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -54,7 +57,41 @@ public class PageAjoutPartie extends JPanel {
     }
     
     private void layoutComponents(){
+        setLayout(new GridBagLayout());
+        GridBagConstraints gc = new GridBagConstraints();
+
+        gc.fill = GridBagConstraints.HORIZONTAL;
+        gc.weightx = 1;
+        gc.weighty = 0.1;
+
+        //ligne 1
+        gc.gridx = 0;
+        gc.gridy = 0;
+
+        gc.fill = GridBagConstraints.HORIZONTAL;
+        gc.anchor = GridBagConstraints.FIRST_LINE_END;
+        add(dateField, gc);
         
+        gc.gridx = 0;
+        gc.gridy = 1;
+        
+        gc.fill = GridBagConstraints.HORIZONTAL;
+        gc.anchor = GridBagConstraints.FIRST_LINE_START;
+        add(comboResult,gc);
+        
+        gc.gridx = 0;
+        gc.gridy = 2;
+        
+        gc.fill = GridBagConstraints.HORIZONTAL;
+        gc.anchor = GridBagConstraints.FIRST_LINE_START;
+        add(addButton,gc);
+        
+        gc.gridx = 1;
+        gc.gridy = 2;
+        
+        gc.fill = GridBagConstraints.HORIZONTAL;
+        gc.anchor = GridBagConstraints.FIRST_LINE_END;
+        add(comboDeck,gc);
     }
     
     
