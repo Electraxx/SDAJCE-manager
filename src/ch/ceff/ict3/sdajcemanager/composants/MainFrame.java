@@ -51,6 +51,7 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         pageDeck.setListener(this);
 
         toolBar.setListener(this);
+        //tablePanel.setCarteTableListener(this);
 
         contentPane.add(pageDeck, BorderLayout.CENTER);
         contentPane.add(toolBar, BorderLayout.PAGE_START);
@@ -234,4 +235,6 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         contentPane.revalidate();
         contentPane.repaint();
     }
+
+    
 }

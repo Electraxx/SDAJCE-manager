@@ -117,4 +117,7 @@ public class Database {
     public Partie getPartie(int index) {return null;}
     public List<Partie> getAllParties() {return null;}
     public void delPartie(int index) {}
+    public void orderTable(){
+        //Collections.sort(personnes);
+    }
 }
