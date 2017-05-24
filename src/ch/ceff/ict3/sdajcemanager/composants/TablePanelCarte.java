@@ -10,13 +10,14 @@ import ch.ceff.ict3.sdajcemanager.modele.Carte;
 import ch.ceff.ict3.sdajcemanager.modele.CarteTableModele;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -68,6 +69,10 @@ public class TablePanelCarte extends JPanel {
     public void setSorter() {
         rowSorter = new TableRowSorter<>(table.getModel());
         table.setRowSorter(rowSorter);
+        List<RowSorter.SortKey> sortKeys = new ArrayList<>(25);
+        sortKeys.add(new RowSorter.SortKey(4, SortOrder.ASCENDING));
+        sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
+        rowSorter.setSortKeys(sortKeys);
     }
 
 }
