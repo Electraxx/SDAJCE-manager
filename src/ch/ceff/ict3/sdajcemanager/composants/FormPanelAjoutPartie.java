@@ -34,6 +34,7 @@ public class FormPanelAjoutPartie extends JPanel {
     private JComboBox comboResult;
     private JTextField dateField;
     private AppListener listener;
+    private TablePanelPartie tablePartie;
 
     public FormPanelAjoutPartie() {
         initComponents();
@@ -42,6 +43,7 @@ public class FormPanelAjoutPartie extends JPanel {
     private void initComponents() {
         addButton = new JButton("Ajouter");
 
+        tablePartie = new TablePanelPartie();
         //liste déroulante pour les decks
         comboDeck = new JComboBox();
         DefaultComboBoxModel modelDeck = new DefaultComboBoxModel();
@@ -78,9 +80,10 @@ public class FormPanelAjoutPartie extends JPanel {
                 temp_data_deck.add(new Deck(0, deck, temp_data_carte));
 
                 System.out.println("OK !");
-                //   Date date = formatter.parse(dateString);
-                temp_data_partie.add(new Partie(0, new Date(), partie, temp_data_deck));
-
+               
+                temp_data_partie.add(new Partie(1, new Date(), partie, temp_data_deck));
+                
+                
                 listener.changePage("pagePartie");
             }
         });
