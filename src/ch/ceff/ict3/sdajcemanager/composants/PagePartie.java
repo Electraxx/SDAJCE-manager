@@ -29,8 +29,13 @@ public class PagePartie extends JPanel {
         tablePartie = new TablePanelPartie();
         panelPartie = new FormPanelPartie();
         List<Partie> temp_data = new ArrayList<Partie>();
+        
+        //tablePartie.setData(temp_data);
+        tablePartie.refresh();
+        this.add(panelPartie,BorderLayout.NORTH);
+        this.add(tablePartie,BorderLayout.SOUTH);
 
-    //    temp_data.add(new Partie(0,, true, decks))
+    //    temp_data.add(new Partie(0, true, decks))
     }
 
 }
