@@ -5,8 +5,8 @@
  */
 package ch.ceff.ict3.sdajcemanager.composants;
 
-import ch.ceff.ict3.sdajcemanager.modele.Carte;
-import ch.ceff.ict3.sdajcemanager.modele.CarteTableModele;
+import ch.ceff.ict3.sdajcemanager.modele.Partie;
+import ch.ceff.ict3.sdajcemanager.modele.PartieTableModele;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.util.List;
@@ -21,7 +21,7 @@ import javax.swing.JTable;
 public class TablePanelPartie extends JPanel {
     
       private JTable table;
-    private CarteTableModele carteModel;
+      private PartieTableModele partieModele;
     
     public TablePanelPartie(){
         initComponents();
@@ -30,18 +30,18 @@ public class TablePanelPartie extends JPanel {
         setLayout(new BorderLayout());
     
         table = new JTable();
-        carteModel = new CarteTableModele();
-        table = new JTable(carteModel);
+        partieModele = new PartieTableModele();
+        table = new JTable(partieModele);
         setPreferredSize(new Dimension(685,200));
         add(new JScrollPane(table), BorderLayout.CENTER);
     }
     
-     public void setData(List<Carte> data) {
-        carteModel.setData(data);
+     public void setData(List<Partie> data) {
+        partieModele.setData(data);
     }
      
       public void refresh() {
-        carteModel.fireTableDataChanged();
+        partieModele.fireTableDataChanged();
     }
     
     
