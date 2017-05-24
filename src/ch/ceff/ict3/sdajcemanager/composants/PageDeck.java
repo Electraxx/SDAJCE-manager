@@ -55,6 +55,10 @@ public class PageDeck  extends JPanel{
         tablePanel.search(text);
     }
     
+    public void setData(List<Deck> data) {
+        tablePanel.setData(data);
+    }
+    
     public void setListener(AppListener appListener){
         panelDeck.setSearchDeckListener(appListener);
     }

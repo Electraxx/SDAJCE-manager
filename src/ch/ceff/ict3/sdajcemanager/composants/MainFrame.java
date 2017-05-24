@@ -9,6 +9,9 @@ import ch.ceff.ict3.sdajcemanager.controleurs.Controleur;
 import ch.ceff.ict3.sdajcemanager.event.*;
 import ch.ceff.ict3.sdajcemanager.listeners.AppListener;
 import ch.ceff.ict3.sdajcemanager.modele.Carte;
+import ch.ceff.ict3.sdajcemanager.modele.Conteneur;
+import ch.ceff.ict3.sdajcemanager.modele.Deck;
+import ch.ceff.ict3.sdajcemanager.modele.Partie;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -17,6 +20,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -67,6 +72,21 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         setLocationRelativeTo(null);
         
         controler = new Controleur();
+        
+        List<Carte> cartes = new ArrayList<>();
+        
+        cartes.add(controler.getCarte(1));
+        cartes.add(controler.getCarte(2));
+        cartes.add(controler.getCarte(14));
+        cartes.add(controler.getCarte(20));
+        
+        Deck deck = new Deck(1, "SUPER DECK", cartes);
+        
+        controler.addDeck(deck);
+        
+        pageCarte.setData((ArrayList<Carte>)controler.getAllCartes());
+        pageDeck.setData((ArrayList<Deck>)controler.getAllDecks());
+        pagePartie.setData((ArrayList<Partie>)controler.getAllParties());
         
         addWindowListener(this);
         
@@ -144,7 +164,8 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
 
     @Override
     public void addCarte(AddCarteEvent event) {
-        this.controler.addCarte(event);
+        Carte carte = new Carte(-1, event.getNom(), event.getType(), event.getSphere(), event.getNombre(), event.getConteneur());
+        this.controler.addCarte(carte);
     }
 
     @Override
@@ -154,12 +175,14 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
 
     @Override
     public void editCarte(EditCarteEvent event) {
-        this.controler.editCarte(event);
+        Carte carte = new Carte(event.getId(), event.getNom(), event.getType(), event.getSphere(), event.getNombre(), event.getConteneur());
+        this.controler.editCarte(carte);
     }
 
     @Override
     public void addConteneur(AddConteneurEvent event) {
-        this.controler.addConteneur(event);
+        Conteneur conteneur = new Conteneur(-1, event.getNom(), event.getAbbr());
+        this.controler.addConteneur(conteneur);
     }
 
     @Override
@@ -168,7 +191,8 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
 
     @Override
     public void addDeck(AddDeckEvent event) {
-        this.controler.addDeck(event);
+        Deck deck = new Deck(-1, event.getNom(), event.getCartes());
+        this.controler.addDeck(deck);
     }
 
     @Override
@@ -178,7 +202,8 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
 
     @Override
     public void addPartie(AddPartieEvent event) {
-        this.controler.addPartie(event);
+        Partie partie = new Partie(-1, event.getDate(), event.isResultat(), event.getDecks());
+        this.controler.addPartie(partie);
     }
 
     @Override

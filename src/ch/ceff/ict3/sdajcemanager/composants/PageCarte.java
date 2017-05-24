@@ -55,6 +55,10 @@ public class PageCarte extends JPanel {
         tablePanel.search(text);
     }
     
+    public void setData(ArrayList<Carte> data) {
+        tablePanel.setData(data);
+    }
+    
     public void setListener(AppListener appListener){
         panelCarte.setSearchCarteListener(appListener);
     }

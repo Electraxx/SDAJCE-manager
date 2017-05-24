@@ -6,7 +6,6 @@
 package ch.ceff.ict3.sdajcemanager.composants;
 
 import ch.ceff.ict3.sdajcemanager.modele.Carte;
-import ch.ceff.ict3.sdajcemanager.modele.Conteneur;
 import ch.ceff.ict3.sdajcemanager.modele.Deck;
 import ch.ceff.ict3.sdajcemanager.modele.Partie;
 import java.awt.BorderLayout;
@@ -46,6 +45,10 @@ public class PagePartie extends JPanel {
         this.add(tablePartie, BorderLayout.SOUTH);
 
         //    temp_data.add(new Partie(0, true, decks))
+    }
+    
+    public void setData(List<Partie> data) {
+        tablePartie.setData(data);
     }
 
 }

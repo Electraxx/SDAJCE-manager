@@ -7,6 +7,7 @@ package ch.ceff.ict3.sdajcemanager.modele;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -30,6 +31,26 @@ public class DBConnect {
         ResultSet result = null;
         try {
             result = statement.executeQuery(query);
+        } catch(SQLException ex) {
+            ex.printStackTrace();
+        }
+        return result;
+    }
+    
+    public static int update(Statement statement, String query) {
+        int result = -1;
+        try {
+            result = statement.executeUpdate(query);
+        } catch(SQLException ex) {
+            ex.printStackTrace();
+        }
+        return result;
+    }
+    
+    public static int prepareStmtUpdate(Statement statement, String query) {
+        int result = -1;
+        try {
+            result = statement.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
         } catch(SQLException ex) {
             ex.printStackTrace();
         }

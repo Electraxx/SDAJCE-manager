@@ -26,8 +26,7 @@ public class Controleur {
         db = Database.newDatabase();
     }
 
-    public void addCarte(AddCarteEvent event) {
-        Carte carte = new Carte(-1, event.getNom(), event.getType(), event.getSphere(), event.getNombre(), event.getConteneur());
+    public void addCarte(Carte carte) {
         try {
             db.addCarte(carte);
         } catch (SQLException ex) {
@@ -57,8 +56,7 @@ public class Controleur {
         }
         return null;
     }
-    public void editCarte(EditCarteEvent event) {
-        Carte carte = new Carte(event.getId(), event.getNom(), event.getType(), event.getSphere(), event.getNombre(), event.getConteneur());
+    public void editCarte(Carte carte) {
         try {
             db.editCarte(carte);
         } catch (SQLException ex) {
@@ -66,8 +64,7 @@ public class Controleur {
         }
     }
 
-    public void addDeck(AddDeckEvent event) {
-        Deck deck = new Deck(-1, event.getNom(), event.getCartes());
+    public void addDeck(Deck deck) {
         try {
             db.addDeck(deck);
         } catch (SQLException ex) {
@@ -98,8 +95,7 @@ public class Controleur {
         return null;
     }
 
-    public void addPartie(AddPartieEvent event) {
-        Partie partie = new Partie(-1, event.getDate(), event.isResultat(), event.getDecks());
+    public void addPartie(Partie partie) {
         try {
             db.addPartie(partie);
         } catch (SQLException ex) {
@@ -130,8 +126,7 @@ public class Controleur {
         return null;
     }
 
-    public void addConteneur(AddConteneurEvent event) {
-        Conteneur conteneur = new Conteneur(-1, event.getNom(), event.getAbbr());
+    public void addConteneur(Conteneur conteneur) {
         try {
             db.addConteneur(conteneur);
         } catch (SQLException ex) {

@@ -42,7 +42,7 @@ public class CarteTableModele extends AbstractTableModel{
             case 3:
                 return carte.getSphere();
             case 4:
-                return carte.getConteneur().getAbbreviation();
+                return carte.getConteneur().getNom();
         }
         return null;
     }
