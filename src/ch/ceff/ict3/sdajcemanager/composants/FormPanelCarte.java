@@ -5,7 +5,7 @@
  */
 package ch.ceff.ict3.sdajcemanager.composants;
 
-
+import ch.ceff.ict3.sdajcemanager.event.SearchCarteEvent;
 import ch.ceff.ict3.sdajcemanager.listeners.AppListener;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -22,6 +22,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 /**
  *
@@ -35,8 +37,7 @@ public class FormPanelCarte extends JPanel {
     private JComboBox comboAttribut;
     private JComboBox comboProperty;
     private JTextField searchField;
-    
-    private AppListener listener;
+    private AppListener appListener;
 
     public FormPanelCarte() {
         initComponents();
@@ -79,9 +80,8 @@ public class FormPanelCarte extends JPanel {
         comboProperty.setSelectedIndex(0);
         comboProperty.setEditable(true);
 
-       
-       setPreferredSize(new Dimension(700,150));
-        
+        setPreferredSize(new Dimension(700, 150));
+
         Border bordure = BorderFactory.createTitledBorder("Option");
         Border marge = BorderFactory.createEmptyBorder(5, 5, 5, 5);
         setBorder(BorderFactory.createCompoundBorder(marge, bordure));
@@ -93,31 +93,63 @@ public class FormPanelCarte extends JPanel {
         //placement des composants
         layoutComponents();
 
+        searchField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                search();
+                System.out.println("fdsfd");
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                search();
+                System.out.println("fdsfd");
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                search();
+                System.out.println("fdsfd");
+            }
+        });
+
         //action sur le bouton rechercher
         buttonSearch.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
-              String nom = searchField.getText();
-              String type = (String)comboType.getSelectedItem();
-              String sphere = (String)comboAttribut.getSelectedItem();
-              String conteneur = (String)comboProperty.getSelectedItem();
-              
-            //  SearchCarteEvent carteEvent = new SearchCarteEvent(this,nom,type,sphere,conteneur);
-              
-              if(listener != null){
-               //   listener.searchCarte(carteEvent);
-              }
-              
+                String nom = searchField.getText();
+                String type = (String) comboType.getSelectedItem();
+                String sphere = (String) comboAttribut.getSelectedItem();
+                String conteneur = (String) comboProperty.getSelectedItem();
+
+                //  SearchCarteEvent carteEvent = new SearchCarteEvent(this,nom,type,sphere,conteneur);
+                if (appListener != null) {
+                    //   listener.searchCarte(carteEvent);
+                }
+
             }
         });
-        
+
         //action sur le bouton ajouter carte
         buttonAddCart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
-               
+
             }
         });
+    }
+
+    public void setSearchCarteListener(AppListener appListener) {
+        this.appListener = appListener;
+    }
+
+    public void search() {
+        String search = searchField.getText();
+        SearchCarteEvent searchcarteEvent = new SearchCarteEvent(this, search);
+
+        if (appListener != null) {
+            appListener.searchCarte(searchcarteEvent);
+        }
     }
 
     private void layoutComponents() {
@@ -167,6 +199,5 @@ public class FormPanelCarte extends JPanel {
         gc.insets = new Insets(0, 0, 0, 3);
         add(comboProperty, gc);
     }
-
 
 }

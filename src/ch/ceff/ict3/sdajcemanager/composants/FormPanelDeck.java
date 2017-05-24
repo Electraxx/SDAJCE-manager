@@ -134,7 +134,6 @@ public class FormPanelDeck extends JPanel {
         gc.insets = new Insets(0, 0, 0, 3);
         add(searchField, gc);
 
-
         gc.gridx = 2;
         gc.anchor = GridBagConstraints.FIRST_LINE_END;
         add(buttonAddCart, gc);

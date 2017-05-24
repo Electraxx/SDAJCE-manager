@@ -52,8 +52,7 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         pagePartie = new PagePartie();
         toolBar = new ToolBar();
         pageDeck.setListener(this);
-        
-
+        pageCarte.setListener(this);
         toolBar.setListener(this);
         //tablePanel.setCarteTableListener(this);
 
@@ -184,6 +183,13 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
     public void searchDeck(SearchDeckEvent event) {
         pageDeck.search(event.getSearch());
     }
+
+    @Override
+    public void searchCarte(SearchCarteEvent event) {
+        pageCarte.search(event.getSearch());
+    }
+    
+    
     
     
 

@@ -16,7 +16,9 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.JTableHeader;
+import javax.swing.RowFilter;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -27,6 +29,7 @@ public class TablePanelCarte extends JPanel {
     private JTable table;
     private CarteTableModele carteModel;
     private AppListener appListener;
+    private TableRowSorter<TableModel> rowSorter;
 
     public TablePanelCarte() {
         initComponents();
@@ -46,12 +49,25 @@ public class TablePanelCarte extends JPanel {
         carteModel.setData(data);
     }
 
+    public void setAutoCreateRowSorter() {
+        table.setAutoCreateRowSorter(true);
+    }
+
     public void refresh() {
         carteModel.fireTableDataChanged();
     }
-    
-    public void setCarteTableListener(AppListener listener) {
-        this.appListener = listener;
+
+    public void search(String text) {
+        if (text.trim().length() == 0) {
+            rowSorter.setRowFilter(null);
+        } else {
+            rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text, 1));
+        }
+    }
+
+    public void setSorter() {
+        rowSorter = new TableRowSorter<>(table.getModel());
+        table.setRowSorter(rowSorter);
     }
 
 }
