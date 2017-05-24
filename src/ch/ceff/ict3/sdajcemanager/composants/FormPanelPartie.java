@@ -21,7 +21,7 @@ import javax.swing.border.Border;
  *
  * @author cp-13jru
  */
-public class FormPanelPartie extends JPanel {
+public class FormPanelPartie extends JPanel{
 
     private JButton buttonAdd;
     private AppListener listener;
@@ -47,9 +47,14 @@ public class FormPanelPartie extends JPanel {
         buttonAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
+                System.out.print("salt");
                 listener.changePage("pageAjoutPartie");
             }
         });
+    }
+
+    public void setListener(AppListener listener) {
+        this.listener = listener;
     }
 
     private void layoutComponents() {

@@ -30,7 +30,7 @@ public class FormPanelAjoutPartie extends JPanel {
     }
 
     private void initComponents() {
-        addButton = new JButton();
+        addButton = new JButton("Ajouter");
         
         //liste déroulante pour les decks
         comboDeck = new JComboBox();
@@ -47,7 +47,7 @@ public class FormPanelAjoutPartie extends JPanel {
         DefaultComboBoxModel modelResult = new DefaultComboBoxModel();
         modelResult.addElement("victoire");
         modelResult.addElement("défaite");
-        comboResult.setModel(modelDeck);
+        comboResult.setModel(modelResult);
         comboResult.setSelectedIndex(0);
         comboResult.setEditable(true);
 

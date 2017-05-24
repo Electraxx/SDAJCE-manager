@@ -5,6 +5,7 @@
  */
 package ch.ceff.ict3.sdajcemanager.composants;
 
+import ch.ceff.ict3.sdajcemanager.listeners.AppListener;
 import ch.ceff.ict3.sdajcemanager.modele.Carte;
 import ch.ceff.ict3.sdajcemanager.modele.Conteneur;
 import ch.ceff.ict3.sdajcemanager.modele.Deck;
@@ -23,6 +24,7 @@ public class PagePartie extends JPanel {
 
     private TablePanelPartie tablePartie;
     private FormPanelPartie panelPartie;
+    private AppListener listener;
 
     public PagePartie() {
         initComponents();
@@ -31,6 +33,7 @@ public class PagePartie extends JPanel {
     private void initComponents() {
         tablePartie = new TablePanelPartie();
         panelPartie = new FormPanelPartie();
+        panelPartie.setListener(listener);
 
         List<Deck> temp_data_Deck = new ArrayList<Deck>();
         List<Carte> temp_data_carte = new ArrayList<Carte>();
@@ -47,5 +50,9 @@ public class PagePartie extends JPanel {
 
         //    temp_data.add(new Partie(0, true, decks))
     }
-
+    
+    public void setListener(AppListener listener) {
+        this.listener = listener;
+        panelPartie.setListener(listener);
+    }
 }

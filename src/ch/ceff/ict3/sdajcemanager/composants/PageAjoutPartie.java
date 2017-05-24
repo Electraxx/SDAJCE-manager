@@ -24,7 +24,7 @@ public class PageAjoutPartie extends JPanel {
 
         //toolBar = new ToolBar();
         ajoutPartie = new FormPanelAjoutPartie();
-
+        
         this.add(ajoutPartie,BorderLayout.CENTER);
         
 

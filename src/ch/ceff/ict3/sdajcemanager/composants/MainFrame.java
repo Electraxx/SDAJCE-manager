@@ -40,7 +40,7 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
     private PageCarte pageCarte;
     private PageDeck pageDeck;
     private PagePartie pagePartie;
-    private FormPanelAjoutPartie pageAjoutPartie;
+    private PageAjoutPartie pageAjoutPartie;
     private JSplitPane splitPane;
     private AppListener listener;
     private Controleur controler;
@@ -54,10 +54,14 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         pageCarte = new PageCarte();
         pageDeck = new PageDeck();
         pagePartie = new PagePartie();
-        
+        pageAjoutPartie = new PageAjoutPartie();
         toolBar = new ToolBar();
+        
+        
         pageDeck.setListener(this);
         pageCarte.setListener(this);
+        pagePartie.setListener(this);
+        
         toolBar.setListener(this);
         //tablePanel.setCarteTableListener(this);
 
@@ -197,10 +201,6 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
     public void searchCarte(SearchCarteEvent event) {
         pageCarte.search(event.getSearch());
     }
-    
-    
-    
-    
 
     @Override
     public void windowClosing(WindowEvent e) {
