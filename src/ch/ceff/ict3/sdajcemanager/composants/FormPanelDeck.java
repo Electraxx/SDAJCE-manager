@@ -5,7 +5,7 @@
  */
 package ch.ceff.ict3.sdajcemanager.composants;
 
-
+import ch.ceff.ict3.sdajcemanager.event.SearchDeckEvent;
 import ch.ceff.ict3.sdajcemanager.listeners.AppListener;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -18,45 +18,30 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 /**
  *
- * @author cp-13jru
+ * @author cp-14syf
  */
-public class FormPanelCarte extends JPanel {
+public class FormPanelDeck extends JPanel {
 
-    private JButton buttonSearch;
     private JButton buttonAddCart;
-    private JComboBox comboType;
     private JComboBox comboAttribut;
-    private JComboBox comboProperty;
     private JTextField searchField;
-    
-    private AppListener listener;
+    private AppListener appListener;
 
-    public FormPanelCarte() {
+    public FormPanelDeck() {
         initComponents();
     }
 
     private void initComponents() {
-        //liste des types
 
-        comboType = new JComboBox();
-        DefaultComboBoxModel modelType = new DefaultComboBoxModel();
-        modelType.addElement("Type");
-        modelType.addElement("Heros");
-        modelType.addElement("Evenement");
-        modelType.addElement("Attachement");
-        modelType.addElement("Allié");
-        comboType.setModel(modelType);
-        comboType.setSelectedIndex(0);
-        comboType.setEditable(true);
         //liste des sphère
-
         comboAttribut = new JComboBox();
         DefaultComboBoxModel modelSphere = new DefaultComboBoxModel();
         modelSphere.addElement("Sphere");
@@ -69,55 +54,63 @@ public class FormPanelCarte extends JPanel {
         comboAttribut.setSelectedIndex(0);
         comboAttribut.setEditable(true);
 
-        //Liste des Conteneur
-        comboProperty = new JComboBox();
-        DefaultComboBoxModel modelConteneur = new DefaultComboBoxModel();
-        modelConteneur.addElement("Conteneur");
-        modelConteneur.addElement("BB");
-        modelConteneur.addElement("C1");
-        comboProperty.setModel(modelConteneur);
-        comboProperty.setSelectedIndex(0);
-        comboProperty.setEditable(true);
+        setPreferredSize(new Dimension(700, 150));
 
-       
-       setPreferredSize(new Dimension(700,150));
-        
         Border bordure = BorderFactory.createTitledBorder("Option");
         Border marge = BorderFactory.createEmptyBorder(5, 5, 5, 5);
         setBorder(BorderFactory.createCompoundBorder(marge, bordure));
 
         searchField = new JTextField(9);
-        buttonSearch = new JButton("Rechercher");
-        buttonAddCart = new JButton("Ajouter carte");
+        buttonAddCart = new JButton("Nouveau Deck");
 
         //placement des composants
         layoutComponents();
 
-        //action sur le bouton rechercher
-        buttonSearch.addActionListener(new ActionListener() {
+        searchField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
-            public void actionPerformed(ActionEvent event) {
-              String nom = searchField.getText();
-              String type = (String)comboType.getSelectedItem();
-              String sphere = (String)comboAttribut.getSelectedItem();
-              String conteneur = (String)comboProperty.getSelectedItem();
-              
-            //  SearchCarteEvent carteEvent = new SearchCarteEvent(this,nom,type,sphere,conteneur);
-              
-              if(listener != null){
-               //   listener.searchCarte(carteEvent);
-              }
-              
+            public void insertUpdate(DocumentEvent e) {
+                search();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                search();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                search();
             }
         });
-        
-        //action sur le bouton ajouter carte
+
+        //action sur le bouton nouveau deck
         buttonAddCart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
-               
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
         });
+
+        comboAttribut.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String sphereSearch = comboAttribut.getSelectedItem().toString();
+                System.out.println(sphereSearch);
+            }
+        });
+    }
+
+    public void search() {
+        String search = searchField.getText();
+        SearchDeckEvent searchDeckEvent = new SearchDeckEvent(this, search);
+
+        if (appListener != null) {
+            appListener.searchDeck(searchDeckEvent);
+        }
+    }
+
+    public void setSearchDeckListener(AppListener appListener) {
+        this.appListener = appListener;
     }
 
     private void layoutComponents() {
@@ -141,11 +134,8 @@ public class FormPanelCarte extends JPanel {
         gc.insets = new Insets(0, 0, 0, 3);
         add(searchField, gc);
 
-        gc.gridx = 2;
-        gc.anchor = GridBagConstraints.FIRST_LINE_END;
-        add(buttonSearch, gc);
 
-        gc.gridx = 3;
+        gc.gridx = 2;
         gc.anchor = GridBagConstraints.FIRST_LINE_END;
         add(buttonAddCart, gc);
 
@@ -153,20 +143,10 @@ public class FormPanelCarte extends JPanel {
         gc.gridx = 0;
         gc.gridy = 1;
 
-        gc.fill = GridBagConstraints.HORIZONTAL;
-        gc.anchor = GridBagConstraints.FIRST_LINE_START;
-        add(comboType, gc);
-
         gc.gridx = 1;
         gc.anchor = GridBagConstraints.PAGE_START;
         gc.insets = new Insets(0, 0, 0, 3);
         add(comboAttribut, gc);
 
-        gc.gridx = 2;
-        gc.anchor = GridBagConstraints.FIRST_LINE_START;
-        gc.insets = new Insets(0, 0, 0, 3);
-        add(comboProperty, gc);
     }
-
-
 }

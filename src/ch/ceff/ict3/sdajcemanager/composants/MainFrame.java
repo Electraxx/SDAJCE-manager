@@ -5,31 +5,39 @@
  */
 package ch.ceff.ict3.sdajcemanager.composants;
 
+import ch.ceff.ict3.sdajcemanager.event.*;
+import ch.ceff.ict3.sdajcemanager.listeners.AppListener;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import javafx.scene.control.ToolBar;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
+import javax.swing.KeyStroke;
 
 /**
  *
  * @author cp-14luf
  */
-public class MainFrame extends JFrame implements WindowListener {
+public class MainFrame extends JFrame implements WindowListener, AppListener {
 
     private TablePanelCarte tablePanel;
     private ToolBar toolBar;
     private FormPanelCarte panelCarte;
-    
+    private FormPanelDeck panelDeck;
+    private TablePanelDeck tablePanelDeck;
+    private PageCarte pageCarte;
+    private PageDeck pageDeck;
     private JSplitPane splitPane;
+    private AppListener listener;
 
     public MainFrame(String titre) {
         initComponents(titre);
@@ -37,17 +45,15 @@ public class MainFrame extends JFrame implements WindowListener {
 
     public void initComponents(String titre) {
         Container contentPane = getContentPane();
+        pageCarte = new PageCarte();
+        pageDeck = new PageDeck();
+        toolBar = new ToolBar();
+        pageDeck.setListener(this);
 
-        //toolBar = new ToolBar();
-        tablePanel = new TablePanelCarte();
-        panelCarte = new FormPanelCarte();
-        
-        
-        
-        //splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,tablePanel,panelCarte);
+        toolBar.setListener(this);
 
-        contentPane.add(panelCarte, BorderLayout.NORTH);
-        contentPane.add(tablePanel, BorderLayout.SOUTH);
+        contentPane.add(pageDeck, BorderLayout.CENTER);
+        contentPane.add(toolBar, BorderLayout.PAGE_START);
 
         setJMenuBar(createJMenuBar());
         setMinimumSize(new Dimension(700, 450));
@@ -83,32 +89,107 @@ public class MainFrame extends JFrame implements WindowListener {
         //ajout d'un sous-menu au sous-menu MenuPartie
         JMenuItem itemNouvellePartie = new JMenuItem("nouvelle partie");
         menuPartie.add(itemNouvellePartie);
-        
+
         //Mnémonique
         itemQuitter.setMnemonic(KeyEvent.VK_Q);
-        itemAjouterCarte.setMnemonic(KeyEvent.VK_C);
+        itemAjouterCarte.setMnemonic(KeyEvent.VK_F);
         itemNouveauDeck.setMnemonic(KeyEvent.VK_D);
+        itemNouvellePartie.setMnemonic(KeyEvent.VK_P);
 
+        //accelerateur
+        itemQuitter.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, ActionEvent.CTRL_MASK));
+        itemAjouterCarte.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, ActionEvent.CTRL_MASK));
+        itemNouveauDeck.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, ActionEvent.CTRL_MASK));
+        itemNouvellePartie.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.CTRL_MASK));
+
+        //listerner menu 
+        itemQuitter.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                quitter();
+            }
+        });
+
+        addWindowListener((WindowListener) this);
         return menuBar;
     }
-    
-    private void quitter(){
-        int option = JOptionPane.showConfirmDialog(this,"désirez-vous quitter ?"
-                ,"demande de confirmation",
+
+    private void quitter() {
+        int option = JOptionPane.showConfirmDialog(this,
+                "Voulez-vous réellement quitter l'application",
+                "Demande de confirmation",
                 JOptionPane.OK_CANCEL_OPTION);
-        if(option == JOptionPane.OK_OPTION){
+
+        if (option == JOptionPane.OK_OPTION) {
             System.exit(0);
         }
     }
 
-    @Override
-    public void windowOpened(WindowEvent e) {
-       
+
+    public void setListener(AppListener listener) {
+        this.listener = listener;
     }
+
+    @Override
+    public void addCarte(AddCarteEvent event) {
+
+    }
+
+    @Override
+    public void delCarte(DelCarteEvent event) {
+
+    }
+
+    @Override
+    public void editCarte(EditCarteEvent event) {
+
+    }
+
+    @Override
+    public void addConteneur(AddConteneurEvent event) {
+
+    }
+
+    @Override
+    public void editConteneur(DelConteneurEvent event) {
+
+    }
+
+    @Override
+    public void addDeck(AddDeckEvent event) {
+
+    }
+
+    @Override
+    public void delDeck(DelDeckEvent event) {
+
+    }
+
+    @Override
+    public void addPartie(AddPartieEvent event) {
+
+    }
+
+    @Override
+    public void delPartie(DelPartieEvent event) {
+
+    }
+
+    @Override
+    public void searchDeck(SearchDeckEvent event) {
+        pageDeck.search(event.getSearch());
+    }
+    
+    
 
     @Override
     public void windowClosing(WindowEvent e) {
         quitter();
+    }
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+
     }
 
     @Override
@@ -135,6 +216,22 @@ public class MainFrame extends JFrame implements WindowListener {
     public void windowDeactivated(WindowEvent e) {
 
     }
-    
-    
+
+    @Override
+    public void changePage(String page) {
+        Container contentPane = getContentPane();
+
+        contentPane.removeAll();
+        contentPane.add(toolBar, BorderLayout.PAGE_START);
+        if (page == "pageCarte") {
+            contentPane.add(pageCarte, BorderLayout.CENTER);
+        } else if (page == "pageDeck") {
+            contentPane.add(pageDeck, BorderLayout.CENTER);
+        } else if (page == "pagePartie") {
+            //contentPane.add(pagePartie, BorderLayout.CENTER);
+        }
+
+        contentPane.revalidate();
+        contentPane.repaint();
+    }
 }
