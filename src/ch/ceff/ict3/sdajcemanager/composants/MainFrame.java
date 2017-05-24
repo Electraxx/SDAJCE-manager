@@ -5,16 +5,7 @@
  */
 package ch.ceff.ict3.sdajcemanager.composants;
 
-import ch.ceff.ict3.sdajcemanager.event.AddCarteEvent;
-import ch.ceff.ict3.sdajcemanager.event.AddConteneurEvent;
-import ch.ceff.ict3.sdajcemanager.event.AddDeckEvent;
-import ch.ceff.ict3.sdajcemanager.event.AddPartieEvent;
-import ch.ceff.ict3.sdajcemanager.event.DelCarteEvent;
-import ch.ceff.ict3.sdajcemanager.event.DelConteneurEvent;
-import ch.ceff.ict3.sdajcemanager.event.DelDeckEvent;
-import ch.ceff.ict3.sdajcemanager.event.DelPartieEvent;
-import ch.ceff.ict3.sdajcemanager.event.EditCarteEvent;
-
+import ch.ceff.ict3.sdajcemanager.event.*;
 import ch.ceff.ict3.sdajcemanager.listeners.AppListener;
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -41,6 +32,8 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
     private TablePanelCarte tablePanel;
     private ToolBar toolBar;
     private FormPanelCarte panelCarte;
+    private FormPanelDeck panelDeck;
+    private TablePanelDeck tablePanelDeck;
     private PageCarte pageCarte;
     private PageDeck pageDeck;
     private JSplitPane splitPane;
@@ -55,10 +48,11 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         pageCarte = new PageCarte();
         pageDeck = new PageDeck();
         toolBar = new ToolBar();
+        pageDeck.setListener(this);
 
         toolBar.setListener(this);
 
-        contentPane.add(pageCarte, BorderLayout.CENTER);
+        contentPane.add(pageDeck, BorderLayout.CENTER);
         contentPane.add(toolBar, BorderLayout.PAGE_START);
 
         setJMenuBar(createJMenuBar());
@@ -180,6 +174,13 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
     public void delPartie(DelPartieEvent event) {
 
     }
+
+    @Override
+    public void searchDeck(SearchDeckEvent event) {
+        pageDeck.search(event.getSearch());
+    }
+    
+    
 
     @Override
     public void windowClosing(WindowEvent e) {
