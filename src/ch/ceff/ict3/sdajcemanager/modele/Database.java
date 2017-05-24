@@ -214,8 +214,9 @@ public class Database {
         stmtConteneur.close();
     }
     public Conteneur getConteneur(int index) throws SQLException {
+        Statement stmtConteneur = connection.createStatement();
         String queryConteneur = "SELECT * FROM conteneur WHERE id_contn=" + index;
-        ResultSet resultConteneur = DBConnect.query(connection, queryConteneur);
+        ResultSet resultConteneur = DBConnect.query(stmtConteneur, queryConteneur);
         
         Conteneur conteneneur = new Conteneur(
                 resultConteneur.getInt("id_contn"),
@@ -227,8 +228,9 @@ public class Database {
         return conteneneur;
     }
     public List<Conteneur> getAllConteneur() throws SQLException {
+        Statement stmtConteneurs = connection.createStatement();
         String queryConteneurs = "SELECT id_contn FORM conteneur";
-        ResultSet resultConteneurs = DBConnect.query(connection, queryConteneurs);
+        ResultSet resultConteneurs = DBConnect.query(stmtConteneurs, queryConteneurs);
         
         List<Conteneur> conteneurs = new ArrayList<>();
         
@@ -241,12 +243,14 @@ public class Database {
         return conteneurs;
         
     }
-    public void delConteneur(int index) {
+    public void delConteneur(int index) throws SQLException {
+        Statement stmtConteneur = connection.createStatement();
         String queryConteneur = "DELETE FROM conteneur WHERE id_contn=" + index;
-        DBConnect.query(this.connection, queryConteneur);
+        DBConnect.query(stmtConteneur, queryConteneur);
     }
     
-    public void addPartie(Partie partie) {
+    public void addPartie(Partie partie) throws SQLException {
+        Statement stmtPartie = connection.createStatement();
         String queryPartie = "INSERT INTO partie ("
                 + "date_partie"
                 + "resultat"
@@ -254,9 +258,10 @@ public class Database {
                 + partie.getDate() + ","
                 + partie.isResultat()
                 +");";
-        DBConnect.query(this.connection, queryPartie);
+        DBConnect.query(stmtPartie, queryPartie);
         
         for (Deck deck: partie.getDecks()) {
+            Statement stmtQueryDecksPartie = connection.createStatement();
             String queryDecksPartie = "SELECT INTO decks_partie ("
                     + "id_deck"
                     + "id_partie"
@@ -264,16 +269,19 @@ public class Database {
                     + deck.getId() + ","
                     + partie.getId()
                     +");";
-            DBConnect.query(this.connection, queryDecksPartie);
+            DBConnect.query(stmtQueryDecksPartie, queryDecksPartie);
         }
         
     }
     public Partie getPartie(int index) throws SQLException {
+        Statement stmtPartie = connection.createStatement();
+        Statement stmtDecksPartie = connection.createStatement();
+        
         String queryPartie = "SELECT * FROM partie";
-        ResultSet resultPartie = DBConnect.query(this.connection, queryPartie);
+        ResultSet resultPartie = DBConnect.query(stmtPartie, queryPartie);
         
         String queryDecksPartie = "SELECT id_deck FROM decks_partie WHERE id_partie=" + index; 
-        ResultSet resultDecksPartie = DBConnect.query(this.connection, queryDecksPartie);
+        ResultSet resultDecksPartie = DBConnect.query(stmtDecksPartie, queryDecksPartie);
         
         List<Deck> decks = new ArrayList<>();
         
@@ -293,8 +301,10 @@ public class Database {
         return partie;
     }
     public List<Partie> getAllParties() throws SQLException {
+        Statement stmtParties = connection.createStatement();
+        
         String queryParties = "SELECT id_partie FROM partie";
-        ResultSet resultParties = DBConnect.query(this.connection, queryParties);
+        ResultSet resultParties = DBConnect.query(stmtParties, queryParties);
         
         List<Partie> parties = new ArrayList<>();
         
@@ -305,10 +315,12 @@ public class Database {
         resultParties.close();
         return parties;
     }
-    public void delPartie(int index) {
+    public void delPartie(int index) throws SQLException {
+        Statement stmtPartie = connection.createStatement();
+        Statement stmtDeckPartie = connection.createStatement();
+        
         String queryPartie = "DELETE FROM partie WHERE id_deck=" + index;
         String queryDeckPartie = "DELETE FROM decks_partie WHERE id_deck=" + index;
-        DBConnect.query(this.connection, queryPartie);
-        DBConnect.query(this.connection, queryDeckPartie);
+        DBConnect.query(stmtDeckPartie, queryDeckPartie);
     }
 }
