@@ -61,6 +61,7 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         pageDeck.setListener(this);
         pageCarte.setListener(this);
         pagePartie.setListener(this);
+       
         
         toolBar.setListener(this);
         //tablePanel.setCarteTableListener(this);

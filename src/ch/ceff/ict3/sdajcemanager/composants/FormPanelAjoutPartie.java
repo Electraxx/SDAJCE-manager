@@ -5,12 +5,21 @@
  */
 package ch.ceff.ict3.sdajcemanager.composants;
 
+import ch.ceff.ict3.sdajcemanager.listeners.AppListener;
+import ch.ceff.ict3.sdajcemanager.modele.Carte;
+import ch.ceff.ict3.sdajcemanager.modele.Deck;
+import ch.ceff.ict3.sdajcemanager.modele.Partie;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -24,6 +33,7 @@ public class FormPanelAjoutPartie extends JPanel {
     private JComboBox comboDeck;
     private JComboBox comboResult;
     private JTextField dateField;
+    private AppListener listener;
 
     public FormPanelAjoutPartie() {
         initComponents();
@@ -31,7 +41,7 @@ public class FormPanelAjoutPartie extends JPanel {
 
     private void initComponents() {
         addButton = new JButton("Ajouter");
-        
+
         //liste déroulante pour les decks
         comboDeck = new JComboBox();
         DefaultComboBoxModel modelDeck = new DefaultComboBoxModel();
@@ -41,22 +51,48 @@ public class FormPanelAjoutPartie extends JPanel {
         comboDeck.setModel(modelDeck);
         comboDeck.setSelectedIndex(0);
         comboDeck.setEditable(true);
-        
+
         //liste déroulante pour la victoire ou la défaite
         comboResult = new JComboBox();
         DefaultComboBoxModel modelResult = new DefaultComboBoxModel();
-        modelResult.addElement("victoire");
-        modelResult.addElement("défaite");
+        modelResult.addElement(true);
+        modelResult.addElement(false);
         comboResult.setModel(modelResult);
         comboResult.setSelectedIndex(0);
         comboResult.setEditable(true);
 
         dateField = new JTextField(9);
-        
+
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SimpleDateFormat formatter = new SimpleDateFormat();
+                String dateString = dateField.getText();
+                String deck = (String) comboDeck.getSelectedItem();
+
+                Boolean partie = (Boolean) comboResult.getSelectedItem();
+                List<Carte> temp_data_carte = new ArrayList<Carte>();
+                List<Partie> temp_data_partie = new ArrayList<Partie>();
+                List<Deck> temp_data_deck = new ArrayList<Deck>();
+
+                temp_data_deck.add(new Deck(0, deck, temp_data_carte));
+
+                System.out.println("OK !");
+                //   Date date = formatter.parse(dateString);
+                temp_data_partie.add(new Partie(0, new Date(), partie, temp_data_deck));
+
+                listener.changePage("pagePartie");
+            }
+        });
+
         layoutComponents();
     }
-    
-    private void layoutComponents(){
+
+    public void setListener(AppListener listener) {
+        this.listener = listener;
+    }
+
+    private void layoutComponents() {
         setLayout(new GridBagLayout());
         GridBagConstraints gc = new GridBagConstraints();
 
@@ -71,32 +107,30 @@ public class FormPanelAjoutPartie extends JPanel {
         gc.fill = GridBagConstraints.HORIZONTAL;
         gc.anchor = GridBagConstraints.FIRST_LINE_END;
         add(dateField, gc);
-        
+
         //ligne 1 
         gc.gridx = 1;
         gc.gridy = 0;
-        
+
         gc.fill = GridBagConstraints.HORIZONTAL;
         gc.anchor = GridBagConstraints.FIRST_LINE_START;
-        add(comboResult,gc);
-        
+        add(comboResult, gc);
+
         //ligne 1
         gc.gridx = 2;
         gc.gridy = 0;
-        
+
         gc.fill = GridBagConstraints.HORIZONTAL;
         gc.anchor = GridBagConstraints.FIRST_LINE_START;
-        add(addButton,gc);
-        
+        add(addButton, gc);
+
         //ligne 2
         gc.gridx = 1;
         gc.gridy = 1;
-        
+
         gc.fill = GridBagConstraints.HORIZONTAL;
         gc.anchor = GridBagConstraints.FIRST_LINE_END;
-        add(comboDeck,gc);
+        add(comboDeck, gc);
     }
-    
-    
 
 }
