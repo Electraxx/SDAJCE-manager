@@ -72,18 +72,7 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         setLocationRelativeTo(null);
         
         controler = new Controleur();
-        
-        List<Carte> cartes = new ArrayList<>();
-        
-        cartes.add(controler.getCarte(1));
-        cartes.add(controler.getCarte(2));
-        cartes.add(controler.getCarte(14));
-        cartes.add(controler.getCarte(20));
-        
-        Deck deck = new Deck(1, "SUPER DECK", cartes);
-        
-        controler.addDeck(deck);
-        
+
         pageCarte.setData((ArrayList<Carte>)controler.getAllCartes());
         pageDeck.setData((ArrayList<Deck>)controler.getAllDecks());
         pagePartie.setData((ArrayList<Partie>)controler.getAllParties());

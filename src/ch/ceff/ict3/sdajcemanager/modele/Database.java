@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -147,12 +148,15 @@ public class Database {
         
         int deck_id = resultDeck.getInt(1);
         
-        List<String> queryCartesDeckList = new ArrayList<String>();
+        List<String> queryCartesDeckList = new LinkedList<>();
         
         
         for(Carte carte: deck.getCartes()) {
-            queryCartesDeck += "(" + carte.getId() + "," + deck_id + "," + carte.getNombre() + "), ";
+            queryCartesDeckList.add("(" + carte.getId() + "," + deck_id + "," + carte.getNombre() + ")");
         }
+        
+        String joined = String.join(",", queryCartesDeckList);
+        queryCartesDeck += joined;
         
         
         System.out.println(queryCartesDeck);
