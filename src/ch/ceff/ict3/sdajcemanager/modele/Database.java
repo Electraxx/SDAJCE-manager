@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -142,10 +143,8 @@ public class Database {
                 + ") VALUES ";
         
         DBConnect.prepareStmtUpdate(stmtDeck, queryDeck);
-        
         ResultSet resultDeck = stmtDeck.getGeneratedKeys();
         resultDeck.next();
-        
         int deck_id = resultDeck.getInt(1);
         
         List<String> queryCartesDeckList = new LinkedList<>();
@@ -281,27 +280,40 @@ public class Database {
     
     public void addPartie(Partie partie) throws SQLException {
         Statement stmtPartie = connection.createStatement();
+        
+        int partie_resultat = 0;
+        
+        if(partie.isResultat()) partie_resultat = 1;
+        
         String queryPartie = "INSERT INTO partie ("
-                + "date_partie"
+                + "date_partie,"
                 + "resultat"
                 + ") VALUES ("
-                + partie.getDate() + ","
-                + partie.isResultat()
+                + "'"+new Timestamp(partie.getDate().getTime()) + "',"
+                + partie_resultat
                 +");";
-        DBConnect.update(stmtPartie, queryPartie);
+        
+        System.out.println(queryPartie);
+        
+        DBConnect.prepareStmtUpdate(stmtPartie, queryPartie);
+        ResultSet resultPartie = stmtPartie.getGeneratedKeys();
+        resultPartie.next();
+        int partie_id = resultPartie.getInt(1);
         
         for (Deck deck: partie.getDecks()) {
             Statement stmtQueryDecksPartie = connection.createStatement();
-            String queryDecksPartie = "SELECT INTO decks_partie ("
-                    + "id_deck"
+            String queryDecksPartie = "INSERT INTO decks_partie ("
+                    + "id_deck,"
                     + "id_partie"
                     + ") VALUES ("
                     + deck.getId() + ","
-                    + partie.getId()
+                    + partie_id
                     +");";
             DBConnect.update(stmtQueryDecksPartie, queryDecksPartie);
             stmtQueryDecksPartie.close();
         }
+        
+        
         stmtPartie.close();
     }
     public Partie getPartie(int index) throws SQLException {

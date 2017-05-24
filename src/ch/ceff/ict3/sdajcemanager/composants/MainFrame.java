@@ -21,7 +21,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -72,7 +71,7 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         setLocationRelativeTo(null);
         
         controler = new Controleur();
-
+        
         pageCarte.setData((ArrayList<Carte>)controler.getAllCartes());
         pageDeck.setData((ArrayList<Deck>)controler.getAllDecks());
         pagePartie.setData((ArrayList<Partie>)controler.getAllParties());
