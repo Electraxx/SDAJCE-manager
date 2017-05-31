@@ -5,18 +5,23 @@
  */
 package ch.ceff.ict3.sdajcemanager.composants;
 
+import ch.ceff.ict3.sdajcemanager.event.AddCarteEvent;
 import ch.ceff.ict3.sdajcemanager.listeners.AppListener;
+import ch.ceff.ict3.sdajcemanager.modele.Conteneur;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
 
 /**
  *
@@ -27,7 +32,7 @@ public class FormPanelAjoutCarte extends JPanel {
     private JTextField fieldName;
     private JComboBox comboType;
     private JComboBox comboSphere;
-    private JTextField fieldNumber;
+    private JSpinner fieldNumber;
     private JComboBox comboConteneur;
     private JButton addCarte;
     private AppListener listener;
@@ -38,7 +43,7 @@ public class FormPanelAjoutCarte extends JPanel {
 
     private void initComponents() {
         fieldName = new JTextField(10);
-        fieldNumber = new JTextField(2);
+        fieldNumber = new JSpinner(new SpinnerNumberModel(0, 0, 256, 1));
         addCarte = new JButton("ajouter");
 
         //liste déroulante pour les type de carte
@@ -68,18 +73,14 @@ public class FormPanelAjoutCarte extends JPanel {
 
         //liste déroulante pour le conteneur de la carte
         comboConteneur = new JComboBox();
-        DefaultComboBoxModel modelContenur = new DefaultComboBoxModel();
-        modelContenur.addElement("Conteneur");
-        modelContenur.addElement("BB");
-        modelContenur.addElement("C1");
-        comboConteneur.setModel(modelContenur);
-        comboConteneur.setSelectedIndex(0);
         comboConteneur.setEditable(true);
 
         addCarte.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 
+                
+                listener.addCarte(new AddCarteEvent(this, fieldName.getText(), (String)comboType.getSelectedItem(), (String)comboSphere.getSelectedItem(), (int)fieldNumber.getValue(), (Conteneur)comboConteneur.getSelectedItem()));
                 listener.changePage("pageCarte");
             }
         });
@@ -89,6 +90,18 @@ public class FormPanelAjoutCarte extends JPanel {
 
     public void setListener(AppListener listener) {
         this.listener = listener;
+    }
+    
+    public void setData(List<Conteneur> data){
+        DefaultComboBoxModel modelConteneur = new DefaultComboBoxModel();
+        modelConteneur.addElement("Conteneur");
+        
+        for(Conteneur c : data) {
+            modelConteneur.addElement(c);
+        }
+        
+        comboConteneur.setModel(modelConteneur);
+        comboConteneur.setSelectedIndex(0);
     }
 
     public void layoutComponents() {

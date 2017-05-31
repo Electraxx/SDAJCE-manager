@@ -5,9 +5,6 @@
  */
 package ch.ceff.ict3.sdajcemanager.modele;
 
-import java.util.LinkedList;
-import java.util.List;
-
 /**
  *
  * @author cp-14luf
@@ -47,4 +44,11 @@ public class Conteneur {
     public void setAbbreviation(String abbreviation) {
         this.abbreviation = abbreviation;
     }
+
+    @Override
+    public String toString() {
+        return this.nom;
+    }
+    
+    
 }

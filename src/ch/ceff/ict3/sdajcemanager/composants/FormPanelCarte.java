@@ -99,17 +99,17 @@ public class FormPanelCarte extends JPanel {
         searchField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                //search();
+                searchAll();
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                //search();
+                searchAll();
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                //search();
+                searchAll();
             }
         });
 

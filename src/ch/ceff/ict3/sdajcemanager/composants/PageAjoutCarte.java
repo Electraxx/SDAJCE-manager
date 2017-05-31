@@ -6,7 +6,9 @@
 package ch.ceff.ict3.sdajcemanager.composants;
 
 import ch.ceff.ict3.sdajcemanager.listeners.AppListener;
+import ch.ceff.ict3.sdajcemanager.modele.Conteneur;
 import java.awt.BorderLayout;
+import java.util.List;
 import javax.swing.JPanel;
 
 /**
@@ -31,5 +33,9 @@ public class PageAjoutCarte extends JPanel {
     public void setListener(AppListener listener) {
         this.listener = listener;
         ajoutCarte.setListener(listener);
+    }
+    
+    public void setData(List<Conteneur> data) {
+        ajoutCarte.setData(data);
     }
 }

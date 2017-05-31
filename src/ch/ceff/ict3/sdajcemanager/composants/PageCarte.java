@@ -42,9 +42,9 @@ public class PageCarte extends JPanel {
     
     public void setData(List<Carte> data) {
         tablePanel.setData(data);
-        
         tablePanel.setAutoCreateRowSorter();
         tablePanel.setSorter();
+        
     }
 
     public void searchBySphere(String text) {

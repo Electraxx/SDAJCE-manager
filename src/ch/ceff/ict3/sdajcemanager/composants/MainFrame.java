@@ -332,7 +332,7 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
             pageAjoutPartie.setData(controler.getAllDecks());
             contentPane.add(pageAjoutPartie,BorderLayout.CENTER);
         }else if (page == "pageAjoutCarte"){
-            //pageAjoutCarte.setData();
+            pageAjoutCarte.setData(controler.getAllConteneur());
             contentPane.add(pageAjoutCarte,BorderLayout.CENTER);
         }
 
