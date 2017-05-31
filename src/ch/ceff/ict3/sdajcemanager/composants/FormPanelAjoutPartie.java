@@ -57,8 +57,8 @@ public class FormPanelAjoutPartie extends JPanel {
         //liste déroulante pour la victoire ou la défaite
         comboResult = new JComboBox();
         DefaultComboBoxModel modelResult = new DefaultComboBoxModel();
-        modelResult.addElement(true);
-        modelResult.addElement(false);
+        modelResult.addElement("victoire");
+        modelResult.addElement("défaite");
         comboResult.setModel(modelResult);
         comboResult.setSelectedIndex(0);
         comboResult.setEditable(true);
@@ -71,8 +71,12 @@ public class FormPanelAjoutPartie extends JPanel {
                 SimpleDateFormat formatter = new SimpleDateFormat();
                 String dateString = dateField.getText();
                 String deck = (String) comboDeck.getSelectedItem();
-
-                Boolean partie = (Boolean) comboResult.getSelectedItem();
+                String partie = (String)comboResult.getSelectedItem();
+                boolean ok = false;
+                if(partie == "victoire"){
+                    ok = true;
+                }
+                System.out.println(ok);
                 List<Carte> temp_data_carte = new ArrayList<Carte>();
                 List<Partie> temp_data_partie = new ArrayList<Partie>();
                 List<Deck> temp_data_deck = new ArrayList<Deck>();
@@ -81,7 +85,7 @@ public class FormPanelAjoutPartie extends JPanel {
 
                 System.out.println("OK !");
                
-                temp_data_partie.add(new Partie(1, new Date(), partie, temp_data_deck));
+                temp_data_partie.add(new Partie(1, new Date(), ok, temp_data_deck));
                 
                 
                 listener.changePage("pagePartie");
