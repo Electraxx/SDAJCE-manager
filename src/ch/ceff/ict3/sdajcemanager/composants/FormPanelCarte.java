@@ -37,7 +37,7 @@ public class FormPanelCarte extends JPanel {
     private JComboBox comboAttribut;
     private JComboBox comboProperty;
     private JTextField searchField;
-    private AppListener appListener;
+    private AppListener listener;
 
     public FormPanelCarte() {
         initComponents();
@@ -123,7 +123,7 @@ public class FormPanelCarte extends JPanel {
                 String conteneur = (String) comboProperty.getSelectedItem();
 
                 //  SearchCarteEvent carteEvent = new SearchCarteEvent(this,nom,type,sphere,conteneur);
-                if (appListener != null) {
+                if (listener != null) {
                     //   listener.searchCarte(carteEvent);
                 }
 
@@ -134,21 +134,21 @@ public class FormPanelCarte extends JPanel {
         buttonAddCart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
-
+                listener.changePage("pageAjoutCarte");
             }
         });
     }
 
-    public void setSearchCarteListener(AppListener appListener) {
-        this.appListener = appListener;
+    public void setSearchCarteListener(AppListener listener) {
+        this.listener = listener;
     }
 
     public void search() {
         String search = searchField.getText();
         SearchCarteEvent searchcarteEvent = new SearchCarteEvent(this, search);
 
-        if (appListener != null) {
-            appListener.searchCarte(searchcarteEvent);
+        if (listener != null) {
+            listener.searchCarte(searchcarteEvent);
         }
     }
 

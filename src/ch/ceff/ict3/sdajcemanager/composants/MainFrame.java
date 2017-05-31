@@ -41,6 +41,7 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
     private PageDeck pageDeck;
     private PagePartie pagePartie;
     private PageAjoutPartie pageAjoutPartie;
+    private PageAjoutCarte pageAjoutCarte;
     private JSplitPane splitPane;
     private AppListener listener;
     private Controleur controler;
@@ -55,6 +56,7 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         pageDeck = new PageDeck();
         pagePartie = new PagePartie();
         pageAjoutPartie = new PageAjoutPartie();
+        pageAjoutCarte = new PageAjoutCarte();
         toolBar = new ToolBar();
         
         
@@ -62,6 +64,7 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         pageCarte.setListener(this);
         pagePartie.setListener(this);
         pageAjoutPartie.setListener(this);
+        pageAjoutCarte.setListener(this);
         
         toolBar.setListener(this);
         //tablePanel.setCarteTableListener(this);
@@ -274,6 +277,8 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
             contentPane.add(pagePartie, BorderLayout.CENTER);
         }else if (page == "pageAjoutPartie"){
             contentPane.add(pageAjoutPartie,BorderLayout.CENTER);
+        }else if (page == "pageAjoutCarte"){
+            contentPane.add(pageAjoutCarte,BorderLayout.CENTER);
         }
 
         contentPane.revalidate();
