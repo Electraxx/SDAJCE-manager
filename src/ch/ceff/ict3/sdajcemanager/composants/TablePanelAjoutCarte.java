@@ -8,19 +8,20 @@ package ch.ceff.ict3.sdajcemanager.composants;
 import ch.ceff.ict3.sdajcemanager.listeners.AppListener;
 import ch.ceff.ict3.sdajcemanager.modele.Carte;
 import ch.ceff.ict3.sdajcemanager.modele.CarteTableModeleAjout;
+import ch.ceff.ict3.sdajcemanager.modele.SpinnerEditor;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.DefaultCellEditor;
-import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
-import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.SpinnerListModel;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -35,7 +36,6 @@ public class TablePanelAjoutCarte extends JPanel {
     private CarteTableModeleAjout carteModel;
     private AppListener appListener;
     private TableRowSorter<TableModel> rowSorter;
-    JComboBox comboBoxNb = new JComboBox();
     List<RowFilter<Object, Object>> filters = new ArrayList<RowFilter<Object, Object>>(3);
 
     public TablePanelAjoutCarte() {
@@ -48,14 +48,19 @@ public class TablePanelAjoutCarte extends JPanel {
         table = new JTable();
         carteModel = new CarteTableModeleAjout();
         table = new JTable(carteModel);
-
+        
+        TableColumn nombreColumn = table.getColumn("Nombre");
+        nombreColumn.setCellEditor(new SpinnerEditor());
+        
         setPreferredSize(new Dimension(685, 200));
         add(new JScrollPane(table), BorderLayout.CENTER);
+        
     }
     
 
     public void setData(List<Carte> data) {
         carteModel.setData(data);
+        
     }
 
     public void setAutoCreateRowSorter() {
@@ -64,6 +69,7 @@ public class TablePanelAjoutCarte extends JPanel {
 
     public void refresh() {
         carteModel.fireTableDataChanged();
+        
     }
 
     public void searchByText(String text) {

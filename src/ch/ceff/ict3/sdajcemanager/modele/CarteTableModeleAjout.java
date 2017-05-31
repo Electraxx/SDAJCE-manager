@@ -5,11 +5,9 @@
  */
 package ch.ceff.ict3.sdajcemanager.modele;
 
+import java.util.ArrayList;
 import java.util.List;
-import javax.swing.DefaultCellEditor;
-import javax.swing.JComboBox;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableColumn;
 
 /**
  *
@@ -17,15 +15,11 @@ import javax.swing.table.TableColumn;
  */
 public class CarteTableModeleAjout extends AbstractTableModel {
 
-    private final String[] COLNAMES = {"tete", "Nombre", "Nom", "Type", "Sphère", "Conteneur"};
+    private final String[] COLNAMES = {"Nombre", "Disponnible", "Nom", "Type", "Sphère", "Conteneur"};
 
     private List<Carte> cartes;
-    
-    public void setData(){
-        
-        Object[][] data = {cartes.toArray()};
-        
-    }
+    private int[] nbr;
+
 
     @Override
     public int getRowCount() {
@@ -40,19 +34,11 @@ public class CarteTableModeleAjout extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Carte carte = cartes.get(rowIndex);
-
-        JComboBox comboBox = new JComboBox();
-        comboBox.addItem("Snowboarding");
-        comboBox.addItem("Rowing");
-        comboBox.addItem("Knitting");
-        comboBox.addItem("Speed reading");
-        comboBox.addItem("Pool");
-        comboBox.addItem("None of the above");
-        //setCellEditor(new DefaultCellEditor(comboBox));
-
+        
+        
         switch (columnIndex) {
             case 0:
-                return true;
+                return this.nbr[rowIndex];
             case 1:
                 return carte.getNombre();
             case 2:
@@ -71,7 +57,7 @@ public class CarteTableModeleAjout extends AbstractTableModel {
     public Class<?> getColumnClass(int columnIndex) {
         switch (columnIndex) {
             case 0:
-                return Boolean.class;
+                return Integer.class;
             case 1:
                 return String.class;
             case 2:
@@ -96,12 +82,16 @@ public class CarteTableModeleAjout extends AbstractTableModel {
     public void setValueAt(Object value, int row, int col) {
 //        Carte carte = cartes.get(row);
 //        carte = value;
+        this.nbr[row] = (int)value;
         fireTableCellUpdated(row, col);
     }
 
     public void setData(List<Carte> cartes) {
         this.cartes = cartes;
+        this.nbr = new int[cartes.size()];
     }
+    
+    
 
     @Override
     public String getColumnName(int column) {

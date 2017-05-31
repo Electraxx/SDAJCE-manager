@@ -10,6 +10,7 @@ import ch.ceff.ict3.sdajcemanager.modele.Conteneur;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
 /**
@@ -38,7 +39,8 @@ public class PageAjoutDeck extends JPanel {
         temp_data.add(new Carte(0, "Dompteur de Chevaux de L’ouestfolde", "Allié", "Energie", 3, new Conteneur(0, "Test", "c1")));
         temp_data.add(new Carte(0, "Rassemblement des Rohirrim", "Evénement", "Energie", 3, new Conteneur(0, "Test", "c1")));
         temp_data.add(new Carte(0, "Ménestrel de Fondcombe", "Allié", "Connaissance", 3, new Conteneur(0, "Test", "c1")));
-
+        
+        
         tablePanel.setData(temp_data);
         tablePanel.refresh();
         tablePanel.setAutoCreateRowSorter();
