@@ -11,6 +11,7 @@ import ch.ceff.ict3.sdajcemanager.modele.Deck;
 import ch.ceff.ict3.sdajcemanager.modele.Partie;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
@@ -21,7 +22,6 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 /**
  *
@@ -32,7 +32,6 @@ public class FormPanelAjoutPartie extends JPanel {
     private JButton addButton;
     private JComboBox comboDeck;
     private JComboBox comboResult;
-    private JTextField dateField;
     private AppListener listener;
     private TablePanelPartie tablePartie;
 
@@ -63,13 +62,11 @@ public class FormPanelAjoutPartie extends JPanel {
         comboResult.setSelectedIndex(0);
         comboResult.setEditable(true);
 
-        dateField = new JTextField(9);
 
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 SimpleDateFormat formatter = new SimpleDateFormat();
-                String dateString = dateField.getText();
                 String deck = (String) comboDeck.getSelectedItem();
                 String partie = (String)comboResult.getSelectedItem();
                 boolean ok = false;
@@ -107,20 +104,13 @@ public class FormPanelAjoutPartie extends JPanel {
         gc.weightx = 1;
         gc.weighty = 0.1;
 
-        //ligne 1
+
+        //ligne 1 
         gc.gridx = 0;
         gc.gridy = 0;
 
         gc.fill = GridBagConstraints.HORIZONTAL;
-        gc.anchor = GridBagConstraints.FIRST_LINE_END;
-        add(dateField, gc);
-
-        //ligne 1 
-        gc.gridx = 1;
-        gc.gridy = 0;
-
-        gc.fill = GridBagConstraints.HORIZONTAL;
-        gc.anchor = GridBagConstraints.FIRST_LINE_START;
+        gc.anchor = GridBagConstraints.PAGE_START;
         add(comboResult, gc);
 
         //ligne 1
@@ -128,15 +118,16 @@ public class FormPanelAjoutPartie extends JPanel {
         gc.gridy = 0;
 
         gc.fill = GridBagConstraints.HORIZONTAL;
-        gc.anchor = GridBagConstraints.FIRST_LINE_START;
+        gc.anchor = GridBagConstraints.FIRST_LINE_END;
+        gc.insets = new Insets(0,5,0,5);
         add(addButton, gc);
 
         //ligne 2
         gc.gridx = 1;
-        gc.gridy = 1;
+        gc.gridy = 0;
 
         gc.fill = GridBagConstraints.HORIZONTAL;
-        gc.anchor = GridBagConstraints.FIRST_LINE_END;
+        gc.anchor = GridBagConstraints.CENTER;
         add(comboDeck, gc);
     }
 
