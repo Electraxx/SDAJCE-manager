@@ -227,7 +227,6 @@ public class Database {
         Statement stmtConteneur = connection.createStatement();
         
         String queryConteneur = "SELECT * FROM conteneur WHERE id_contn=" + index;
-        System.out.println(queryConteneur);
         ResultSet resultConteneur = DBConnect.query(stmtConteneur, queryConteneur);
         resultConteneur.next();
         

@@ -39,15 +39,17 @@ public class TablePanelCarte extends JPanel {
 
     private void initComponents() {
         setLayout(new BorderLayout());
-
         table = new JTable();
         carteModel = new CarteTableModele();
         table = new JTable(carteModel);
         setPreferredSize(new Dimension(685, 200));
         add(new JScrollPane(table), BorderLayout.CENTER);
     }
+    
+    
 
     public void setData(List<Carte> data) {
+        
         carteModel.setData(data);
     }
 

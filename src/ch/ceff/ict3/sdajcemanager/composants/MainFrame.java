@@ -220,6 +220,13 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
     }
 
     @Override
+    public void changeDeckCarte(int index) {
+        pageDeck.changeDeckCarte(index);
+    }
+    
+    
+
+    @Override
     public void windowClosing(WindowEvent e) {
         quitter();
     }
@@ -267,7 +274,6 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         } else if (page == "pagePartie") {
             
         }else if( page == "ajoutDeck"){
-            System.out.println("ohhkhjkhjkjkhkkjkj");
             contentPane.add(pageAjoutDeck, BorderLayout.CENTER);
         }
 

@@ -52,5 +52,7 @@ public class PageAjoutDeck extends JPanel {
     private void layoutComponents() {
 
     }
+    
+    
 
 }

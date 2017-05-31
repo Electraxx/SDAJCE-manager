@@ -48,7 +48,9 @@ public class CarteTableModele extends AbstractTableModel{
     }
     
     public void setData(List<Carte> cartes) {
+        try{
         this.cartes = cartes;
+        }catch(Exception e){}
     }
 
     @Override

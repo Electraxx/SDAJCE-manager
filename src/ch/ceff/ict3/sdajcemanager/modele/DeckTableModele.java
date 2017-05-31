@@ -13,10 +13,11 @@ import javax.swing.table.AbstractTableModel;
  * @author cp-14luf
  */
 public class DeckTableModele extends AbstractTableModel {
+
     private final String[] COLNAMES = {"Deck"};
-    
+
     private List<Deck> decks;
-    
+
     @Override
     public int getRowCount() {
         return decks.size();
@@ -30,14 +31,14 @@ public class DeckTableModele extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Deck deck = decks.get(rowIndex);
-        
-        switch(columnIndex) {
+
+        switch (columnIndex) {
             case 0:
                 return deck.getName();
         }
         return null;
     }
-    
+
     public void setData(List<Deck> decks) {
         this.decks = decks;
     }
@@ -46,7 +47,10 @@ public class DeckTableModele extends AbstractTableModel {
     public String getColumnName(int column) {
         return COLNAMES[column];
     }
-    
-    
-    
+
+    public Deck getDecks(int index) {
+        return decks.get(index);
+
+    }
+
 }
