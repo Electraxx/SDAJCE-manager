@@ -5,9 +5,11 @@
  */
 package ch.ceff.ict3.sdajcemanager.composants;
 
+import ch.ceff.ict3.sdajcemanager.actions.ImporterAction;
 import ch.ceff.ict3.sdajcemanager.actions.PageAjoutCarteAction;
 import ch.ceff.ict3.sdajcemanager.actions.PageAjoutDeckAction;
 import ch.ceff.ict3.sdajcemanager.actions.PageAjoutPartieAction;
+import ch.ceff.ict3.sdajcemanager.actions.QuitterAction;
 import ch.ceff.ict3.sdajcemanager.controleurs.Controleur;
 import ch.ceff.ict3.sdajcemanager.event.*;
 import ch.ceff.ict3.sdajcemanager.fileFilters.CsvFileFilter;
@@ -65,7 +67,7 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         initComponents(titre);
     }
 
-    public void initComponents(String titre) {
+    private void initComponents(String titre) {
         Container contentPane = getContentPane();
         pageCarte = new PageCarte();
         pageDeck = new PageDeck();
@@ -86,7 +88,7 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         fileChooser.setFileFilter(new CsvFileFilter());
         //tablePanel.setCarteTableListener(this);
 
-        contentPane.add(pageDeck, BorderLayout.CENTER);
+        contentPane.add(pageCarte, BorderLayout.CENTER);
         contentPane.add(toolBar, BorderLayout.PAGE_START);
 
         setJMenuBar(createJMenuBar());
@@ -110,8 +112,8 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         JMenu menuFichier = new JMenu("Fichier");
         menuBar.add(menuFichier);
         //sous-menu Fichier
-        JMenuItem itemImportCartes = new JMenuItem("Importer des cartes");
-        JMenuItem itemQuitter = new JMenuItem("Quitter");
+        JMenuItem itemImportCartes = new JMenuItem(new ImporterAction("Importer Cartes", null, "Importe des cartes depuis un .csv", KeyEvent.VK_I, MainFrame.this));
+        JMenuItem itemQuitter = new JMenuItem(new QuitterAction("Quitter", null, "Quitter le programme", KeyEvent.VK_Q, MainFrame.this));
 
         menuFichier.add(itemImportCartes);
         menuFichier.add(itemQuitter);
@@ -315,7 +317,12 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
 
     @Override
     public void importer() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("pnpnpwne");
+        fileChooser.setAcceptAllFileFilterUsed(false);
+        if (fileChooser.showOpenDialog(MainFrame.this) == JFileChooser.APPROVE_OPTION) {
+            System.out.println(fileChooser.getSelectedFile());
+            addCsvToDataBase(fileChooser.getSelectedFile());
+        }
     }
 
     @Override
