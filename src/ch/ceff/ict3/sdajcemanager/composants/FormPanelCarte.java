@@ -77,8 +77,8 @@ public class FormPanelCarte extends JPanel {
         comboConteneur = new JComboBox();
         DefaultComboBoxModel modelConteneur = new DefaultComboBoxModel();
         modelConteneur.addElement("Conteneur");
-        modelConteneur.addElement("BB");
-        modelConteneur.addElement("C1");
+        modelConteneur.addElement("Boîte de base");
+        modelConteneur.addElement("Cycle 1");
         comboConteneur.setModel(modelConteneur);
         comboConteneur.setSelectedIndex(0);
         comboConteneur.setEditable(true);
