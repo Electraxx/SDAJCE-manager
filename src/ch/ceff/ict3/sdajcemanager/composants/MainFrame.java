@@ -7,6 +7,7 @@ package ch.ceff.ict3.sdajcemanager.composants;
 
 import ch.ceff.ict3.sdajcemanager.controleurs.Controleur;
 import ch.ceff.ict3.sdajcemanager.event.*;
+import ch.ceff.ict3.sdajcemanager.fileFilters.CsvFileFilter;
 import ch.ceff.ict3.sdajcemanager.listeners.AppListener;
 import ch.ceff.ict3.sdajcemanager.modele.Carte;
 import ch.ceff.ict3.sdajcemanager.modele.Conteneur;
@@ -20,7 +21,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -47,6 +54,7 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
     private JSplitPane splitPane;
     private AppListener listener;
     private Controleur controler;
+    private JFileChooser fileChooser;
 
     public MainFrame(String titre) {
         initComponents(titre);
@@ -61,6 +69,8 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         pageDeck.setListener(this);
         pageCarte.setListener(this);
         toolBar.setListener(this);
+        fileChooser = new JFileChooser();
+        fileChooser.setFileFilter(new CsvFileFilter());
         //tablePanel.setCarteTableListener(this);
 
         contentPane.add(pageDeck, BorderLayout.CENTER);
@@ -69,13 +79,13 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         setJMenuBar(createJMenuBar());
         setMinimumSize(new Dimension(700, 450));
         setLocationRelativeTo(null);
-        
+
         controler = new Controleur();
-        
-        pageCarte.setData((ArrayList<Carte>)controler.getAllCartes());
-        pageDeck.setData((ArrayList<Deck>)controler.getAllDecks());
-        pagePartie.setData((ArrayList<Partie>)controler.getAllParties());
-        
+
+        pageCarte.setData((ArrayList<Carte>) controler.getAllCartes());
+        pageDeck.setData((ArrayList<Deck>) controler.getAllDecks());
+        pagePartie.setData((ArrayList<Partie>) controler.getAllParties());
+
         addWindowListener(this);
         
     }
@@ -87,7 +97,10 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         JMenu menuFichier = new JMenu("Fichier");
         menuBar.add(menuFichier);
         //sous-menu Fichier
+        JMenuItem itemImportCartes = new JMenuItem("Importer des cartes");
         JMenuItem itemQuitter = new JMenuItem("Quitter");
+
+        menuFichier.add(itemImportCartes);
         menuFichier.add(itemQuitter);
 
         //menu page 
@@ -130,6 +143,17 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
             }
         });
 
+        itemImportCartes.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fileChooser.setAcceptAllFileFilterUsed(false);//On ne veut plus *.*
+                if (fileChooser.showOpenDialog(MainFrame.this) == JFileChooser.APPROVE_OPTION) {
+                    System.out.println(fileChooser.getSelectedFile());
+                    addCsvToDataBase(fileChooser.getSelectedFile());
+                }
+            }
+        });
+
         addWindowListener((WindowListener) this);
         return menuBar;
     }
@@ -145,6 +169,40 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         }
     }
 
+    private void addCsvToDataBase(File fileName) {
+
+        String csvFile = fileName.getPath();
+        BufferedReader br = null;
+        String line = "";
+        String cvsSplit = ";";
+
+        try {
+
+            br = new BufferedReader(new FileReader(csvFile));
+            br.readLine();
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(cvsSplit);
+                Carte carte = new Carte(-1, data[0], data[1], data[2], Integer.parseInt(data[3]), controler.getConteneur(1));
+                controler.addCarte(carte);
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                    pageCarte.setData((ArrayList<Carte>) controler.getAllCartes());
+                    pageCarte.refresh();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
 
     public void setListener(AppListener listener) {
         this.listener = listener;
@@ -208,10 +266,6 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
     public void searchCarte(SearchCarteEvent event) {
         pageCarte.search(event.getSearch());
     }
-    
-    
-    
-    
 
     @Override
     public void windowClosing(WindowEvent e) {
@@ -266,5 +320,4 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         contentPane.repaint();
     }
 
-    
 }
