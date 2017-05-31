@@ -46,6 +46,11 @@ public class Deck {
     public void setCartes(List<Carte> cartes) {
         this.cartes = cartes;
     }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
     
     
     

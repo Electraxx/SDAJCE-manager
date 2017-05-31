@@ -19,7 +19,7 @@ public class PartieTableModele extends AbstractTableModel{
     
     
     private List<Partie> parties;
-    private SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+    private SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy h:mm a");
     
     
     @Override
@@ -36,8 +36,10 @@ public class PartieTableModele extends AbstractTableModel{
     public Object getValueAt(int rowIndex, int columnIndex) {
         Partie partie = parties.get(rowIndex);
         
+        
         switch(columnIndex) {
             case 0:
+                System.out.println(partie.getDate());
                 return format.format(partie.getDate());
             case 1:
                 

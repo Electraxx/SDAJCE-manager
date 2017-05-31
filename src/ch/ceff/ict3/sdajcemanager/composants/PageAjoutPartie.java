@@ -6,7 +6,9 @@
 package ch.ceff.ict3.sdajcemanager.composants;
 
 import ch.ceff.ict3.sdajcemanager.listeners.AppListener;
+import ch.ceff.ict3.sdajcemanager.modele.Deck;
 import java.awt.BorderLayout;
+import java.util.List;
 import javax.swing.JPanel;
 
 /**
@@ -25,7 +27,7 @@ public class PageAjoutPartie extends JPanel {
 
         //toolBar = new ToolBar();
         ajoutPartie = new FormPanelAjoutPartie();
-
+        
         this.add(ajoutPartie, BorderLayout.CENTER);
 
     }
@@ -33,5 +35,9 @@ public class PageAjoutPartie extends JPanel {
     public void setListener(AppListener listener) {
         this.listener = listener;
         ajoutPartie.setListener(listener);
+    }
+    
+    public void setData(List<Deck> decks) {
+        ajoutPartie.setData(decks);
     }
 }

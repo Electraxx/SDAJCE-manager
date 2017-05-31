@@ -320,7 +320,7 @@ public class Database {
         Statement stmtPartie = connection.createStatement();
         Statement stmtDecksPartie = connection.createStatement();
         
-        String queryPartie = "SELECT * FROM partie";
+        String queryPartie = "SELECT * FROM partie WHERE id_partie=" + index;
         ResultSet resultPartie = DBConnect.query(stmtPartie, queryPartie);
         resultPartie.next();
         
@@ -334,13 +334,14 @@ public class Database {
             decks.add(getDeck(resultDecksPartie.getInt("id_deck")));
         }
         
+        
         Partie partie = new Partie(
                 resultPartie.getInt("id_partie"),
-                resultPartie.getDate("date_partie"),
+                resultPartie.getTimestamp("date_partie"),
                 resultPartie.getBoolean("resultat"),
                 decks
-                
         );
+        
         resultDecksPartie.close();
         resultPartie.close();
         stmtPartie.close();

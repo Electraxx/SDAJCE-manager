@@ -5,6 +5,7 @@
  */
 package ch.ceff.ict3.sdajcemanager.composants;
 
+import ch.ceff.ict3.sdajcemanager.event.AddPartieEvent;
 import ch.ceff.ict3.sdajcemanager.listeners.AppListener;
 import ch.ceff.ict3.sdajcemanager.modele.Carte;
 import ch.ceff.ict3.sdajcemanager.modele.Deck;
@@ -34,30 +35,35 @@ public class FormPanelAjoutPartie extends JPanel {
     private JComboBox comboResult;
     private AppListener listener;
     private TablePanelPartie tablePartie;
+    
+    private List<Deck> decks;
 
     public FormPanelAjoutPartie() {
         initComponents();
     }
 
     private void initComponents() {
+        this.decks = new ArrayList<>();
+        
         addButton = new JButton("Ajouter");
-
         tablePartie = new TablePanelPartie();
         //liste déroulante pour les decks
         comboDeck = new JComboBox();
+        
         DefaultComboBoxModel modelDeck = new DefaultComboBoxModel();
-        for (int i = 0; i < 10; i++) {
-            modelDeck.addElement("deck" + i);
+        
+        for(Deck d : this.decks) {
+            modelDeck.addElement(d);
         }
+        
         comboDeck.setModel(modelDeck);
-        comboDeck.setSelectedIndex(0);
         comboDeck.setEditable(true);
 
         //liste déroulante pour la victoire ou la défaite
         comboResult = new JComboBox();
         DefaultComboBoxModel modelResult = new DefaultComboBoxModel();
-        modelResult.addElement("victoire");
-        modelResult.addElement("défaite");
+        modelResult.addElement("Victoire");
+        modelResult.addElement("Défaite");
         comboResult.setModel(modelResult);
         comboResult.setSelectedIndex(0);
         comboResult.setEditable(true);
@@ -66,24 +72,22 @@ public class FormPanelAjoutPartie extends JPanel {
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                
+                
                 SimpleDateFormat formatter = new SimpleDateFormat();
-                String deck = (String) comboDeck.getSelectedItem();
                 String partie = (String)comboResult.getSelectedItem();
+                
+                
                 boolean ok = false;
-                if(partie == "victoire"){
+                if(partie == "Victoire"){
                     ok = true;
                 }
-                System.out.println(ok);
-                List<Carte> temp_data_carte = new ArrayList<Carte>();
-                List<Partie> temp_data_partie = new ArrayList<Partie>();
-                List<Deck> temp_data_deck = new ArrayList<Deck>();
-
-                temp_data_deck.add(new Deck(0, deck, temp_data_carte));
-
-                System.out.println("OK !");
-               
-                temp_data_partie.add(new Partie(1, new Date(), ok, temp_data_deck));
                 
+                List<Deck> partieDecks = new ArrayList<>();
+                
+                partieDecks.add((Deck)comboDeck.getSelectedItem());
+                
+                listener.addPartie(new AddPartieEvent(new Date(), ok, partieDecks, this));
                 
                 listener.changePage("pagePartie");
             }
@@ -94,6 +98,21 @@ public class FormPanelAjoutPartie extends JPanel {
 
     public void setListener(AppListener listener) {
         this.listener = listener;
+    }
+    
+    public void setData(List<Deck> decks) {
+        this.decks = decks;
+        refresh();
+    }
+    
+    public void refresh() {
+        DefaultComboBoxModel modelDeck = new DefaultComboBoxModel();
+        
+        for(Deck d : this.decks) {
+            modelDeck.addElement(d);
+        }
+        
+        comboDeck.setModel(modelDeck);
     }
 
     private void layoutComponents() {

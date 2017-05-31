@@ -68,6 +68,14 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
     }
 
     private void initComponents(String titre) {
+        controler = new Controleur();
+        
+        setMinimumSize(new Dimension(700, 450));
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        setLocationRelativeTo(null);
+        
+        setJMenuBar(createJMenuBar());
+        
         Container contentPane = getContentPane();
         pageCarte = new PageCarte();
         pageDeck = new PageDeck();
@@ -91,16 +99,16 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         contentPane.add(pageCarte, BorderLayout.CENTER);
         contentPane.add(toolBar, BorderLayout.PAGE_START);
 
-        setJMenuBar(createJMenuBar());
-        setMinimumSize(new Dimension(700, 450));
-        setLocationRelativeTo(null);
-
-        controler = new Controleur();
+        
+        
+        
+        
 
         pageCarte.setData((ArrayList<Carte>) controler.getAllCartes());
         pageDeck.setData((ArrayList<Deck>) controler.getAllDecks());
         pagePartie.setData((ArrayList<Partie>) controler.getAllParties());
-
+        pageAjoutPartie.setData(controler.getAllDecks());
+        
         addWindowListener(this);
         
     }
@@ -317,7 +325,6 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
 
     @Override
     public void importer() {
-        System.out.println("pnpnpwne");
         fileChooser.setAcceptAllFileFilterUsed(false);
         if (fileChooser.showOpenDialog(MainFrame.this) == JFileChooser.APPROVE_OPTION) {
             System.out.println(fileChooser.getSelectedFile());

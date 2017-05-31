@@ -26,7 +26,7 @@ public class PageDeck  extends JPanel{
         initComponents();
     }
 
-    public void initComponents() {
+    private void initComponents() {
         
         //toolBar = new ToolBar();
         tablePanel = new TablePanelDeck();
