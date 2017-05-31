@@ -6,6 +6,10 @@
 package ch.ceff.ict3.sdajcemanager;
 
 import ch.ceff.ict3.sdajcemanager.composants.MainFrame;
+import ch.ceff.ict3.sdajcemanager.modele.Database;
+import ch.ceff.ict3.sdajcemanager.modele.Partie;
+import java.sql.SQLException;
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
@@ -18,11 +22,16 @@ public class App {
     public static final String APP_NAME = "SDAJCE-manager";
 
     public static void main(String[] args) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+            ex.printStackTrace();
+        }
+        
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new MainFrame(APP_NAME);
-                JFrame fenetre = new MainFrame("Tutoriel 13");
+                JFrame fenetre = new MainFrame(APP_NAME);
                 fenetre.setVisible(true);
             }
         });

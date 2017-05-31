@@ -46,4 +46,7 @@ public class DeckTableModele extends AbstractTableModel {
     public String getColumnName(int column) {
         return COLNAMES[column];
     }
+    
+    
+    
 }

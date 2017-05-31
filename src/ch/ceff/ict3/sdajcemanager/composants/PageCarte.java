@@ -5,6 +5,7 @@
  */
 package ch.ceff.ict3.sdajcemanager.composants;
 
+import ch.ceff.ict3.sdajcemanager.listeners.AppListener;
 import ch.ceff.ict3.sdajcemanager.modele.Carte;
 import ch.ceff.ict3.sdajcemanager.modele.Conteneur;
 import java.awt.BorderLayout;
@@ -26,25 +27,42 @@ public class PageCarte extends JPanel {
     }
 
     public void initComponents() {
-        
+
         //toolBar = new ToolBar();
         tablePanel = new TablePanelCarte();
         panelCarte = new FormPanelCarte();
 
         List<Carte> temp_data = new ArrayList<Carte>();
-
-        temp_data.add(new Carte(0, "Gimli", "Heros", "energie", 2, new Conteneur(0, "Test", "bb")));
-        temp_data.add(new Carte(1, "Legolas", "Heros", "Tactique", 2, new Conteneur(0, "Test", "c1")));
-        temp_data.add(new Carte(2, "Gandalf", "Allié", "Neutre", 2, new Conteneur(0, "Test", "bb")));
-        temp_data.add(new Carte(3, "Thorin", "Heros", "neutre", 2, new Conteneur(0, "Test", "c1")));
-        
-        
-
         tablePanel.setData(temp_data);
         tablePanel.refresh();
+        tablePanel.setAutoCreateRowSorter();
+        tablePanel.setSorter();
         this.add(panelCarte, BorderLayout.NORTH);
         this.add(tablePanel, BorderLayout.SOUTH);
 
+    }
 
+    public void searchByText(String text) {
+        tablePanel.searchByText(text);
+    }
+
+    public void searchByType(String text) {
+        tablePanel.searchByType(text);
+    }
+
+    public void searchBySphere(String text) {
+        tablePanel.searchBySphere(text);
+    }
+
+    public void searchByConteneur(String text) {
+        tablePanel.searchByConteneur(text);
+    }
+
+    public void setListener(AppListener appListener) {
+        panelCarte.setSearchCarteListener(appListener);
+    }
+
+    public void delFilters() {
+        tablePanel.delFilters();
     }
 }

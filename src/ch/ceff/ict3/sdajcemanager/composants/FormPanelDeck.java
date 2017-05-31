@@ -5,6 +5,8 @@
  */
 package ch.ceff.ict3.sdajcemanager.composants;
 
+import ch.ceff.ict3.sdajcemanager.event.SearchDeckEvent;
+import ch.ceff.ict3.sdajcemanager.listeners.AppListener;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -19,17 +21,19 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 /**
  *
  * @author cp-14syf
  */
-public class FormPanelDeck  extends JPanel{
-    
-    private JButton buttonSearch;
+public class FormPanelDeck extends JPanel {
+
     private JButton buttonAddCart;
     private JComboBox comboAttribut;
     private JTextField searchField;
+    private AppListener appListener;
 
     public FormPanelDeck() {
         initComponents();
@@ -38,7 +42,6 @@ public class FormPanelDeck  extends JPanel{
     private void initComponents() {
 
         //liste des sphère
-
         comboAttribut = new JComboBox();
         DefaultComboBoxModel modelSphere = new DefaultComboBoxModel();
         modelSphere.addElement("Sphere");
@@ -50,34 +53,64 @@ public class FormPanelDeck  extends JPanel{
         comboAttribut.setModel(modelSphere);
         comboAttribut.setSelectedIndex(0);
         comboAttribut.setEditable(true);
-       
-      // setPreferredSize(new Dimension(700,150));
-        
+
+        setPreferredSize(new Dimension(700, 150));
+
         Border bordure = BorderFactory.createTitledBorder("Option");
         Border marge = BorderFactory.createEmptyBorder(5, 5, 5, 5);
         setBorder(BorderFactory.createCompoundBorder(marge, bordure));
 
         searchField = new JTextField(9);
-        buttonSearch = new JButton("Rechercher");
         buttonAddCart = new JButton("Nouveau Deck");
 
         //placement des composants
         layoutComponents();
 
-        //action sur le bouton rechercher
-        buttonSearch.addActionListener(new ActionListener() {
+        searchField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
-            public void actionPerformed(ActionEvent event) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            public void insertUpdate(DocumentEvent e) {
+                search();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                search();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                search();
             }
         });
-        //action sur le bouton ajouter carte
+
+        //action sur le bouton nouveau deck
         buttonAddCart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
         });
+
+        comboAttribut.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String sphereSearch = comboAttribut.getSelectedItem().toString();
+                System.out.println(sphereSearch);
+            }
+        });
+    }
+
+    public void search() {
+        String search = searchField.getText();
+        SearchDeckEvent searchDeckEvent = new SearchDeckEvent(this, search);
+
+        if (appListener != null) {
+            appListener.searchDeck(searchDeckEvent);
+        }
+    }
+
+    public void setSearchDeckListener(AppListener appListener) {
+        this.appListener = appListener;
     }
 
     private void layoutComponents() {
@@ -102,10 +135,6 @@ public class FormPanelDeck  extends JPanel{
         add(searchField, gc);
 
         gc.gridx = 2;
-        gc.anchor = GridBagConstraints.FIRST_LINE_END;
-        add(buttonSearch, gc);
-
-        gc.gridx = 3;
         gc.anchor = GridBagConstraints.FIRST_LINE_END;
         add(buttonAddCart, gc);
 

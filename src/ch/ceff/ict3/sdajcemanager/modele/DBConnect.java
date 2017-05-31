@@ -17,21 +17,19 @@ import java.sql.Statement;
  */
 public class DBConnect {
     
-    public static Connection connect(String url, String user, String password) {
+    public static Connection connect(String host, String dbName, String user, String password) {
         try {
-            return DriverManager.getConnection(url, user, password);
-        } catch(SQLException e) {
+            return DriverManager.getConnection("jdbc:mysql://"+host+":"+3306+"/"+dbName,user, password);
+        } catch(SQLException ex) {
+            ex.printStackTrace();
         }
         return null;
     }
     
-    public static ResultSet query(Connection connection, String query) {
+    public static ResultSet query(Statement statement, String query) {
         ResultSet result = null;
         try {
-            Statement statement = connection.createStatement();
             result = statement.executeQuery(query);
-            statement.close();
-            
         } catch(SQLException ex) {
             ex.printStackTrace();
         }
