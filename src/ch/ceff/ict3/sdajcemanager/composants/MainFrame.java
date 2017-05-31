@@ -99,15 +99,7 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         contentPane.add(pageCarte, BorderLayout.CENTER);
         contentPane.add(toolBar, BorderLayout.PAGE_START);
 
-        
-        
-        
-        
-
-        pageCarte.setData((ArrayList<Carte>) controler.getAllCartes());
-        pageDeck.setData((ArrayList<Deck>) controler.getAllDecks());
-        pagePartie.setData((ArrayList<Partie>) controler.getAllParties());
-        pageAjoutPartie.setData(controler.getAllDecks());
+        changePage("pageCarte");
         
         addWindowListener(this);
         
@@ -308,14 +300,19 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         contentPane.removeAll();
         contentPane.add(toolBar, BorderLayout.PAGE_START);
         if (page == "pageCarte") {
+            pageCarte.setData(controler.getAllCartes());
             contentPane.add(pageCarte, BorderLayout.CENTER);
         } else if (page == "pageDeck") {
+            pageDeck.setData(controler.getAllDecks());
             contentPane.add(pageDeck, BorderLayout.CENTER);
         } else if (page == "pagePartie") {
+            pagePartie.setData(controler.getAllParties());
             contentPane.add(pagePartie, BorderLayout.CENTER);
         }else if (page == "pageAjoutPartie"){
+            pageAjoutPartie.setData(controler.getAllDecks());
             contentPane.add(pageAjoutPartie,BorderLayout.CENTER);
         }else if (page == "pageAjoutCarte"){
+            //pageAjoutCarte.setData();
             contentPane.add(pageAjoutCarte,BorderLayout.CENTER);
         }
 

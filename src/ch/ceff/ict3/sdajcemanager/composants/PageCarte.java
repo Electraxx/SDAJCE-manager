@@ -53,7 +53,7 @@ public class PageCarte extends JPanel {
         tablePanel.search(text);
     }
     
-    public void setData(ArrayList<Carte> data) {
+    public void setData(List<Carte> data) {
         tablePanel.setData(data);
     }
     

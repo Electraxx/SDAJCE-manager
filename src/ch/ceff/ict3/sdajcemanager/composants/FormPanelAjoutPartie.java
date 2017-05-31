@@ -7,9 +7,7 @@ package ch.ceff.ict3.sdajcemanager.composants;
 
 import ch.ceff.ict3.sdajcemanager.event.AddPartieEvent;
 import ch.ceff.ict3.sdajcemanager.listeners.AppListener;
-import ch.ceff.ict3.sdajcemanager.modele.Carte;
 import ch.ceff.ict3.sdajcemanager.modele.Deck;
-import ch.ceff.ict3.sdajcemanager.modele.Partie;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
