@@ -14,6 +14,13 @@ import java.util.EventListener;
  */
 public interface AppListener extends EventListener{
     
+    public void quitter();
+    public void importer();
+    
+    public void pageAjoutCarte();
+    public void pageAjoutDeck();
+    public void pageAjoutPartie();
+    
     public void changePage(String page);
     
     public void addCarte(AddCarteEvent event);

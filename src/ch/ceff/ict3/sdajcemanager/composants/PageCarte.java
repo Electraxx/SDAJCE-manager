@@ -21,13 +21,14 @@ public class PageCarte extends JPanel {
 
     private FormPanelCarte panelCarte;
     private TablePanelCarte tablePanel;
+    private AppListener listener;
 
     public PageCarte() {
         initComponents();
     }
 
     public void initComponents() {
-        
+
         //toolBar = new ToolBar();
         tablePanel = new TablePanelCarte();
         panelCarte = new FormPanelCarte();
@@ -38,8 +39,6 @@ public class PageCarte extends JPanel {
         temp_data.add(new Carte(1, "Legolas", "Heros", "Tactique", 2, new Conteneur(0, "Test", "c1")));
         temp_data.add(new Carte(2, "Gandalf", "Allié", "Neutre", 2, new Conteneur(0, "Test", "bb")));
         temp_data.add(new Carte(3, "Thorin", "Heros", "neutre", 2, new Conteneur(0, "Test", "c1")));
-        
-        
 
         tablePanel.setData(temp_data);
         tablePanel.refresh();
@@ -48,10 +47,9 @@ public class PageCarte extends JPanel {
         this.add(panelCarte, BorderLayout.NORTH);
         this.add(tablePanel, BorderLayout.SOUTH);
 
-
     }
-    
-    public void search(String text){
+
+    public void search(String text) {
         tablePanel.search(text);
     }
     
@@ -61,5 +59,6 @@ public class PageCarte extends JPanel {
     
     public void setListener(AppListener appListener){
         panelCarte.setSearchCarteListener(appListener);
+        this.listener = appListener;
     }
 }

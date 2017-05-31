@@ -5,31 +5,25 @@
  */
 package ch.ceff.ict3.sdajcemanager.composants;
 
-
 import ch.ceff.ict3.sdajcemanager.listeners.AppListener;
+
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 /**
  *
  * @author cp-13jru
  */
-public class FormPanelPartie extends JPanel {
+public class FormPanelPartie extends JPanel{
 
     private JButton buttonAdd;
-
     private AppListener listener;
 
     public FormPanelPartie() {
@@ -53,11 +47,14 @@ public class FormPanelPartie extends JPanel {
         buttonAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
-                
+               
+                listener.changePage("pageAjoutPartie");
             }
         });
+    }
 
-        //action sur le bouton ajouter carte
+    public void setListener(AppListener listener) {
+        this.listener = listener;
     }
 
     private void layoutComponents() {

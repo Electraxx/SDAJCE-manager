@@ -11,27 +11,25 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author cp-13jru
+ * @author CP-13JRU
  */
-public class PageAjoutPartie extends JPanel {
+public class PageAjoutCarte extends JPanel {
 
-    private FormPanelAjoutPartie ajoutPartie;
+    private FormPanelAjoutCarte ajoutCarte;
     private AppListener listener;
-    public PageAjoutPartie() {
+
+    public PageAjoutCarte() {
         initComponents();
     }
 
     public void initComponents() {
+        ajoutCarte = new FormPanelAjoutCarte();
 
-        //toolBar = new ToolBar();
-        ajoutPartie = new FormPanelAjoutPartie();
-
-        this.add(ajoutPartie, BorderLayout.CENTER);
-
+        this.add(ajoutCarte, BorderLayout.CENTER);
     }
 
     public void setListener(AppListener listener) {
         this.listener = listener;
-        ajoutPartie.setListener(listener);
+        ajoutCarte.setListener(listener);
     }
 }

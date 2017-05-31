@@ -5,6 +5,9 @@
  */
 package ch.ceff.ict3.sdajcemanager.composants;
 
+import ch.ceff.ict3.sdajcemanager.actions.PageAjoutCarteAction;
+import ch.ceff.ict3.sdajcemanager.actions.PageAjoutDeckAction;
+import ch.ceff.ict3.sdajcemanager.actions.PageAjoutPartieAction;
 import ch.ceff.ict3.sdajcemanager.controleurs.Controleur;
 import ch.ceff.ict3.sdajcemanager.event.*;
 import ch.ceff.ict3.sdajcemanager.listeners.AppListener;
@@ -44,6 +47,8 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
     private PageCarte pageCarte;
     private PageDeck pageDeck;
     private PagePartie pagePartie;
+    private PageAjoutPartie pageAjoutPartie;
+    private PageAjoutCarte pageAjoutCarte;
     private JSplitPane splitPane;
     private AppListener listener;
     private Controleur controler;
@@ -57,9 +62,17 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         pageCarte = new PageCarte();
         pageDeck = new PageDeck();
         pagePartie = new PagePartie();
+        pageAjoutPartie = new PageAjoutPartie();
+        pageAjoutCarte = new PageAjoutCarte();
         toolBar = new ToolBar();
+        
+        
         pageDeck.setListener(this);
         pageCarte.setListener(this);
+        pagePartie.setListener(this);
+        pageAjoutPartie.setListener(this);
+        pageAjoutCarte.setListener(this);
+        
         toolBar.setListener(this);
         //tablePanel.setCarteTableListener(this);
 
@@ -101,20 +114,14 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         menuPage.add(menuDeck);
         menuPage.add(menuPartie);
         //ajout d'un sous-menu au sous-menu MenuCarte
-        JMenuItem itemAjouterCarte = new JMenuItem("ajout carte");
+        JMenuItem itemAjouterCarte = new JMenuItem(new PageAjoutCarteAction("Ajout Carte...", null, "Ajoute une carte dans la base de données", KeyEvent.VK_F, MainFrame.this));
         menuCarte.add(itemAjouterCarte);
         //ajout d'un sous-menu au sous-menu MenuItem
-        JMenuItem itemNouveauDeck = new JMenuItem("Nouveau Deck");
+        JMenuItem itemNouveauDeck = new JMenuItem(new PageAjoutDeckAction("Nouveau Deck...", null, "Ajoute un deck dans la base de données", KeyEvent.VK_D, MainFrame.this));
         menuDeck.add(itemNouveauDeck);
         //ajout d'un sous-menu au sous-menu MenuPartie
-        JMenuItem itemNouvellePartie = new JMenuItem("nouvelle partie");
+        JMenuItem itemNouvellePartie = new JMenuItem(new PageAjoutPartieAction("Nouvelle Partie...", null, "Ajoute une partie dans la base de données", KeyEvent.VK_P, MainFrame.this));
         menuPartie.add(itemNouvellePartie);
-
-        //Mnémonique
-        itemQuitter.setMnemonic(KeyEvent.VK_Q);
-        itemAjouterCarte.setMnemonic(KeyEvent.VK_F);
-        itemNouveauDeck.setMnemonic(KeyEvent.VK_D);
-        itemNouvellePartie.setMnemonic(KeyEvent.VK_P);
 
         //accelerateur
         itemQuitter.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, ActionEvent.CTRL_MASK));
@@ -122,19 +129,12 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         itemNouveauDeck.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, ActionEvent.CTRL_MASK));
         itemNouvellePartie.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.CTRL_MASK));
 
-        //listerner menu 
-        itemQuitter.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                quitter();
-            }
-        });
-
         addWindowListener((WindowListener) this);
         return menuBar;
     }
-
-    private void quitter() {
+    
+    @Override
+    public void quitter() {
         int option = JOptionPane.showConfirmDialog(this,
                 "Voulez-vous réellement quitter l'application",
                 "Demande de confirmation",
@@ -208,10 +208,6 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
     public void searchCarte(SearchCarteEvent event) {
         pageCarte.search(event.getSearch());
     }
-    
-    
-    
-    
 
     @Override
     public void windowClosing(WindowEvent e) {
@@ -260,10 +256,34 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
             contentPane.add(pageDeck, BorderLayout.CENTER);
         } else if (page == "pagePartie") {
             contentPane.add(pagePartie, BorderLayout.CENTER);
+        }else if (page == "pageAjoutPartie"){
+            contentPane.add(pageAjoutPartie,BorderLayout.CENTER);
+        }else if (page == "pageAjoutCarte"){
+            contentPane.add(pageAjoutCarte,BorderLayout.CENTER);
         }
 
         contentPane.revalidate();
         contentPane.repaint();
+    }
+
+    @Override
+    public void importer() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void pageAjoutCarte() {
+        changePage("pageAjoutCarte");
+    }
+
+    @Override
+    public void pageAjoutDeck() {
+        changePage("pageAjoutDeck");
+    }
+
+    @Override
+    public void pageAjoutPartie() {
+        changePage("pageAjoutPartie");
     }
 
     
