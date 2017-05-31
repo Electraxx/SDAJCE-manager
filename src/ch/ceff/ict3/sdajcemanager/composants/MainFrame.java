@@ -8,7 +8,6 @@ package ch.ceff.ict3.sdajcemanager.composants;
 import ch.ceff.ict3.sdajcemanager.controleurs.Controleur;
 import ch.ceff.ict3.sdajcemanager.event.*;
 import ch.ceff.ict3.sdajcemanager.listeners.AppListener;
-import ch.ceff.ict3.sdajcemanager.modele.Carte;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -58,14 +57,13 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         pageAjoutPartie = new PageAjoutPartie();
         pageAjoutCarte = new PageAjoutCarte();
         toolBar = new ToolBar();
-        
-        
+
         pageDeck.setListener(this);
         pageCarte.setListener(this);
         pagePartie.setListener(this);
         pageAjoutPartie.setListener(this);
         pageAjoutCarte.setListener(this);
-        
+
         toolBar.setListener(this);
         //tablePanel.setCarteTableListener(this);
 
@@ -75,11 +73,11 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         setJMenuBar(createJMenuBar());
         setMinimumSize(new Dimension(700, 450));
         setLocationRelativeTo(null);
-        
+
         controler = new Controleur();
-        
+
         addWindowListener(this);
-        
+
     }
 
     private JMenuBar createJMenuBar() {
@@ -112,19 +110,37 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         JMenuItem itemNouvellePartie = new JMenuItem("nouvelle partie");
         menuPartie.add(itemNouvellePartie);
 
+        //menu Aide
+        JMenu menuAide = new JMenu("Aide");
+        menuBar.add(menuAide);
+        //sous-menu de l'aide
+        JMenuItem itemAide = new JMenuItem("Sommaire de l'aide");
+        menuAide.add(itemAide);
         //Mnémonique
         itemQuitter.setMnemonic(KeyEvent.VK_Q);
         itemAjouterCarte.setMnemonic(KeyEvent.VK_F);
         itemNouveauDeck.setMnemonic(KeyEvent.VK_D);
         itemNouvellePartie.setMnemonic(KeyEvent.VK_P);
+        itemAide.setMnemonic(KeyEvent.VK_F1);
 
         //accelerateur
         itemQuitter.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, ActionEvent.CTRL_MASK));
         itemAjouterCarte.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, ActionEvent.CTRL_MASK));
         itemNouveauDeck.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, ActionEvent.CTRL_MASK));
         itemNouvellePartie.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.CTRL_MASK));
-
+        itemAide.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1,0));
         //listerner menu 
+        
+        //clique sur le menu aide
+        itemAide.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new AideDialog(MainFrame.this, false).setVisible(true); 
+                
+            }
+        });
+        
+        //clique sur le bouton quitter du menu fichier
         itemQuitter.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -145,7 +161,7 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
                 changePage("pageNewDeck");
             }
         });
-        
+
         //clique sur le sous-menu parti -> nouvelle partie
         itemNouvellePartie.addActionListener(new ActionListener() {
             @Override
@@ -168,7 +184,6 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
             System.exit(0);
         }
     }
-
 
     public void setListener(AppListener listener) {
         this.listener = listener;
@@ -275,15 +290,14 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
             contentPane.add(pageDeck, BorderLayout.CENTER);
         } else if (page == "pagePartie") {
             contentPane.add(pagePartie, BorderLayout.CENTER);
-        }else if (page == "pageAjoutPartie"){
-            contentPane.add(pageAjoutPartie,BorderLayout.CENTER);
-        }else if (page == "pageAjoutCarte"){
-            contentPane.add(pageAjoutCarte,BorderLayout.CENTER);
+        } else if (page == "pageAjoutPartie") {
+            contentPane.add(pageAjoutPartie, BorderLayout.CENTER);
+        } else if (page == "pageAjoutCarte") {
+            contentPane.add(pageAjoutCarte, BorderLayout.CENTER);
         }
 
         contentPane.revalidate();
         contentPane.repaint();
     }
 
-    
 }
