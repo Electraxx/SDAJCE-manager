@@ -128,6 +128,28 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
                 quitter();
             }
         });
+        //clique sur le sous-menu carte -> ajout carte
+        itemAjouterCarte.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                changePage("pageAjoutCarte");
+            }
+        });
+        //clique sur le sous-menu deck -> nouveau deck
+        itemNouveauDeck.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                changePage("pageNewDeck");
+            }
+        });
+        
+        //clique sur le sous-menu parti -> nouvelle partie
+        itemNouvellePartie.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                changePage("pageAjoutPartie");
+            }
+        });
 
         addWindowListener((WindowListener) this);
         return menuBar;
