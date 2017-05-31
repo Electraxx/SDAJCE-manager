@@ -130,6 +130,14 @@ public class FormPanelAjoutCarte extends JPanel {
         gc.anchor = GridBagConstraints.LINE_END;
          gc.insets = new Insets(0, 5, 5, 5);
         add(fieldName, gc);
+        
+         gc.gridx = 0;
+        gc.gridy = 2;
+
+        gc.fill = GridBagConstraints.HORIZONTAL;
+        gc.anchor = GridBagConstraints.LINE_START;
+        
+        add(new JLabel("Type de carte"), gc);
 
         //ligne 3
         gc.gridx = 1;
@@ -139,6 +147,14 @@ public class FormPanelAjoutCarte extends JPanel {
         gc.anchor = GridBagConstraints.FIRST_LINE_END;
         gc.insets = new Insets(0, 5, 5, 5);
         add(comboType, gc);
+        
+         gc.gridx = 0;
+        gc.gridy = 3;
+
+        gc.fill = GridBagConstraints.HORIZONTAL;
+        gc.anchor = GridBagConstraints.LINE_START;
+        
+        add(new JLabel("Sphere de la carte"), gc);
 
         //ligne 4
         gc.gridx = 1;
@@ -148,6 +164,14 @@ public class FormPanelAjoutCarte extends JPanel {
         gc.anchor = GridBagConstraints.FIRST_LINE_END;
         gc.insets = new Insets(0, 5, 5, 5);
         add(comboSphere, gc);
+        
+         gc.gridx = 0;
+        gc.gridy = 4;
+
+        gc.fill = GridBagConstraints.HORIZONTAL;
+        gc.anchor = GridBagConstraints.LINE_START;
+        
+        add(new JLabel("Conteneur de la carte"), gc);
 
         //ligne 5
         gc.gridx = 1;

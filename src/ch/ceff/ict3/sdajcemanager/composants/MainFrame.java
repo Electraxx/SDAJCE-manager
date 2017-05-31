@@ -69,7 +69,7 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         toolBar.setListener(this);
         //tablePanel.setCarteTableListener(this);
 
-        contentPane.add(pageDeck, BorderLayout.CENTER);
+        contentPane.add(pageCarte, BorderLayout.CENTER);
         contentPane.add(toolBar, BorderLayout.PAGE_START);
 
         setJMenuBar(createJMenuBar());
