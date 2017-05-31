@@ -10,13 +10,14 @@ import ch.ceff.ict3.sdajcemanager.modele.Carte;
 import ch.ceff.ict3.sdajcemanager.modele.CarteTableModele;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -30,6 +31,7 @@ public class TablePanelCarte extends JPanel {
     private CarteTableModele carteModel;
     private AppListener appListener;
     private TableRowSorter<TableModel> rowSorter;
+    List<RowFilter<Object, Object>> filters = new ArrayList<RowFilter<Object, Object>>(3);
 
     public TablePanelCarte() {
         initComponents();
@@ -57,17 +59,42 @@ public class TablePanelCarte extends JPanel {
         carteModel.fireTableDataChanged();
     }
 
-    public void search(String text) {
-        if (text.trim().length() == 0) {
-            rowSorter.setRowFilter(null);
-        } else {
-            rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text, 1));
-        }
+    public void searchByText(String text) {
+        filters.add(RowFilter.regexFilter("(?i)" + text, 1));
+    }
+
+    public void search() {
+        
+        RowFilter<Object, Object> rf = RowFilter.andFilter(filters);
+        rowSorter.setRowFilter(rf);
+    }
+
+    public void searchByType(String text) {
+        filters.add(RowFilter.regexFilter("(?i)" + text, 2));
+        search();
+    }
+
+    public void searchBySphere(String text) {
+        filters.add(RowFilter.regexFilter("(?i)" + text, 3));
+        search();
+    }
+
+    public void searchByConteneur(String text) {
+        filters.add(RowFilter.regexFilter("(?i)" + text, 4));
+        search();
+    }
+    
+    public void delFilters(){
+        filters.clear();
     }
 
     public void setSorter() {
         rowSorter = new TableRowSorter<>(table.getModel());
         table.setRowSorter(rowSorter);
+        List<RowSorter.SortKey> sortKeys = new ArrayList<>(25);
+        sortKeys.add(new RowSorter.SortKey(4, SortOrder.ASCENDING));
+        sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
+        rowSorter.setSortKeys(sortKeys);
     }
 
 }

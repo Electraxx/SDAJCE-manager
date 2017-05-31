@@ -39,6 +39,10 @@ public interface AppListener extends EventListener{
     
     public void searchDeck(SearchDeckEvent event);
     public void searchCarte(SearchCarteEvent event);
+    public void searchCarteByType(SearchCarteByTypeEvent event);
+    public void searchCarteBySphere(SearchCarteBySphereEvent event);
+    public void searchCarteByConteneur(SearchCarteByConteneurEvent event);
+    public void delFilters();
     
     
     
