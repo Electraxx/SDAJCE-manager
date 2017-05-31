@@ -43,6 +43,7 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
     private JSplitPane splitPane;
     private AppListener listener;
     private Controleur controler;
+    private PageAjoutDeck pageAjoutDeck;
 
     public MainFrame(String titre) {
         initComponents(titre);
@@ -54,9 +55,11 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         pageDeck = new PageDeck();
         pagePartie = new PagePartie();
         toolBar = new ToolBar();
+        pageAjoutDeck = new PageAjoutDeck();
         pageDeck.setListener(this);
         pageCarte.setListener(this);
         toolBar.setListener(this);
+        
         //tablePanel.setCarteTableListener(this);
 
         contentPane.add(pageDeck, BorderLayout.CENTER);
@@ -262,7 +265,10 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         } else if (page == "pageDeck") {
             contentPane.add(pageDeck, BorderLayout.CENTER);
         } else if (page == "pagePartie") {
-            contentPane.add(pagePartie, BorderLayout.CENTER);
+            
+        }else if( page == "ajoutDeck"){
+            System.out.println("ohhkhjkhjkjkhkkjkj");
+            contentPane.add(pageAjoutDeck, BorderLayout.CENTER);
         }
 
         contentPane.revalidate();
