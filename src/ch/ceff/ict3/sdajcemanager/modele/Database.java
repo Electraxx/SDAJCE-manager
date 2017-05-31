@@ -45,10 +45,10 @@ public class Database {
                 + "sphere_carte,"
                 + "nombre_carte,"
                 + "id_conteneur_carte"
-                + ") VALUES ("
-                + carte.getNom() + ","
-                + carte.getType() + ","
-                + carte.getSphere() + ","
+                + ") VALUES ('"
+                + carte.getNom() + "','"
+                + carte.getType() + "','"
+                + carte.getSphere() + "',"
                 + carte.getNombre() + ","
                 + carte.getConteneur().getId()
                 +");";

@@ -61,4 +61,8 @@ public class PageCarte extends JPanel {
         panelCarte.setSearchCarteListener(appListener);
         this.listener = appListener;
     }
+    
+    public void refresh(){
+        tablePanel.refresh();
+    }
 }
