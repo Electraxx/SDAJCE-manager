@@ -54,10 +54,10 @@ public class TablePanelDeck extends JPanel {
             @Override
             public void mousePressed(MouseEvent event) {
                 if (event.getButton() == MouseEvent.BUTTON1) {
-                    // System.out.println(table.getSelectedRow());
-                    //System.out.println(table.getModel().getSelectedRowCount());
-                    System.out.println(table.getModel().getValueAt(table.getSelectedRow(), 1).toString());
-                    int id = deckModel.getDecks(table.getSelectedRow()).getId();
+
+                    int id = Integer.parseInt(table.getModel().getValueAt(table.
+                            convertRowIndexToModel(table.getSelectedRow()), 1).toString());
+                    System.out.println(id);
                     if (appListener != null) {
                         appListener.changeDeckCarte(id);
                     }
