@@ -7,7 +7,8 @@ package ch.ceff.ict3.sdajcemanager.composants;
 
 import ch.ceff.ict3.sdajcemanager.listeners.AppListener;
 import ch.ceff.ict3.sdajcemanager.modele.Carte;
-import ch.ceff.ict3.sdajcemanager.modele.CarteTableModele;
+import ch.ceff.ict3.sdajcemanager.modele.CarteTableModeleAjout;
+import ch.ceff.ict3.sdajcemanager.modele.SpinnerEditor;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -25,32 +27,40 @@ import javax.swing.table.TableRowSorter;
  *
  * @author cp-13jru
  */
-public class TablePanelCarte extends JPanel {
+public class TablePanelAjoutCarte extends JPanel {
 
     private JTable table;
-    private CarteTableModele carteModel;
+    private CarteTableModeleAjout carteModel;
     private AppListener appListener;
     private TableRowSorter<TableModel> rowSorter;
     List<RowFilter<Object, Object>> filters = new ArrayList<RowFilter<Object, Object>>(3);
 
-    public TablePanelCarte() {
+    public TablePanelAjoutCarte() {
         initComponents();
     }
 
     private void initComponents() {
         setLayout(new BorderLayout());
+
         table = new JTable();
-        carteModel = new CarteTableModele();
+        carteModel = new CarteTableModeleAjout();
         table = new JTable(carteModel);
+        
+        
+        TableColumn nombreColumn = table.getColumn("Nombre");
+        nombreColumn.setCellEditor(new SpinnerEditor());
+        
         setPreferredSize(new Dimension(685, 200));
         add(new JScrollPane(table), BorderLayout.CENTER);
+        
     }
-    
     
 
     public void setData(List<Carte> data) {
-        
         carteModel.setData(data);
+        TableColumn nombreColumn = table.getColumn("Nombre");
+        nombreColumn.setCellEditor(new SpinnerEditor(data.size()));
+        
     }
 
     public void setAutoCreateRowSorter() {
@@ -59,6 +69,7 @@ public class TablePanelCarte extends JPanel {
 
     public void refresh() {
         carteModel.fireTableDataChanged();
+        
     }
 
     public void searchByText(String text) {
@@ -66,7 +77,7 @@ public class TablePanelCarte extends JPanel {
     }
 
     public void search() {
-        
+
         RowFilter<Object, Object> rf = RowFilter.andFilter(filters);
         rowSorter.setRowFilter(rf);
     }
@@ -85,8 +96,8 @@ public class TablePanelCarte extends JPanel {
         filters.add(RowFilter.regexFilter("(?i)" + text, 4));
         search();
     }
-    
-    public void delFilters(){
+
+    public void delFilters() {
         filters.clear();
     }
 

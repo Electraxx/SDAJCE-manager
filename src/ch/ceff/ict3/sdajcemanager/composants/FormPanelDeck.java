@@ -87,7 +87,7 @@ public class FormPanelDeck extends JPanel {
         buttonAddCart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                appListener.changePage("ajoutDeck");
             }
         });
 
