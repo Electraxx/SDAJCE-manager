@@ -6,6 +6,7 @@
 package ch.ceff.ict3.sdajcemanager.composants;
 
 import ch.ceff.ict3.sdajcemanager.actions.ImporterAction;
+import ch.ceff.ict3.sdajcemanager.actions.OuvrirAideAction;
 import ch.ceff.ict3.sdajcemanager.actions.PageAjoutCarteAction;
 import ch.ceff.ict3.sdajcemanager.actions.PageAjoutDeckAction;
 import ch.ceff.ict3.sdajcemanager.actions.PageAjoutPartieAction;
@@ -142,14 +143,8 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         JMenu menuAide = new JMenu("Aide");
         menuBar.add(menuAide);
         //sous-menu de l'aide
-        JMenuItem itemAide = new JMenuItem("Sommaire de l'aide");
+        JMenuItem itemAide = new JMenuItem(new OuvrirAideAction("Aide", null, "Ouvre une page d'aide", KeyEvent.VK_F1, MainFrame.this));
         menuAide.add(itemAide);
-        //Mnémonique
-        itemQuitter.setMnemonic(KeyEvent.VK_Q);
-        itemAjouterCarte.setMnemonic(KeyEvent.VK_F);
-        itemNouveauDeck.setMnemonic(KeyEvent.VK_D);
-        itemNouvellePartie.setMnemonic(KeyEvent.VK_P);
-        itemAide.setMnemonic(KeyEvent.VK_F1);
 
         //accelerateur
         itemQuitter.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, ActionEvent.CTRL_MASK));
@@ -159,44 +154,6 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         itemAide.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
         //listerner menu 
 
-        //clique sur le menu aide
-        itemAide.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new AideDialog(MainFrame.this, false).setVisible(true);
-
-            }
-        });
-
-        //clique sur le bouton quitter du menu fichier
-        itemQuitter.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                quitter();
-            }
-        });
-        //clique sur le sous-menu carte -> ajout carte
-        itemAjouterCarte.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                changePage("pageAjoutCarte");
-            }
-        });
-        //clique sur le sous-menu deck -> nouveau deck
-        itemNouveauDeck.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                changePage("pageNewDeck");
-            }
-        });
-
-        //clique sur le sous-menu parti -> nouvelle partie
-        itemNouvellePartie.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                changePage("pageAjoutPartie");
-            }
-        });
 
         addWindowListener((WindowListener) this);
         return menuBar;
@@ -427,6 +384,11 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
     @Override
     public void pageAjoutPartie() {
         changePage("pageAjoutPartie");
+    }
+
+    @Override
+    public void ouvrirAide() {
+        new AideDialog(MainFrame.this, false).setVisible(true);
     }
 
     

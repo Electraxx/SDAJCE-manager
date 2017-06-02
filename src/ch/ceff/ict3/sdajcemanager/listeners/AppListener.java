@@ -21,6 +21,8 @@ public interface AppListener extends EventListener{
     public void pageAjoutDeck();
     public void pageAjoutPartie();
     
+    public void ouvrirAide();
+    
     public void changePage(String page);
     
     public void addCarte(AddCarteEvent event);
