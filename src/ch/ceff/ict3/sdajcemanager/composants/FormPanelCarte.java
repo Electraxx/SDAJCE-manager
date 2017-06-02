@@ -44,8 +44,8 @@ public class FormPanelCarte extends JPanel {
     }
 
     private void initComponents() {
+        
         //liste des types
-
         comboType = new JComboBox();
         DefaultComboBoxModel modelType = new DefaultComboBoxModel();
         modelType.addElement("Type");
@@ -56,8 +56,8 @@ public class FormPanelCarte extends JPanel {
         comboType.setModel(modelType);
         comboType.setSelectedIndex(0);
         comboType.setEditable(true);
+        
         //liste des sphère
-
         comboAttribut = new JComboBox();
         DefaultComboBoxModel modelSphere = new DefaultComboBoxModel();
         modelSphere.addElement("Sphere");
@@ -122,9 +122,9 @@ public class FormPanelCarte extends JPanel {
                 String sphere = (String) comboAttribut.getSelectedItem();
                 String conteneur = (String) comboProperty.getSelectedItem();
 
-                //  SearchCarteEvent carteEvent = new SearchCarteEvent(this,nom,type,sphere,conteneur);
+               
                 if (listener != null) {
-                    //   listener.searchCarte(carteEvent);
+               
                 }
 
             }

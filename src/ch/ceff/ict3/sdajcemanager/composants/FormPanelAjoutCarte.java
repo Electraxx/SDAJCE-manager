@@ -44,7 +44,6 @@ public class FormPanelAjoutCarte extends JPanel {
         //liste déroulante pour les type de carte
         comboType = new JComboBox();
         DefaultComboBoxModel modelType = new DefaultComboBoxModel();
-        modelType.addElement("Type");
         modelType.addElement("Héros");
         modelType.addElement("Evénement");
         modelType.addElement("Attachement");
@@ -56,7 +55,6 @@ public class FormPanelAjoutCarte extends JPanel {
         //liste déroulante pour les sphère des cartes
         comboSphere = new JComboBox();
         DefaultComboBoxModel modelSphere = new DefaultComboBoxModel();
-        modelSphere.addElement("Sphere");
         modelSphere.addElement("Tactique");
         modelSphere.addElement("Connaissance");
         modelSphere.addElement("Energie");
@@ -69,7 +67,6 @@ public class FormPanelAjoutCarte extends JPanel {
         //liste déroulante pour le conteneur de la carte
         comboConteneur = new JComboBox();
         DefaultComboBoxModel modelContenur = new DefaultComboBoxModel();
-        modelContenur.addElement("Conteneur");
         modelContenur.addElement("BB");
         modelContenur.addElement("C1");
         comboConteneur.setModel(modelContenur);

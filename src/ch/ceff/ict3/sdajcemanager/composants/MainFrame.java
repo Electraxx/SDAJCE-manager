@@ -128,18 +128,18 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         itemAjouterCarte.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, ActionEvent.CTRL_MASK));
         itemNouveauDeck.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, ActionEvent.CTRL_MASK));
         itemNouvellePartie.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.CTRL_MASK));
-        itemAide.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1,0));
+        itemAide.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
         //listerner menu 
-        
+
         //clique sur le menu aide
         itemAide.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new AideDialog(MainFrame.this, false).setVisible(true); 
-                
+                new AideDialog(MainFrame.this, false).setVisible(true);
+
             }
         });
-        
+
         //clique sur le bouton quitter du menu fichier
         itemQuitter.addActionListener(new ActionListener() {
             @Override
@@ -174,6 +174,7 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         return menuBar;
     }
 
+    //méthode permettant avant la fermeture de l'application, d'afficher une demande si la personne veut quitter le programme
     private void quitter() {
         int option = JOptionPane.showConfirmDialog(this,
                 "Voulez-vous réellement quitter l'application",
@@ -255,7 +256,7 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
 
     @Override
     public void windowClosed(WindowEvent e) {
-
+     
     }
 
     @Override
@@ -278,6 +279,7 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
 
     }
 
+    //méthode permettant de modifier le contenu du mainFrame lors d'un clique sur un bouton de page
     @Override
     public void changePage(String page) {
         Container contentPane = getContentPane();
