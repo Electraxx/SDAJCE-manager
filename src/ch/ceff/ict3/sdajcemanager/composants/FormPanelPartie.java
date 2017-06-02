@@ -38,7 +38,7 @@ public class FormPanelPartie extends JPanel{
         Border marge = BorderFactory.createEmptyBorder(5, 5, 5, 5);
         setBorder(BorderFactory.createCompoundBorder(marge, bordure));
 
-        buttonAdd = new JButton("Ajouter");
+        buttonAdd = new JButton("Ajouter une nouvelle partie");
 
         //placement des composants
         layoutComponents();

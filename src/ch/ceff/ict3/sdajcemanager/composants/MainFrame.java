@@ -90,7 +90,7 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         pagePartie.setListener(this);
         pageAjoutPartie.setListener(this);
         pageAjoutCarte.setListener(this);
-        
+
         toolBar.setListener(this);
         fileChooser = new JFileChooser();
         fileChooser.setFileFilter(new CsvFileFilter());
@@ -102,7 +102,7 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         changePage("pageCarte");
         
         addWindowListener(this);
-        
+
     }
 
     private JMenuBar createJMenuBar() {
@@ -138,11 +138,65 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         JMenuItem itemNouvellePartie = new JMenuItem(new PageAjoutPartieAction("Nouvelle Partie...", null, "Ajoute une partie dans la base de données", KeyEvent.VK_P, MainFrame.this));
         menuPartie.add(itemNouvellePartie);
 
+        //menu Aide
+        JMenu menuAide = new JMenu("Aide");
+        menuBar.add(menuAide);
+        //sous-menu de l'aide
+        JMenuItem itemAide = new JMenuItem("Sommaire de l'aide");
+        menuAide.add(itemAide);
+        //Mnémonique
+        itemQuitter.setMnemonic(KeyEvent.VK_Q);
+        itemAjouterCarte.setMnemonic(KeyEvent.VK_F);
+        itemNouveauDeck.setMnemonic(KeyEvent.VK_D);
+        itemNouvellePartie.setMnemonic(KeyEvent.VK_P);
+        itemAide.setMnemonic(KeyEvent.VK_F1);
+
         //accelerateur
         itemQuitter.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, ActionEvent.CTRL_MASK));
         itemAjouterCarte.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, ActionEvent.CTRL_MASK));
         itemNouveauDeck.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, ActionEvent.CTRL_MASK));
         itemNouvellePartie.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.CTRL_MASK));
+        itemAide.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
+        //listerner menu 
+
+        //clique sur le menu aide
+        itemAide.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new AideDialog(MainFrame.this, false).setVisible(true);
+
+            }
+        });
+
+        //clique sur le bouton quitter du menu fichier
+        itemQuitter.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                quitter();
+            }
+        });
+        //clique sur le sous-menu carte -> ajout carte
+        itemAjouterCarte.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                changePage("pageAjoutCarte");
+            }
+        });
+        //clique sur le sous-menu deck -> nouveau deck
+        itemNouveauDeck.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                changePage("pageNewDeck");
+            }
+        });
+
+        //clique sur le sous-menu parti -> nouvelle partie
+        itemNouvellePartie.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                changePage("pageAjoutPartie");
+            }
+        });
 
         addWindowListener((WindowListener) this);
         return menuBar;
@@ -297,7 +351,7 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
 
     @Override
     public void windowClosed(WindowEvent e) {
-
+     
     }
 
     @Override
@@ -320,6 +374,7 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
 
     }
 
+    //méthode permettant de modifier le contenu du mainFrame lors d'un clique sur un bouton de page
     @Override
     public void changePage(String page) {
         Container contentPane = getContentPane();

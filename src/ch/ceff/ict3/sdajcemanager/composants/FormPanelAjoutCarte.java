@@ -49,7 +49,6 @@ public class FormPanelAjoutCarte extends JPanel {
         //liste déroulante pour les type de carte
         comboType = new JComboBox();
         DefaultComboBoxModel modelType = new DefaultComboBoxModel();
-        modelType.addElement("Type");
         modelType.addElement("Héros");
         modelType.addElement("Evénement");
         modelType.addElement("Attachement");
@@ -61,7 +60,6 @@ public class FormPanelAjoutCarte extends JPanel {
         //liste déroulante pour les sphère des cartes
         comboSphere = new JComboBox();
         DefaultComboBoxModel modelSphere = new DefaultComboBoxModel();
-        modelSphere.addElement("Sphere");
         modelSphere.addElement("Tactique");
         modelSphere.addElement("Connaissance");
         modelSphere.addElement("Energie");
@@ -144,6 +142,14 @@ public class FormPanelAjoutCarte extends JPanel {
         gc.anchor = GridBagConstraints.LINE_END;
          gc.insets = new Insets(0, 5, 5, 5);
         add(fieldName, gc);
+        
+         gc.gridx = 0;
+        gc.gridy = 2;
+
+        gc.fill = GridBagConstraints.HORIZONTAL;
+        gc.anchor = GridBagConstraints.LINE_START;
+        
+        add(new JLabel("Type de carte"), gc);
 
         //ligne 3
         gc.gridx = 1;
@@ -153,6 +159,14 @@ public class FormPanelAjoutCarte extends JPanel {
         gc.anchor = GridBagConstraints.FIRST_LINE_END;
         gc.insets = new Insets(0, 5, 5, 5);
         add(comboType, gc);
+        
+         gc.gridx = 0;
+        gc.gridy = 3;
+
+        gc.fill = GridBagConstraints.HORIZONTAL;
+        gc.anchor = GridBagConstraints.LINE_START;
+        
+        add(new JLabel("Sphere de la carte"), gc);
 
         //ligne 4
         gc.gridx = 1;
@@ -162,6 +176,14 @@ public class FormPanelAjoutCarte extends JPanel {
         gc.anchor = GridBagConstraints.FIRST_LINE_END;
         gc.insets = new Insets(0, 5, 5, 5);
         add(comboSphere, gc);
+        
+         gc.gridx = 0;
+        gc.gridy = 4;
+
+        gc.fill = GridBagConstraints.HORIZONTAL;
+        gc.anchor = GridBagConstraints.LINE_START;
+        
+        add(new JLabel("Conteneur de la carte"), gc);
 
         //ligne 5
         gc.gridx = 1;

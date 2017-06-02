@@ -47,8 +47,8 @@ public class FormPanelCarte extends JPanel {
     }
 
     private void initComponents() {
+        
         //liste des types
-
         comboType = new JComboBox();
         DefaultComboBoxModel modelType = new DefaultComboBoxModel();
         modelType.addElement("Type");
@@ -59,6 +59,7 @@ public class FormPanelCarte extends JPanel {
         comboType.setModel(modelType);
         comboType.setSelectedIndex(0);
         comboType.setEditable(true);
+        
         //liste des sphère
 
         comboSphere = new JComboBox();
