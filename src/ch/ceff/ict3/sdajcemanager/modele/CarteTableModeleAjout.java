@@ -5,8 +5,8 @@
  */
 package ch.ceff.ict3.sdajcemanager.modele;
 
-import java.util.ArrayList;
 import java.util.List;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -19,8 +19,8 @@ public class CarteTableModeleAjout extends AbstractTableModel {
 
     private List<Carte> cartes;
     private int[] nbr;
-
-
+    
+    
     @Override
     public int getRowCount() {
         return cartes.size();
@@ -82,13 +82,20 @@ public class CarteTableModeleAjout extends AbstractTableModel {
     public void setValueAt(Object value, int row, int col) {
 //        Carte carte = cartes.get(row);
 //        carte = value;
+        System.out.println((int)value);
         this.nbr[row] = (int)value;
+        
         fireTableCellUpdated(row, col);
     }
 
     public void setData(List<Carte> cartes) {
         this.cartes = cartes;
         this.nbr = new int[cartes.size()];
+        
+        for(int i = 0; i < cartes.size(); i++) {
+            this.nbr[i] = cartes.get(i).getNombre();
+        }
+        
     }
     
     

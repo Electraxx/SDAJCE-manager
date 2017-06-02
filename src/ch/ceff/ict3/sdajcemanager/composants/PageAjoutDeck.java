@@ -10,7 +10,6 @@ import ch.ceff.ict3.sdajcemanager.modele.Conteneur;
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
 /**

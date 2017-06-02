@@ -15,13 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
-import javax.swing.SpinnerListModel;
-import javax.swing.SpinnerNumberModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -49,6 +46,7 @@ public class TablePanelAjoutCarte extends JPanel {
         carteModel = new CarteTableModeleAjout();
         table = new JTable(carteModel);
         
+        
         TableColumn nombreColumn = table.getColumn("Nombre");
         nombreColumn.setCellEditor(new SpinnerEditor());
         
@@ -60,6 +58,8 @@ public class TablePanelAjoutCarte extends JPanel {
 
     public void setData(List<Carte> data) {
         carteModel.setData(data);
+        TableColumn nombreColumn = table.getColumn("Nombre");
+        nombreColumn.setCellEditor(new SpinnerEditor(data.size()));
         
     }
 
