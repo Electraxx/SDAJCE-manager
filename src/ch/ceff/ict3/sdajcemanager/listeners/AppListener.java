@@ -33,7 +33,7 @@ public interface AppListener extends EventListener{
     public void addConteneur(AddConteneurEvent event);
     public void editConteneur(DelConteneurEvent event);
     
-    public void addDeck(AddDeckEvent event);
+    public void addDeck();
     public void delDeck(DelDeckEvent event);
     
     public void addPartie(AddPartieEvent event);

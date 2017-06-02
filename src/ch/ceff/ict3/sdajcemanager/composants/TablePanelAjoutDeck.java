@@ -62,12 +62,11 @@ public class TablePanelAjoutDeck extends JPanel {
         carteModel.setData(data);
         TableColumn nombreColumn = table.getColumn("Nombre");
         nombreColumn.setCellEditor(new SpinnerEditor(data.size()));
-        getDecks();
         
     }
     
-    public List<Deck> getDecks() {
-        List<Deck> decks = new ArrayList<>();
+    public List<Carte> getCartes() {
+        List<Carte> cartes = new ArrayList<>();
         
         for(int i = 0; i < table.getRowCount(); i++) {
             
@@ -80,11 +79,11 @@ public class TablePanelAjoutDeck extends JPanel {
                         (int)table.getValueAt(i, 0),
                         (Conteneur)((CarteTableModeleAjout)table.getModel()).getCartes().get(i).getConteneur()
                 );
+                cartes.add(carte);
             }
             
         }
-        
-        return decks;
+        return cartes;
     }
 
     public void setAutoCreateRowSorter() {

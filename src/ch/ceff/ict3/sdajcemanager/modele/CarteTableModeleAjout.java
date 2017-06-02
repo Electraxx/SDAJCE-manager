@@ -86,7 +86,6 @@ public class CarteTableModeleAjout extends AbstractTableModel {
     public void setValueAt(Object value, int row, int col) {
 //        Carte carte = cartes.get(row);
 //        carte = value;
-        System.out.println((int)value);
         this.nbr[row] = (int)value;
         
         fireTableCellUpdated(row, col);

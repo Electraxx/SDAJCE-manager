@@ -240,9 +240,9 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
     }
 
     @Override
-    public void addDeck(AddDeckEvent event) {
-        Deck deck = new Deck(-1, event.getNom(), event.getCartes());
-        this.controler.addDeck(deck);
+    public void addDeck() {
+        Deck deck = pageAjoutDeck.getDeck();
+        controler.addDeck(deck);
     }
 
     @Override

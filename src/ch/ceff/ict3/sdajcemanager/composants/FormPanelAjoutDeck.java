@@ -40,6 +40,7 @@ public class FormPanelAjoutDeck extends JPanel {
         addDeckButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                listener.addDeck();
                 listener.changePage("pageDeck");
             }
         });
@@ -59,6 +60,10 @@ public class FormPanelAjoutDeck extends JPanel {
             modelConteneur.addElement(c);
         }
         
+    }
+    
+    public String getNom() {
+        return fieldName.getText();
     }
 
     public void layoutComponents() {

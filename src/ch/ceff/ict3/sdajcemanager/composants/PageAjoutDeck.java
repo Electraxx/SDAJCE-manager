@@ -7,6 +7,7 @@ package ch.ceff.ict3.sdajcemanager.composants;
 
 import ch.ceff.ict3.sdajcemanager.listeners.AppListener;
 import ch.ceff.ict3.sdajcemanager.modele.Carte;
+import ch.ceff.ict3.sdajcemanager.modele.Deck;
 import java.awt.BorderLayout;
 import java.util.List;
 import javax.swing.JPanel;
@@ -31,6 +32,7 @@ public class PageAjoutDeck extends JPanel {
         //toolBar = new ToolBar();
         formPanel = new FormPanelAjoutDeck();
         tablePanel = new TablePanelAjoutDeck();
+        formPanel.setListener(listener);
 
         tablePanel.refresh();
         this.add(formPanel, BorderLayout.CENTER);
@@ -51,8 +53,12 @@ public class PageAjoutDeck extends JPanel {
     
     public void setListener(AppListener listener) {
         this.listener = listener;
+        formPanel.setListener(listener);
     }
     
-    
+    public Deck getDeck() {
+        Deck deck = new Deck(-1, formPanel.getNom(), tablePanel.getCartes());
+        return deck;
+    }
 
 }
