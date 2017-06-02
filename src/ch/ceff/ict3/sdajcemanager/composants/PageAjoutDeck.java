@@ -17,7 +17,8 @@ import javax.swing.JPanel;
  */
 public class PageAjoutDeck extends JPanel {
 
-    private TablePanelAjoutCarte tablePanel;
+    private TablePanelAjoutDeck tablePanel;
+    private FormPanelAjoutDeck formPanel;
     private List<Carte> cartes;
     private AppListener listener;
 
@@ -28,9 +29,11 @@ public class PageAjoutDeck extends JPanel {
     private void initComponents() {
 
         //toolBar = new ToolBar();
-        tablePanel = new TablePanelAjoutCarte();
+        formPanel = new FormPanelAjoutDeck();
+        tablePanel = new TablePanelAjoutDeck();
 
         tablePanel.refresh();
+        this.add(formPanel, BorderLayout.CENTER);
         this.add(tablePanel, BorderLayout.CENTER);
 
     }
@@ -49,5 +52,7 @@ public class PageAjoutDeck extends JPanel {
     public void setListener(AppListener listener) {
         this.listener = listener;
     }
+    
+    
 
 }

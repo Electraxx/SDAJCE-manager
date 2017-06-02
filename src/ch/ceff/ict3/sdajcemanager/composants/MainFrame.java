@@ -340,25 +340,33 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
 
         contentPane.removeAll();
         contentPane.add(toolBar, BorderLayout.PAGE_START);
-        if (page == "pageCarte") {
-            pageCarte.setData(controler.getAllCartes());
-            contentPane.add(pageCarte, BorderLayout.CENTER);
-        } else if (page == "pageDeck") {
-            pageDeck.setData(controler.getAllDecks());
-            contentPane.add(pageDeck, BorderLayout.CENTER);
-        } else if (page == "pagePartie") {
-            pagePartie.setData(controler.getAllParties());
-            contentPane.add(pagePartie, BorderLayout.CENTER);
-        }else if (page == "pageAjoutPartie"){
-            pageAjoutPartie.setData(controler.getAllDecks());
-            contentPane.add(pageAjoutPartie,BorderLayout.CENTER);
-        }else if (page == "pageAjoutCarte"){
-            pageAjoutCarte.setData(controler.getAllConteneur());
-            contentPane.add(pageAjoutCarte,BorderLayout.CENTER);
-            
-        }else if( page == "pageAjoutDeck"){
-            pageAjoutDeck.setData(controler.getAllCartes());
-            contentPane.add(pageAjoutDeck, BorderLayout.CENTER);
+        if (null != page) switch (page) {
+            case "pageCarte":
+                pageCarte.setData(controler.getAllCartes());
+                contentPane.add(pageCarte, BorderLayout.CENTER);
+                break;
+            case "pageDeck":
+                pageDeck.setData(controler.getAllDecks());
+                contentPane.add(pageDeck, BorderLayout.CENTER);
+                break;
+            case "pagePartie":
+                pagePartie.setData(controler.getAllParties());
+                contentPane.add(pagePartie, BorderLayout.CENTER);
+                break;
+            case "pageAjoutPartie":
+                pageAjoutPartie.setData(controler.getAllDecks());
+                contentPane.add(pageAjoutPartie,BorderLayout.CENTER);
+                break;
+            case "pageAjoutCarte":
+                pageAjoutCarte.setData(controler.getAllConteneur());
+                contentPane.add(pageAjoutCarte,BorderLayout.CENTER);
+                break;
+            case "pageAjoutDeck":
+                pageAjoutDeck.setData(controler.getAllCartes());
+                contentPane.add(pageAjoutDeck, BorderLayout.CENTER);
+                break;
+            default:
+                break;
         }
 
         contentPane.revalidate();

@@ -15,7 +15,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class CarteTableModeleAjout extends AbstractTableModel {
 
-    private final String[] COLNAMES = {"Nombre", "Disponnible", "Nom", "Type", "Sphère", "Conteneur"};
+    private final String[] COLNAMES = {"Nombre", "Disponnible", "ID", "Nom", "Type", "Sphère", "Conteneur"};
 
     private List<Carte> cartes;
     private int[] nbr;
@@ -28,7 +28,7 @@ public class CarteTableModeleAjout extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 6;
+        return 7;
     }
 
     @Override
@@ -42,12 +42,14 @@ public class CarteTableModeleAjout extends AbstractTableModel {
             case 1:
                 return carte.getNombre();
             case 2:
-                return carte.getNom();
+                return carte.getId();
             case 3:
-                return carte.getType();
+                return carte.getNom();
             case 4:
-                return carte.getSphere();
+                return carte.getType();
             case 5:
+                return carte.getSphere();
+            case 6:
                 return carte.getConteneur().getNom();
         }
         return null;
@@ -59,14 +61,16 @@ public class CarteTableModeleAjout extends AbstractTableModel {
             case 0:
                 return Integer.class;
             case 1:
-                return String.class;
+                return Integer.class;
             case 2:
-                return String.class;
+                return Integer.class;
             case 3:
                 return String.class;
             case 4:
                 return String.class;
             case 5:
+                return String.class;
+            case 6:
                 return String.class;
             default:
                 return String.class;
@@ -98,7 +102,9 @@ public class CarteTableModeleAjout extends AbstractTableModel {
         
     }
     
-    
+    public List<Carte> getCartes() {
+        return this.cartes;
+    }
 
     @Override
     public String getColumnName(int column) {

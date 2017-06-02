@@ -8,6 +8,8 @@ package ch.ceff.ict3.sdajcemanager.composants;
 import ch.ceff.ict3.sdajcemanager.listeners.AppListener;
 import ch.ceff.ict3.sdajcemanager.modele.Carte;
 import ch.ceff.ict3.sdajcemanager.modele.CarteTableModeleAjout;
+import ch.ceff.ict3.sdajcemanager.modele.Conteneur;
+import ch.ceff.ict3.sdajcemanager.modele.Deck;
 import ch.ceff.ict3.sdajcemanager.modele.SpinnerEditor;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -27,7 +29,7 @@ import javax.swing.table.TableRowSorter;
  *
  * @author cp-13jru
  */
-public class TablePanelAjoutCarte extends JPanel {
+public class TablePanelAjoutDeck extends JPanel {
 
     private JTable table;
     private CarteTableModeleAjout carteModel;
@@ -35,7 +37,7 @@ public class TablePanelAjoutCarte extends JPanel {
     private TableRowSorter<TableModel> rowSorter;
     List<RowFilter<Object, Object>> filters = new ArrayList<RowFilter<Object, Object>>(3);
 
-    public TablePanelAjoutCarte() {
+    public TablePanelAjoutDeck() {
         initComponents();
     }
 
@@ -60,7 +62,29 @@ public class TablePanelAjoutCarte extends JPanel {
         carteModel.setData(data);
         TableColumn nombreColumn = table.getColumn("Nombre");
         nombreColumn.setCellEditor(new SpinnerEditor(data.size()));
+        getDecks();
         
+    }
+    
+    public List<Deck> getDecks() {
+        List<Deck> decks = new ArrayList<>();
+        
+        for(int i = 0; i < table.getRowCount(); i++) {
+            
+            if ((int)table.getValueAt(i, 0) > 0) {
+                Carte carte = new Carte(
+                        (int)table.getValueAt(i, 2),
+                        (String)table.getValueAt(i, 3),
+                        (String)table.getValueAt(i, 4),
+                        (String)table.getValueAt(i, 5),
+                        (int)table.getValueAt(i, 0),
+                        (Conteneur)((CarteTableModeleAjout)table.getModel()).getCartes().get(i).getConteneur()
+                );
+            }
+            
+        }
+        
+        return decks;
     }
 
     public void setAutoCreateRowSorter() {
