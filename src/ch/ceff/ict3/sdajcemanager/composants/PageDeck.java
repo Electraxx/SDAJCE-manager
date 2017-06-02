@@ -44,7 +44,7 @@ public class PageDeck extends JPanel {
 
         temp_data_carte.add(new Carte(0, "test", "tests", "test", 2, new Conteneur(0, "test", "test")));
 
-        for (int i = 0; i < 200; i++) {
+        for (int i = 1; i < 50; i++) {
             temp_data.add(new Deck(i, "deck" + i + " test", temp_data_carte));
         }
 
