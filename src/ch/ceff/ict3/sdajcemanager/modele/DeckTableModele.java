@@ -35,6 +35,8 @@ public class DeckTableModele extends AbstractTableModel {
         switch (columnIndex) {
             case 0:
                 return deck.getName();
+            case 1:
+                return deck.getId();
         }
         return null;
     }
