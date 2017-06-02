@@ -24,9 +24,8 @@ public class PageAjoutCarte extends JPanel {
         initComponents();
     }
 
-    public void initComponents() {
+    private void initComponents() {
         ajoutCarte = new FormPanelAjoutCarte();
-
         this.add(ajoutCarte, BorderLayout.CENTER);
     }
 

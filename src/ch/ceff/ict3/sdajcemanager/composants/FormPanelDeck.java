@@ -87,7 +87,7 @@ public class FormPanelDeck extends JPanel {
         buttonAddCart.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
-                appListener.changePage("ajoutDeck");
+                appListener.changePage("pageAjoutDeck");
             }
         });
 

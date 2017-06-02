@@ -59,11 +59,11 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
     private PagePartie pagePartie;
     private PageAjoutPartie pageAjoutPartie;
     private PageAjoutCarte pageAjoutCarte;
+    private PageAjoutDeck pageAjoutDeck;
     private JSplitPane splitPane;
     private AppListener listener;
     private Controleur controler;
     private JFileChooser fileChooser;
-    private PageAjoutDeck pageAjoutDeck;
 
     public MainFrame(String titre) {
         initComponents(titre);
@@ -84,13 +84,15 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
         pagePartie = new PagePartie();
         pageAjoutPartie = new PageAjoutPartie();
         pageAjoutCarte = new PageAjoutCarte();
-        toolBar = new ToolBar();
         pageAjoutDeck = new PageAjoutDeck();
+        toolBar = new ToolBar();
+        
         pageDeck.setListener(this);
         pageCarte.setListener(this);
         pagePartie.setListener(this);
         pageAjoutPartie.setListener(this);
         pageAjoutCarte.setListener(this);
+        pageAjoutDeck.setListener(this);
 
         toolBar.setListener(this);
         fileChooser = new JFileChooser();
@@ -354,7 +356,8 @@ public class MainFrame extends JFrame implements WindowListener, AppListener {
             pageAjoutCarte.setData(controler.getAllConteneur());
             contentPane.add(pageAjoutCarte,BorderLayout.CENTER);
             
-        }else if( page == "ajoutDeck"){
+        }else if( page == "pageAjoutDeck"){
+            pageAjoutDeck.setData(controler.getAllCartes());
             contentPane.add(pageAjoutDeck, BorderLayout.CENTER);
         }
 
