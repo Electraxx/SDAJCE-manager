@@ -5,7 +5,6 @@
  */
 package ch.ceff.ict3.sdajcemanager.controleurs;
 
-import ch.ceff.ict3.sdajcemanager.event.*;
 import ch.ceff.ict3.sdajcemanager.modele.Carte;
 import ch.ceff.ict3.sdajcemanager.modele.Conteneur;
 import ch.ceff.ict3.sdajcemanager.modele.Database;

@@ -6,7 +6,6 @@
 package ch.ceff.ict3.sdajcemanager.modele;
 
 import java.util.List;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -84,11 +83,11 @@ public class CarteTableModeleAjout extends AbstractTableModel {
 
     @Override
     public void setValueAt(Object value, int row, int col) {
-//        Carte carte = cartes.get(row);
-//        carte = value;
         this.nbr[row] = (int)value;
         
         fireTableCellUpdated(row, col);
+        fireTableDataChanged();
+        
     }
 
     public void setData(List<Carte> cartes) {

@@ -7,7 +7,6 @@ package ch.ceff.ict3.sdajcemanager.composants;
 
 import ch.ceff.ict3.sdajcemanager.Utils;
 import ch.ceff.ict3.sdajcemanager.listeners.AppListener;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;

@@ -6,10 +6,6 @@
 package ch.ceff.ict3.sdajcemanager;
 
 import ch.ceff.ict3.sdajcemanager.composants.MainFrame;
-import ch.ceff.ict3.sdajcemanager.modele.Database;
-import ch.ceff.ict3.sdajcemanager.modele.Partie;
-import java.sql.SQLException;
-import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 

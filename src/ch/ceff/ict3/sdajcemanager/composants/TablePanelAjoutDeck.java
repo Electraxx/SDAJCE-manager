@@ -9,7 +9,6 @@ import ch.ceff.ict3.sdajcemanager.listeners.AppListener;
 import ch.ceff.ict3.sdajcemanager.modele.Carte;
 import ch.ceff.ict3.sdajcemanager.modele.CarteTableModeleAjout;
 import ch.ceff.ict3.sdajcemanager.modele.Conteneur;
-import ch.ceff.ict3.sdajcemanager.modele.Deck;
 import ch.ceff.ict3.sdajcemanager.modele.SpinnerEditor;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -91,8 +90,7 @@ public class TablePanelAjoutDeck extends JPanel {
     }
 
     public void refresh() {
-        carteModel.fireTableDataChanged();
-        
+        carteModel.fireTableDataChanged();        
     }
 
     public void searchByText(String text) {
